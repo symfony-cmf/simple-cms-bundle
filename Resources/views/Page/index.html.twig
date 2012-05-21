@@ -1,0 +1,16 @@
+{% extends "SandboxMainBundle::skeleton.html.twig" %}
+
+{% block content %}
+
+<div xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+     typeof="sioc:Post"
+     about="{{ page.path }}"
+     class="articleContainer">
+
+    <h1 id="main_title" property="dcterms:title">{{ page.title }}</h1>
+    <div property="sioc:content">
+        {{ page.body|raw }}
+    </div>
+</div>
+{{ parent() }}
+{% endblock %}

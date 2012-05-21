@@ -1,0 +1,29 @@
+{
+    "name": "symfony-cmf/simple-cms-bundle",
+    "type": "symfony-bundle",
+    "description": "A simple CMS bundle based on the Symfony CMF",
+    "keywords": ["Symfony CMF", "CMS"],
+    "homepage": "http://cmf.symfony.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Symfony CMF Community",
+            "homepage": "https://github.com/symfony-cmf/SimpleCmsBundle/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/symfony": "2.1.*",
+        "symfony-cmf/routing-bundle": "dev-master",
+        "symfony-cmf/menu-bundle": "dev-master",
+        "symfony-cmf/content-bundle": "dev-master",
+        "doctrine/phpcr-bundle": "dev-master",
+        "doctrine/phpcr-odm": "dev-master"
+    },
+    "autoload":{
+        "psr-0":{
+            "Symfony\\Cmf\\Bundle\\SimpleCmsBundle": ""
+        }
+    },
+    "target-dir": "Symfony/Cmf/Bundle/SimpleCmsBundle"
+}
