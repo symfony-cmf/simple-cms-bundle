@@ -5,7 +5,7 @@
 
     <parameters>
         <parameter key="symfony_cmf_simple_cms.doctrine_router_class">Symfony\Cmf\Bundle\RoutingExtraBundle\Routing\DoctrineRouter</parameter>
-        <parameter key="symfony_cmf_simple_cms.route_entity_class">Symfony\Cmf\Bundle\SimpleCmsbundle\Document\Page</parameter>
+        <parameter key="symfony_cmf_simple_cms.route_entity_class">Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page</parameter>
         <parameter key="symfony_cmf_simple_cms.route_repository_class">Symfony\Cmf\Bundle\RoutingExtraBundle\Document\RouteRepository</parameter>
         <parameter key="symfony_cmf_simple_cms.phpcrodm_route_idprefix_listener_class">Symfony\Cmf\Bundle\RoutingExtraBundle\Listener\IdPrefix</parameter>
         <parameter key="symfony_cmf_simple_cms.resolver_controllers_by_class_class">Symfony\Cmf\Component\Routing\Resolver\ControllerClassResolver</parameter>
@@ -26,7 +26,7 @@
             <argument type="service" id="symfony_cmf_simple_cms.route_repository" />
             <call method="setContext"><argument type="service" id="router.request_context"/></call>
             <call method="setContainer"><argument type="service" id="service_container"/></call>
-            <tag name="router" priority="200" />
+            <tag name="router" priority="10" />
         </service>
 
 
