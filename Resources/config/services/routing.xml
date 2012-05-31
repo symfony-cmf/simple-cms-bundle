@@ -5,7 +5,7 @@
 
     <parameters>
         <parameter key="symfony_cmf_simple_cms.doctrine_router_class">Symfony\Cmf\Bundle\RoutingExtraBundle\Routing\DoctrineRouter</parameter>
-        <parameter key="symfony_cmf_simple_cms.route_entity_class">Symfony\Cmf\Bundle\RoutingExtraBundle\Document\Route</parameter>
+        <parameter key="symfony_cmf_simple_cms.route_entity_class">Symfony\Cmf\Bundle\SimpleCmsbundle\Document\Page</parameter>
         <parameter key="symfony_cmf_simple_cms.route_repository_class">Symfony\Cmf\Bundle\RoutingExtraBundle\Document\RouteRepository</parameter>
         <parameter key="symfony_cmf_simple_cms.phpcrodm_route_idprefix_listener_class">Symfony\Cmf\Bundle\RoutingExtraBundle\Listener\IdPrefix</parameter>
         <parameter key="symfony_cmf_simple_cms.resolver_controllers_by_class_class">Symfony\Cmf\Component\Routing\Resolver\ControllerClassResolver</parameter>
@@ -30,10 +30,8 @@
         </service>
 
 
-        <service id="symfony_cmf_simple_cms.route_repository"
-                 factory-service="symfony_cmf_routing_extra.manager_registry"
-                 factory-method="getRepository"
-                 class="%symfony_cmf_simple_cms.route_repository_class%">
+        <service id="symfony_cmf_simple_cms.route_repository" class="%symfony_cmf_simple_cms.route_repository_class%">
+            <argument type="service" id="symfony_cmf_routing_extra.manager_registry"/>
             <argument>%symfony_cmf_simple_cms.route_entity_class%</argument>
             <call method="setPrefix"><argument>%symfony_cmf_simple_cms.basepath%</argument></call>
         </service>
