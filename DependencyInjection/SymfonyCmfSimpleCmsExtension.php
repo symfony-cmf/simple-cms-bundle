@@ -24,14 +24,14 @@ class SymfonyCmfSimpleCmsExtension extends Extension
 
         $loader->load('services/routing.xml');
 
-        $doctrine = $container->getDefinition($this->getAlias().'.doctrine_router');
+        $dynamic = $container->getDefinition($this->getAlias().'.dynamic_router');
 
         // if any mappings are defined, set the respective mappers
         if (!empty($config['routing']['controllers_by_class'])) {
-            $doctrine->addMethodCall('addControllerMapper', array(new Reference($this->getAlias() . '.mapper_controllers_by_class')));
+            $dynamic->addMethodCall('addControllerMapper', array(new Reference($this->getAlias() . '.mapper_controllers_by_class')));
         }
         if (!empty($config['generic_controller']) && !empty($config['routing']['templates_by_class'])) {
-            $doctrine->addMethodCall('addControllerMapper', array(new Reference($this->getAlias() . '.mapper_templates_by_class')));
+            $dynamic->addMethodCall('addControllerMapper', array(new Reference($this->getAlias() . '.mapper_templates_by_class')));
         }
 
 
