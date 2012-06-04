@@ -8,16 +8,16 @@
         <parameter key="symfony_cmf_simple_cms.route_entity_class">Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page</parameter>
         <parameter key="symfony_cmf_simple_cms.route_repository_class">Symfony\Cmf\Bundle\RoutingExtraBundle\Document\RouteRepository</parameter>
         <parameter key="symfony_cmf_simple_cms.phpcrodm_route_idprefix_listener_class">Symfony\Cmf\Bundle\RoutingExtraBundle\Listener\IdPrefix</parameter>
-        <parameter key="symfony_cmf_simple_cms.resolver_controllers_by_class_class">Symfony\Cmf\Component\Routing\Resolver\ControllerClassResolver</parameter>
-        <parameter key="symfony_cmf_simple_cms.resolver_templates_by_class_class">Symfony\Cmf\Component\Routing\Resolver\TemplateClassResolver</parameter>
+        <parameter key="symfony_cmf_simple_cms.mapper_controllers_by_class_class">Symfony\Cmf\Component\Routing\Mapper\ControllerClassMapper</parameter>
+        <parameter key="symfony_cmf_simple_cms.mapper_templates_by_class_class">Symfony\Cmf\Component\Routing\Mapper\TemplateClassMapper</parameter>
     </parameters>
 
     <services>
 
-        <service id="symfony_cmf_simple_cms.resolver_controllers_by_class" class="%symfony_cmf_simple_cms.resolver_controllers_by_class_class%">
+        <service id="symfony_cmf_simple_cms.mapper_controllers_by_class" class="%symfony_cmf_simple_cms.mapper_controllers_by_class_class%">
             <argument>%symfony_cmf_simple_cms.controllers_by_class%</argument>
         </service>
-        <service id="symfony_cmf_simple_cms.resolver_templates_by_class" class="%symfony_cmf_simple_cms.resolver_templates_by_class_class%">
+        <service id="symfony_cmf_simple_cms.mapper_templates_by_class" class="%symfony_cmf_simple_cms.mapper_templates_by_class_class%">
             <argument>%symfony_cmf_routing_extra.generic_controller%</argument>
             <argument>%symfony_cmf_simple_cms.templates_by_class%</argument>
         </service>

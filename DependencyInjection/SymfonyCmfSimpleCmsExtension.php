@@ -26,12 +26,12 @@ class SymfonyCmfSimpleCmsExtension extends Extension
 
         $doctrine = $container->getDefinition($this->getAlias().'.doctrine_router');
 
-        // if any mappings are defined, set the respective resolvers
+        // if any mappings are defined, set the respective mappers
         if (!empty($config['routing']['controllers_by_class'])) {
-            $doctrine->addMethodCall('addControllerResolver', array(new Reference($this->getAlias() . '.resolver_controllers_by_class')));
+            $doctrine->addMethodCall('addControllerMapper', array(new Reference($this->getAlias() . '.mapper_controllers_by_class')));
         }
         if (!empty($config['generic_controller']) && !empty($config['routing']['templates_by_class'])) {
-            $doctrine->addMethodCall('addControllerResolver', array(new Reference($this->getAlias() . '.resolver_templates_by_class')));
+            $doctrine->addMethodCall('addControllerMapper', array(new Reference($this->getAlias() . '.mapper_templates_by_class')));
         }
 
 
