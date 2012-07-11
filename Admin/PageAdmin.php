@@ -23,11 +23,10 @@ class PageAdmin extends Admin
     {
         $formMapper
             ->with('General')
-                // TODO: how to make the tree model understand documents as well as paths?
-                //->add('parent', 'doctrine_phpcr_type_tree_model', array('class' => 'Symfony\\Cmf\\Bundle\\SimpleCmsBundle\\Document\Page'))
-                ->add('label', null, array('required'=>false, 'label'=>'Menu name'))
-                ->add('name', 'text')
-                ->add('title')
+                ->add('parent', 'doctrine_phpcr_type_tree_model', array('choice_list' => array()))
+                ->add('name', 'text', array('label'=>'Last URL part'))
+                ->add('label', null, array('required'=>false, 'label'=>'Menu label'))
+                ->add('title', null, array('label'=>'Page Title'))
                 ->add('body', 'textarea')
             ->end();
     }
