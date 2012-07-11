@@ -9,6 +9,13 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 
 class PageAdmin extends Admin
 {
+    /**
+     * Path to the root node of simple pages.
+     *
+     * @var string
+     */
+    protected $root;
+
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -23,7 +30,7 @@ class PageAdmin extends Admin
     {
         $formMapper
             ->with('General')
-                ->add('parent', 'doctrine_phpcr_type_tree_model', array('choice_list' => array()))
+                ->add('parent', 'doctrine_phpcr_type_tree_model', array('choice_list' => array(), 'root_node' => $this->root))
                 ->add('name', 'text', array('label'=>'Last URL part'))
                 ->add('label', null, array('required'=>false, 'label'=>'Menu label'))
                 ->add('title', null, array('label'=>'Page Title'))
@@ -44,4 +51,8 @@ class PageAdmin extends Admin
         return array();
     }
 
+    public function setRoot($root)
+    {
+        $this->root = $root;
+    }
 }

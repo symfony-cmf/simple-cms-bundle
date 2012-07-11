@@ -18,6 +18,9 @@
             <call method="setRouteBuilder">
                 <argument type="service" id="sonata.admin.route.path_info_slashes"/>
             </call>
+            <call method="setRoot">
+                <argument>%symfony_cmf_simple_cms.basepath%</argument>
+            </call>
         </service>
 
     </services>
