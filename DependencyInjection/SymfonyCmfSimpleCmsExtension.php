@@ -34,10 +34,10 @@ class SymfonyCmfSimpleCmsExtension extends Extension
             $dynamic->addMethodCall('addControllerMapper', array(new Reference($this->getAlias() . '.mapper_templates_by_class')));
         }
 
-
         $loader->load('services/menu.xml');
 
-        // TODO: make admin optional
-        $loader->load('services/admin.xml');
+        if ($config['use_sonata_admin']) {
+            $loader->load('services/admin.xml');
+        }
     }
 }
