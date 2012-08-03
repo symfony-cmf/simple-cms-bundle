@@ -34,6 +34,8 @@ class SymfonyCmfSimpleCmsExtension extends Extension
             $dynamic->addMethodCall('addControllerMapper', array(new Reference($this->getAlias() . '.mapper_templates_by_class')));
         }
 
+        $dynamic->addMethodCall('setContentRepository', array(new Reference($config['routing']['content_repository_id'])));
+
         $loader->load('services/menu.xml');
 
         if ($config['use_sonata_admin']) {

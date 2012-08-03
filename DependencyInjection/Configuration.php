@@ -20,6 +20,7 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('basepath')->defaultValue('/cms/simple')->end()
             ->arrayNode('routing')
                 ->children()
+                    ->scalarNode('content_repository_id')->defaultValue('symfony_cmf_routing_extra.content_repository')->end()
                     ->arrayNode('controllers_by_class')
                         ->useAttributeAsKey('alias')
                         ->prototype('scalar')
