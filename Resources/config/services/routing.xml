@@ -39,7 +39,7 @@
         <service id="symfony_cmf_simple_cms.phpcrodm_route_idprefix_listener" class="%symfony_cmf_simple_cms.phpcrodm_route_idprefix_listener_class%">
             <argument>%symfony_cmf_simple_cms.basepath%</argument>
             <tag name="doctrine_phpcr.event_listener" event="postLoad" />
-            <tag name="doctrine_phpcr.event_listener" event="prePersist" />
+            <tag name="doctrine_phpcr.event_listener" event="postPersist" />
         </service>
 
     </services>
