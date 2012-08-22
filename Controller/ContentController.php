@@ -4,7 +4,7 @@ namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
+use Symfony\Cmf\Bundle\ContentBundle\Document\StaticContent;
 /**
  * The content controller is a simple controller that calls a template with
  * the specified content.
@@ -29,7 +29,6 @@ class ContentController
      * Render the provided content
      *
      * @param StaticContent $contentDocument
-     * @param string $template the template name to be used with this content
      * @param string $path the url path for the current navigation item
      * @param string $template symfony path of the template to render the
      *      content document. if omitted uses the defaultTemplate as injected
@@ -37,7 +36,7 @@ class ContentController
      *
      * @return Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction($contentDocument, $path, $template = null)
+    public function indexAction(StaticContent $contentDocument, $path, $template = null)
     {
         if (!$contentDocument) {
             throw new NotFoundHttpException('Content not found: ' . $path);
