@@ -36,6 +36,14 @@ class SymfonyCmfSimpleCmsExtension extends Extension
 
         $dynamic->addMethodCall('setContentRepository', array(new Reference($config['routing']['content_repository_id'])));
 
+        if (!empty($config['routing']['multilang'])) {
+            $container->setParameter($this->getAlias() . '.locales', $config['routing']['multilang']['locales']);
+            if ('Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page' === $config['document_class']) {
+                $container->setParameter($this->getAlias() . '.route_entity_class', $container->getParameter($this->getAlias() . '.multilang_route_entity_class'));
+            }
+            $container->setAlias('symfony_cmf_simple_cms.route_repository', 'symfony_cmf_simple_cms.multilang_route_repository');
+        }
+
         $loader->load('services/menu.xml');
 
         if ($config['use_sonata_admin']) {

@@ -6,10 +6,13 @@
     <parameters>
         <parameter key="symfony_cmf_simple_cms.dynamic_router_class">Symfony\Cmf\Bundle\RoutingExtraBundle\Routing\DynamicRouter</parameter>
         <parameter key="symfony_cmf_simple_cms.route_entity_class">Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page</parameter>
+        <parameter key="symfony_cmf_simple_cms.multilang_route_entity_class">Symfony\Cmf\Bundle\SimpleCmsBundle\Document\MultilangPage</parameter>
         <parameter key="symfony_cmf_simple_cms.route_repository_class">Symfony\Cmf\Bundle\RoutingExtraBundle\Document\RouteRepository</parameter>
+        <parameter key="symfony_cmf_simple_cms.multilang_route_repository_class">Symfony\Cmf\Bundle\SimpleCmsBundle\Document\MultilangRouteRepository</parameter>
         <parameter key="symfony_cmf_simple_cms.phpcrodm_route_idprefix_listener_class">Symfony\Cmf\Bundle\RoutingExtraBundle\Listener\IdPrefix</parameter>
         <parameter key="symfony_cmf_simple_cms.mapper_controllers_by_class_class">Symfony\Cmf\Component\Routing\Mapper\ControllerClassMapper</parameter>
         <parameter key="symfony_cmf_simple_cms.mapper_templates_by_class_class">Symfony\Cmf\Component\Routing\Mapper\TemplateClassMapper</parameter>
+        <parameter key="symfony_cmf_simple_cms.locales" />
     </parameters>
 
     <services>
@@ -29,10 +32,16 @@
             <tag name="router" priority="10" />
         </service>
 
-
         <service id="symfony_cmf_simple_cms.route_repository" class="%symfony_cmf_simple_cms.route_repository_class%">
             <argument type="service" id="symfony_cmf_routing_extra.manager_registry"/>
             <argument>%symfony_cmf_simple_cms.route_entity_class%</argument>
+            <call method="setPrefix"><argument>%symfony_cmf_simple_cms.basepath%</argument></call>
+        </service>
+
+        <service id="symfony_cmf_simple_cms.multilang_route_repository" class="%symfony_cmf_simple_cms.multilang_route_repository_class%">
+            <argument type="service" id="symfony_cmf_routing_extra.manager_registry"/>
+            <argument>%symfony_cmf_simple_cms.route_entity_class%</argument>
+            <argument>%symfony_cmf_simple_cms.locales%</argument>
             <call method="setPrefix"><argument>%symfony_cmf_simple_cms.basepath%</argument></call>
         </service>
 
