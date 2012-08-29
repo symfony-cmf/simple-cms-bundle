@@ -13,7 +13,6 @@
         <parameter key="symfony_cmf_simple_cms.mapper_controllers_by_class_class">Symfony\Cmf\Component\Routing\Mapper\ControllerClassMapper</parameter>
         <parameter key="symfony_cmf_simple_cms.mapper_templates_by_class_class">Symfony\Cmf\Component\Routing\Mapper\TemplateClassMapper</parameter>
         <parameter key="symfony_cmf_simple_cms.locales" />
-        <parameter key="symfony_cmf_simple_cms.default_locale" />
     </parameters>
 
     <services>
@@ -43,7 +42,6 @@
             <argument type="service" id="symfony_cmf_routing_extra.manager_registry"/>
             <argument>%symfony_cmf_simple_cms.route_entity_class%</argument>
             <argument>%symfony_cmf_simple_cms.locales%</argument>
-            <argument>%symfony_cmf_simple_cms.default_locale%</argument>
             <call method="setPrefix"><argument>%symfony_cmf_simple_cms.basepath%</argument></call>
         </service>
 
