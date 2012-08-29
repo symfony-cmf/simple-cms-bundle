@@ -33,7 +33,6 @@ class MultilangPage extends Page
 
     public function setLocale($locale)
     {
-        $this->setDefault('_locale', $locale);
         $this->locale = $locale;
     }
 

@@ -51,20 +51,4 @@ class MultilangRouteRepository extends RouteRepository
 
         return parent::getCandidates($url);
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function findManyByUrl($url)
-    {
-        $routes = parent::findManyByUrl($url);
-
-        if ($this->locale && $routes) {
-            foreach ($routes as $route) {
-                $route->setLocale($this->locale);
-            }
-        }
-
-        return $routes;
-    }
 }
