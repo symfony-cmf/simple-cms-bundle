@@ -24,40 +24,28 @@ class MultilangRouteRepository extends RouteRepository
     protected $locales = array();
 
     /**
-     * The locale that does not need to be included in the URL
-     *
-     * @var string
-     */
-    protected $defaultLocale;
-
-    /**
      * The detected locale
      *
      * @var string
      */
     private $locale;
 
-    public function __construct(ObjectManager $dm, $className = null, $locales = array(), $defaultLocale = null)
+    public function __construct(ObjectManager $dm, $className = null, $locales = array())
     {
         parent::__construct($dm, $className);
         $this->locales = $locales;
-        $this->defaultLocale = $defaultLocale;
     }
 
     protected function getCandidates($url)
     {
         $dirs = explode('/', ltrim($url, '/'));
-        if (isset($dirs[0]) && $this->defaultLocale !== $dirs[0] && in_array($dirs[0], $this->locales)) {
+        if (isset($dirs[0]) && in_array($dirs[0], $this->locales)) {
             $this->locale = $dirs[0];
             array_shift($dirs);
             $url = '/'.implode('/', $dirs);
-        } else {
-            $this->locale = $this->defaultLocale;
+
+            $this->dm->getLocaleChooserStrategy()->setLocale($this->locale);
         }
-
-        // TODO empty default locale should attempt to redirect using the users preferred locale?
-
-        $this->dm->getLocaleChooserStrategy()->setLocale($this->locale);
 
         return parent::getCandidates($url);
     }

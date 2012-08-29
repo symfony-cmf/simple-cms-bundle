@@ -41,7 +41,6 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->arrayNode('multilang')
                     ->children()
-                        ->scalarNode('default_locale')->defaultNull()->end()
                         ->arrayNode('locales')
                             ->prototype('scalar')
                         ->end()

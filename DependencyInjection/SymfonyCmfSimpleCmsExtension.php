@@ -38,7 +38,6 @@ class SymfonyCmfSimpleCmsExtension extends Extension
 
         if (!empty($config['routing']['multilang'])) {
             $container->setParameter($this->getAlias() . '.locales', $config['routing']['multilang']['locales']);
-            $container->setParameter($this->getAlias() . '.default_locale', $config['routing']['multilang']['default_locale']);
             if ('Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page' === $config['document_class']) {
                 $container->setParameter($this->getAlias() . '.route_entity_class', $container->getParameter($this->getAlias() . '.multilang_route_entity_class'));
             }
