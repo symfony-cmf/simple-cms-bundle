@@ -37,10 +37,15 @@ class MultilangPage extends Page
         $this->locale = $locale;
     }
 
-    public function getPath()
+    /**
+     * {@inheritDoc}
+     */
+    public function getStaticPrefix()
     {
         $prefix = $this->getPrefix();
         $path = substr(parent::getPath(), strlen($prefix));
-        return $prefix.'/{_locale}'.$path;
+        $path = $prefix.'/{_locale}'.$path;
+
+        return $this->generateStaticPrefix($path, $this->idPrefix);
     }
 }
