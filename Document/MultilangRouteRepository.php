@@ -44,6 +44,8 @@ class MultilangRouteRepository extends RouteRepository
             array_shift($dirs);
             $url = '/'.implode('/', $dirs);
 
+            // the normal listener "waits" until the routing completes
+            // as the locale could be defined inside the route
             $this->dm->getLocaleChooserStrategy()->setLocale($this->locale);
         }
 
