@@ -14,7 +14,7 @@
             <argument/>
             <argument>%symfony_cmf_simple_cms.document_class%</argument>
             <argument>symfony_cmf_simple_cms.admin.page_controller</argument>
-            <tag name="sonata.admin" manager_type="doctrine_phpcr" group="phpcr" label="page"/>
+            <tag name="sonata.admin" manager_type="doctrine_phpcr" group="simple cms" label="page"/>
             <call method="setRouteBuilder">
                 <argument type="service" id="sonata.admin.route.path_info_slashes"/>
             </call>
