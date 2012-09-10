@@ -35,9 +35,6 @@ class Page extends Route implements RouteAwareInterface, NodeInterface
      */
     public $body;
 
-    /** @PHPCRODM\Children() */
-    protected $children;
-
     /**
      * @return array of route objects that point to this content
      */
