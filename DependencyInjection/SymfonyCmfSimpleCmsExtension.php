@@ -44,7 +44,9 @@ class SymfonyCmfSimpleCmsExtension extends Extension
             $container->setAlias('symfony_cmf_simple_cms.route_repository', 'symfony_cmf_simple_cms.multilang_route_repository');
         }
 
-        $loader->load('services/menu.xml');
+        if ($config['use_menu']) {
+            $loader->load('services/menu.xml');
+        }
 
         if ($config['use_sonata_admin']) {
             $loader->load('services/admin.xml');
