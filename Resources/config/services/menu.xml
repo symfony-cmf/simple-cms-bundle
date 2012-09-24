@@ -17,11 +17,6 @@
             <argument>%symfony_cmf_simple_cms.document_class%</argument>
         </service>
 
-        <!--service id="symfony_cmf_content.controller" class="Symfony\Cmf\Bundle\SimpleCmsBundle\Controller\ContentController">
-            <argument type="service" id="templating" />
-            <argument>%symfony_cmf_content.default_template%</argument>
-        </service-->
-
     </services>
 
 </container>
