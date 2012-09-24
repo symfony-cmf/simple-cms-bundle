@@ -20,6 +20,7 @@
         "doctrine/phpcr-odm": "1.0.*"
     },
     "suggest": {
+        "symfony-cmf/create-bundle": "1.0.*",
         "symfony-cmf/menu-bundle": "1.0.*"
     },
     "autoload":{
