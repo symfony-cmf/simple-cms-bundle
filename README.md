@@ -15,4 +15,4 @@ A trivial content management system based on the [Symfony Cmf](https://github.co
 
 ## Documentation
 
-Coming soon
+http://symfony-cmf.readthedocs.org/en/latest/tutorials/installing-configuring-simple-cms.html
