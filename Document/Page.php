@@ -9,11 +9,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 use Symfony\Cmf\Component\Routing\RouteAwareInterface;
 use Symfony\Cmf\Bundle\RoutingExtraBundle\Document\Route;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowInterface;
 
 /**
  * @PHPCRODM\Document
  */
-class Page extends Route implements RouteAwareInterface, NodeInterface
+class Page extends Route implements RouteAwareInterface, NodeInterface, PublishWorkflowInterface
 {
     /**
      * @PHPCRODM\Node
@@ -35,6 +36,16 @@ class Page extends Route implements RouteAwareInterface, NodeInterface
      * @PHPCRODM\String()
      */
     public $body;
+
+    /**
+     * @PHPCRODM\Boolean()
+     */
+    protected $isPublished = false;
+
+    /**
+     * @PHPCRODM\Date()
+     */
+    protected $publishDate;
 
     /**
      * @return array of route objects that point to this content
@@ -124,5 +135,31 @@ class Page extends Route implements RouteAwareInterface, NodeInterface
     public function getBody()
     {
         return $this->body;
+    }
+
+    /**
+     * Get the publish state
+     */
+    public function getIsPublished()
+    {
+        return $this->isPublished;
+    }
+
+    public function setIsPublished($isPublished)
+    {
+        $this->isPublished = $isPublished;
+    }
+
+    /**
+     * Get the publish date
+     */
+    public function getPublishDate()
+    {
+        return $this->publishDate;
+    }
+
+    public function setPublishDate(\DateTime $publishDate = null)
+    {
+        $this->publishDate = $publishDate;
     }
 }
