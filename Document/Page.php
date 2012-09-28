@@ -3,10 +3,11 @@
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
+use Knp\Menu\NodeInterface;
+
 use Symfony\Component\Validator\Constraints as Assert;
 
 use Symfony\Cmf\Component\Routing\RouteAwareInterface;
-use Knp\Menu\NodeInterface;
 use Symfony\Cmf\Bundle\RoutingExtraBundle\Document\Route;
 
 /**
