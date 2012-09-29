@@ -63,11 +63,23 @@ abstract class LoadCmsData extends ContainerAware implements FixtureInterface, O
             if (is_array($overview['title'])) {
                 foreach ($overview['title'] as $locale => $title) {
                     $page->setTitle($title);
+                    if (isset($overview['label'][$locale]) && $overview['label'][$locale]) {
+                        $page->setLabel($overview['label'][$locale]);
+                    } elseif (!isset($overview['label'][$locale])) {
+                        $page->setLabel($title);
+                    }
                     $page->setBody($overview['body'][$locale]);
                     $dm->bindTranslation($page, $locale);
                 }
             } else {
                 $page->setTitle($overview['title']);
+                if (isset($overview['label'])) {
+                    if ($overview['label']) {
+                        $page->setLabel($overview['label']);
+                    }
+                } elseif (!isset($overview['label'])) {
+                    $page->setLabel($overview['title']);
+                }
                 $page->setBody($overview['content']);
             }
 
