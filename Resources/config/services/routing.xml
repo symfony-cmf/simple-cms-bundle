@@ -18,6 +18,7 @@
         <service id="symfony_cmf_simple_cms.mapper_controllers_by_class" class="%symfony_cmf_simple_cms.mapper_controllers_by_class_class%">
             <argument>%symfony_cmf_simple_cms.controllers_by_class%</argument>
         </service>
+
         <service id="symfony_cmf_simple_cms.mapper_templates_by_class" class="%symfony_cmf_simple_cms.mapper_templates_by_class_class%">
             <argument>%symfony_cmf_routing_extra.generic_controller%</argument>
             <argument>%symfony_cmf_simple_cms.templates_by_class%</argument>
@@ -32,7 +33,7 @@
 
         <service id="symfony_cmf_simple_cms.route_repository" class="%symfony_cmf_simple_cms.route_repository_class%">
             <argument type="service" id="symfony_cmf_routing_extra.manager_registry"/>
-            <argument>%symfony_cmf_simple_cms.route_entity_class%</argument>
+            <argument>null</argument>
             <call method="setPrefix"><argument>%symfony_cmf_simple_cms.basepath%</argument></call>
         </service>
 
