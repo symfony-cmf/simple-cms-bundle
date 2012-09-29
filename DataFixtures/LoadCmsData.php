@@ -27,7 +27,7 @@ abstract class LoadCmsData extends ContainerAware implements FixtureInterface, O
 
         $data = $this->getData();
 
-        $defaultClass = $this->container->hasParameter('symfony_cmf_simple_cms.locales')
+        $defaultClass = $this->container->getParameter('symfony_cmf_simple_cms.locales')
             ? 'Symfony\Cmf\Bundle\SimpleCmsBundle\Document\MultilangPage'
             : 'Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page'
         ;
