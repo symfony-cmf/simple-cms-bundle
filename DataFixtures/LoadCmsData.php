@@ -37,10 +37,10 @@ abstract class LoadCmsData extends ContainerAware implements FixtureInterface, O
         $paths = array('/' => $basepath);
         foreach ($data['static'] as $overview) {
             $overview['parent'] = empty($overview['parent']) ? '/' : $overview['parent'];
-            $path = $paths[$overview['parent']].'/'.$overview['name'];
+            $path = $paths[$overview['parent']].($overview['name'] ? '/'.$overview['name'] : '');
             $paths[$overview['parent'].$overview['name']] = $path;
 
-            $page = $dm->find(null, $path);
+            $page = $dm->find($class, $path);
             if (!$page) {
                 $page = new $class();
                 $page->setPath($path);
@@ -72,7 +72,7 @@ abstract class LoadCmsData extends ContainerAware implements FixtureInterface, O
             }
 
             $page->setIsPublished(!isset($overview['is_published']) || $overview['is_published']);
-            $page->setPublishDate(new \DateTime(isset($overview['publish_date']) ? $overview['publish_date'] : null));
+            $page->setPublishDate(date_create_from_format('U', isset($overview['publish_date']) ? strtotime($overview['publish_date']) : time()));
         }
 
         $dm->flush();
