@@ -46,9 +46,10 @@ abstract class LoadCmsData extends ContainerAware implements FixtureInterface, O
                 $page->setPath($path);
             }
 
-            $overview['formats'] = isset($overview['formats']) ? $overview['formats'] : array('html');
-            $page->setDefault('_format', reset($overview['formats']));
-            $page->setRequirement('_format', implode('|', $overview['formats']));
+            if (isset($overview['formats'])) {
+                $page->setDefault('_format', reset($overview['formats']));
+                $page->setRequirement('_format', implode('|', $overview['formats']));
+            }
 
             if (!empty($overview['template'])) {
                 $page->setDefault(RouteObjectInterface::TEMPLATE_NAME, $overview['template']);
