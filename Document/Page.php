@@ -35,17 +35,17 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     /**
      * @PHPCRODM\String()
      */
-    public $body;
-
-    /**
-     * @PHPCRODM\Boolean()
-     */
-    protected $isPublished = false;
+    protected $body;
 
     /**
      * @PHPCRODM\Date()
      */
-    protected $publishDate;
+    protected $publishStartDate;
+
+    /**
+     * @PHPCRODM\Date()
+     */
+    protected $publishEndDate;
 
     /**
      * @return array of route objects that point to this content
@@ -138,28 +138,28 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     }
 
     /**
-     * Get the publish state
+     * Get the publish start date
      */
-    public function getIsPublished()
+    public function getPublishStartDate()
     {
-        return $this->isPublished;
+        return $this->publishStartDate;
     }
 
-    public function setIsPublished($isPublished)
+    public function setPublishStartDate(\DateTime $publishStartDate = null)
     {
-        $this->isPublished = $isPublished;
+        $this->publishStartDate = $publishStartDate;
     }
 
     /**
-     * Get the publish date
+     * Get the publish end date
      */
-    public function getPublishDate()
+    public function getPublishEndDate()
     {
-        return $this->publishDate;
+        return $this->publishEndDate;
     }
 
-    public function setPublishDate(\DateTime $publishDate = null)
+    public function setPublishEndDate(\DateTime $publishEndDate = null)
     {
-        $this->publishDate = $publishDate;
+        $this->publishEndDate = $publishEndDate;
     }
 }
