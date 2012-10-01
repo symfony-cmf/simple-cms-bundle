@@ -42,7 +42,7 @@ abstract class LoadCmsData extends ContainerAware implements FixtureInterface, O
 
             $page = $dm->find($class, $path);
             if (!$page) {
-                $page = new $class();
+                $page = new $class(true);
                 $page->setPath($path);
             }
 
