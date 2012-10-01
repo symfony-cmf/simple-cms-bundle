@@ -83,8 +83,13 @@ abstract class LoadCmsData extends ContainerAware implements FixtureInterface, O
                 $page->setBody($overview['content']);
             }
 
-            $page->setIsPublished(!isset($overview['is_published']) || $overview['is_published']);
-            $page->setPublishDate(date_create_from_format('U', isset($overview['publish_date']) ? strtotime($overview['publish_date']) : time()));
+            if (isset($overview['publish_start_date'])) {
+                $page->setPublishStartDate(date_create_from_format('U', strtotime($overview['publish_start_date'])));
+            }
+
+            if (isset($overview['publish_end_date'])) {
+                $page->setPublishEndDate(date_create_from_format('U', strtotime($overview['publish_end_date'])));
+            }
         }
 
         $dm->flush();
