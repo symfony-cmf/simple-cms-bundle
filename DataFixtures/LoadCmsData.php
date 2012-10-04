@@ -32,10 +32,10 @@ abstract class LoadCmsData extends ContainerAware implements FixtureInterface, O
             : 'Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page'
         ;
 
-        $class = isset($overview['class']) ? $overview['class'] : $defaultClass;
-
         $paths = array('/' => $basepath);
         foreach ($data['static'] as $overview) {
+            $class = isset($overview['class']) ? $overview['class'] : $defaultClass;
+
             $overview['parent'] = empty($overview['parent']) ? '/' : $overview['parent'];
             $path = $paths[$overview['parent']].($overview['name'] ? '/'.$overview['name'] : '');
             $paths[$overview['parent'].$overview['name']] = $path;
