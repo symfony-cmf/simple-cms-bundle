@@ -88,25 +88,6 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
         );
     }
 
-    /**
-     * @PHPCRODM\PreUpdate
-     * @PHPCRODM\PrePersist
-     */
-    public function prepareArrays()
-    {
-        parent::prepareArrays();
-
-        // avoid storing the menu item options
-        $options = parent::getOptions();
-        // avoid storing the default value for the compiler, in case this ever changes in code
-        // would be nice if those where class constants of the symfony route instead of hardcoded strings
-        if ('Symfony\\Component\\Routing\\RouteCompiler' == $options['compiler_class']) {
-            unset($options['compiler_class']);
-        }
-        $this->optionsKeys = array_keys($options);
-        $this->optionsValues = array_values($options);
-    }
-
     public function setLabel($label)
     {
         $this->label = $label;
