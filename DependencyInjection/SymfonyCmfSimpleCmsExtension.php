@@ -16,7 +16,6 @@ class SymfonyCmfSimpleCmsExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $container->setParameter($this->getAlias() . '.basepath', $config['basepath']);
-        $container->setParameter($this->getAlias() . '.document_class', $config['document_class']);
 
         $container->setParameter($this->getAlias() . '.generic_controller', $config['generic_controller']);
         $container->setParameter($this->getAlias() . '.controllers_by_class', $config['routing']['controllers_by_class']);
@@ -39,7 +38,12 @@ class SymfonyCmfSimpleCmsExtension extends Extension
         if (!empty($config['routing']['multilang'])) {
             $container->setParameter($this->getAlias() . '.locales', $config['routing']['multilang']['locales']);
             $container->setAlias('symfony_cmf_simple_cms.route_repository', 'symfony_cmf_simple_cms.multilang_route_repository');
+            if ('Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page' === $config['document_class']) {
+                $config['document_class'] = 'Symfony\Cmf\Bundle\SimpleCmsBundle\Document\MultilangPage';
+            }
         }
+
+        $container->setParameter($this->getAlias() . '.document_class', $config['document_class']);
 
         if ($config['use_menu']) {
             $loader->load('services/menu.xml');
