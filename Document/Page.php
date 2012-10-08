@@ -60,7 +60,7 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
      */
     public function __construct($addFormatPattern = false)
     {
-        parent::__construct();
+        parent::__construct($addFormatPattern);
         $this->createDate = new \DateTime();
     }
 
