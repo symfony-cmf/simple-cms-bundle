@@ -23,6 +23,8 @@ class PageAdmin extends Admin
             ->add('title')
             ->add('label')
             ->add('name')
+            ->add('publishStartDate', 'date')
+            ->add('publishEndDate', 'date')
         ;
     }
 
@@ -32,8 +34,10 @@ class PageAdmin extends Admin
             ->with('General')
                 ->add('parent', 'doctrine_phpcr_type_tree_model', array('choice_list' => array(), 'root_node' => $this->root))
                 ->add('name', 'text', array('label'=>'Last URL part'))
-                ->add('label', null, array('required'=>false, 'label'=>'Menu label'))
+                ->add('label', null, array('required' => false, 'label'=>'Menu label'))
                 ->add('title', null, array('label'=>'Page Title'))
+                ->add('publishStartDate', null, array('required' => false, 'label'=>'Start date'))
+                ->add('publishEndDate', null, array('required' => false, 'label'=>'End date'))
                 ->add('body', 'textarea')
             ->end();
     }
