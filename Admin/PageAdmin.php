@@ -23,6 +23,7 @@ class PageAdmin extends Admin
             ->add('title')
             ->add('label')
             ->add('name')
+            ->add('createDate', 'date')
             ->add('publishStartDate', 'date')
             ->add('publishEndDate', 'date')
         ;
@@ -36,6 +37,7 @@ class PageAdmin extends Admin
                 ->add('name', 'text', array('label'=>'Last URL part'))
                 ->add('label', null, array('required' => false, 'label'=>'Menu label'))
                 ->add('title', null, array('label'=>'Page Title'))
+                ->add('createDate', null, array('label'=>'Create date'))
                 ->add('publishStartDate', null, array('required' => false, 'label'=>'Start date'))
                 ->add('publishEndDate', null, array('required' => false, 'label'=>'End date'))
                 ->add('body', 'textarea')
