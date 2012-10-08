@@ -40,12 +40,29 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     /**
      * @PHPCRODM\Date()
      */
+    protected $createDate;
+
+    /**
+     * @PHPCRODM\Date()
+     */
     protected $publishStartDate;
 
     /**
      * @PHPCRODM\Date()
      */
     protected $publishEndDate;
+
+    /**
+     * Overwrite to be able to create route without pattern
+     *
+     * @param Boolean $addFormatPattern if to add ".{_format}" to the route pattern
+     *                                  also implicitly sets a default/require on "_format" to "html"
+     */
+    public function __construct($addFormatPattern = false)
+    {
+        parent::__construct();
+        $this->createDate = new \DateTime();
+    }
 
     /**
      * @return array of route objects that point to this content
@@ -116,6 +133,27 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     public function getBody()
     {
         return $this->body;
+    }
+
+    /**
+     * Get the date
+     */
+    public function getDate()
+    {
+        return $this->publishStartDate ? $this->publishStartDate : $this->createDate;
+    }
+
+    /**
+     * Get the create date
+     */
+    public function getCreateDate()
+    {
+        return $this->createDate;
+    }
+
+    public function setCreateDate(\DateTime $createDate = null)
+    {
+        $this->createDate = $createDate;
     }
 
     /**
