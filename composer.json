@@ -21,7 +21,8 @@
     },
     "suggest": {
         "symfony-cmf/create-bundle": "1.0.*",
-        "symfony-cmf/menu-bundle": "1.0.*"
+        "symfony-cmf/menu-bundle": "1.0.*",
+        "sonata-project/doctrine-phpcr-admin-bundle": "1.0.*"
     },
     "autoload":{
         "psr-0":{
