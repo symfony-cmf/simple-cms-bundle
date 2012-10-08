@@ -9,13 +9,6 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 
 class PageAdmin extends Admin
 {
-    /**
-     * Path to the root node of simple pages.
-     *
-     * @var string
-     */
-    protected $root;
-
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -55,10 +48,5 @@ class PageAdmin extends Admin
     public function getExportFormats()
     {
         return array();
-    }
-
-    public function setRoot($root)
-    {
-        $this->root = $root;
     }
 }
