@@ -27,12 +27,12 @@ class PageAdmin extends Admin
         $formMapper
             ->with('General')
                 ->add('parent', 'doctrine_phpcr_type_tree_model', array('choice_list' => array(), 'root_node' => $this->root))
-                ->add('name', 'text', array('label'=>'Last URL part'))
-                ->add('label', null, array('required' => false, 'label'=>'Menu label'))
-                ->add('title', null, array('label'=>'Page Title'))
-                ->add('createDate', null, array('label'=>'Create date'))
-                ->add('publishStartDate', null, array('required' => false, 'label'=>'Start date'))
-                ->add('publishEndDate', null, array('required' => false, 'label'=>'End date'))
+                ->add('name', 'text', array('label' => 'Last URL part'))
+                ->add('label', null, array('required' => false, 'label' => 'Menu label'))
+                ->add('title', null, array('label' => 'Page Title'))
+                ->add('createDate', null, array('label' => 'Create date'))
+                ->add('publishStartDate', null, array('required' => false, 'label' => 'Start date'))
+                ->add('publishEndDate', null, array('required' => false, 'label' => 'End date'))
                 ->add('body', 'textarea')
             ->end();
     }
