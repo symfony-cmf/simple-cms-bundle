@@ -59,6 +59,10 @@ abstract class LoadCmsData extends ContainerAware implements FixtureInterface, O
                 $page->setDefault(RouteObjectInterface::CONTROLLER_NAME, $overview['controller']);
             }
 
+            if (!empty($overview['options'])) {
+                $page->setOptions($overview['options']);
+            }
+
             $dm->persist($page);
 
             if (is_array($overview['title'])) {
