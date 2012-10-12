@@ -3,7 +3,6 @@
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\DataFixtures;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
-use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -12,25 +11,43 @@ use PHPCR\Util\NodeHelper;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\Yaml\Parser;
 
+use Symfony\Cmf\Component\Routing\RouteObjectInterface;
+
 abstract class LoadCmsData extends ContainerAware implements FixtureInterface, OrderedFixtureInterface
 {
+    protected $defaultClass = array(
+        'multilangpage' => 'Symfony\Cmf\Bundle\SimpleCmsBundle\Document\MultilangPage',
+        'page' => 'Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page'
+    );
+
     abstract protected function getData();
+
+    protected function createPageInstance($class)
+    {
+        return new $class(true);
+    }
+
+    protected function getBasePath()
+    {
+        return $this->container->getParameter('symfony_cmf_simple_cms.basepath');
+    }
+
+    protected function getDefaultClass()
+    {
+        return $this->container->getParameter('symfony_cmf_simple_cms.locales')
+            ? $this->defaultClass['multilangpage'] : $this->defaultClass['page'];
+    }
 
     public function load(ObjectManager $dm)
     {
         $session = $dm->getPhpcrSession();
-        $basepath = $this->container->getParameter('symfony_cmf_content.static_basepath');
-        NodeHelper::createPath($session, $basepath);
 
-        $basepath = $this->container->getParameter('symfony_cmf_simple_cms.basepath');
+        $basepath = $this->getBasePath();
         NodeHelper::createPath($session, $basepath);
 
         $data = $this->getData();
 
-        $defaultClass = $this->container->getParameter('symfony_cmf_simple_cms.locales')
-            ? 'Symfony\Cmf\Bundle\SimpleCmsBundle\Document\MultilangPage'
-            : 'Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page'
-        ;
+        $defaultClass = $this->getDefaultClass();
 
         $paths = array('/' => $basepath);
         foreach ($data['static'] as $overview) {
@@ -42,7 +59,7 @@ abstract class LoadCmsData extends ContainerAware implements FixtureInterface, O
 
             $page = $dm->find($class, $path);
             if (!$page) {
-                $page = new $class(true);
+                $page = $this->createPageInstance($class);
                 $page->setPath($path);
             }
 
