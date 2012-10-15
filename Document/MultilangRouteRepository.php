@@ -51,4 +51,17 @@ class MultilangRouteRepository extends RouteRepository
 
         return parent::getCandidates($url);
     }
+
+    public function findManyByUrl($url)
+    {
+        $collection = parent::findManyByUrl($url);
+        foreach ($collection as $route) {
+            $locales = $this->dm->getLocalesFor($route, true);
+            if (!$route->getRequirement('_locale')) {
+                $route->setRequirement('_locale', implode('|', $locales));
+            }
+        }
+
+        return $collection;
+    }
 }
