@@ -14,8 +14,14 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('use_sonata_admin')->defaultTrue()->end()
-                ->scalarNode('use_menu')->defaultTrue()->end()
+                ->enumNode('use_sonata_admin')
+                    ->values(array(true, false, 'auto'))
+                    ->defaultValue('auto')
+                ->end()
+                ->enumNode('use_menu')
+                    ->values(array(true, false, 'auto'))
+                    ->defaultValue('auto')
+                ->end()
                 ->scalarNode('document_class')->defaultValue('Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page')->end()
                 ->scalarNode('generic_controller')->defaultValue('symfony_cmf_content.controller:indexAction')->end()
                 ->scalarNode('basepath')->defaultValue('/cms/simple')->end()

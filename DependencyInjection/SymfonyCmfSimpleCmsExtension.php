@@ -46,11 +46,31 @@ class SymfonyCmfSimpleCmsExtension extends Extension
         $container->setParameter($this->getAlias() . '.document_class', $config['document_class']);
 
         if ($config['use_menu']) {
-            $loader->load('services/menu.xml');
+            $this->loadMenu($config, $loader, $container);
         }
 
         if ($config['use_sonata_admin']) {
-            $loader->load('services/admin.xml');
+            $this->loadSonataAdmin($config, $loader, $container);
         }
+    }
+
+    protected function loadMenu($config, XmlFileLoader $loader, ContainerBuilder $container)
+    {
+        $bundles = $container->getParameter('kernel.bundles');
+        if ('auto' === $config['use_menu'] && !isset($bundles['SymfonyCmfMenuBundle'])) {
+            return;
+        }
+
+        $loader->load('services/menu.xml');
+    }
+
+    protected function loadSonataAdmin($config, XmlFileLoader $loader, ContainerBuilder $container)
+    {
+        $bundles = $container->getParameter('kernel.bundles');
+        if ('auto' === $config['use_sonata_admin'] && !isset($bundles['SonataDoctrinePHPCRAdminBundle'])) {
+            return;
+        }
+
+        $loader->load('services/admin.xml');
     }
 }
