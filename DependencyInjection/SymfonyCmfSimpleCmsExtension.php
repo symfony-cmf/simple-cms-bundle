@@ -35,8 +35,8 @@ class SymfonyCmfSimpleCmsExtension extends Extension
 
         $dynamic->addMethodCall('setContentRepository', array(new Reference($config['routing']['content_repository_id'])));
 
-        if (!empty($config['routing']['multilang'])) {
-            $container->setParameter($this->getAlias() . '.locales', $config['routing']['multilang']['locales']);
+        if (!empty($config['multilang'])) {
+            $container->setParameter($this->getAlias() . '.locales', $config['multilang']['locales']);
             $container->setAlias('symfony_cmf_simple_cms.route_repository', 'symfony_cmf_simple_cms.multilang_route_repository');
             if ('Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page' === $config['document_class']) {
                 $config['document_class'] = 'Symfony\Cmf\Bundle\SimpleCmsBundle\Document\MultilangPage';
