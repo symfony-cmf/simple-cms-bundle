@@ -16,7 +16,7 @@ class PageAdmin extends BaseAdmin
     {
         $listMapper
             ->addIdentifier('path', 'text')
-            ->add('title')
+            ->addIdentifier('title')
             ->add('label')
             ->add('name')
             ->add('createDate', 'date')
