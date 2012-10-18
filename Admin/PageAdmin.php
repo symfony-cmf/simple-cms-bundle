@@ -29,12 +29,12 @@ class PageAdmin extends BaseAdmin
     {
         $formMapper
             ->add('parent', 'doctrine_phpcr_type_tree_model', array('choice_list' => array(), 'root_node' => $this->root))
-            ->add('name', 'text', array('label' => 'Last URL part'))
-            ->add('label', null, array('required' => false, 'label' => 'Menu label'))
-            ->add('title', null, array('label' => 'Page Title'))
-            ->add('createDate', null, array('label' => 'Create date'))
-            ->add('publishStartDate', null, array('required' => false, 'label' => 'Start date'))
-            ->add('publishEndDate', null, array('required' => false, 'label' => 'End date'))
+            ->add('name', 'text')
+            ->add('label', null, array('required' => false))
+            ->add('title')
+            ->add('createDate')
+            ->add('publishStartDate', null, array('required' => false))
+            ->add('publishEndDate', null, array('required' => false))
             ->add('body', 'textarea')
         ;
     }
@@ -46,11 +46,11 @@ class PageAdmin extends BaseAdmin
         }
 
         $menu->addChild(
-            $this->trans('Set a start and/or end date to limit the time-frame during which the page will be shown.')
+            $this->trans('sidemenu.publish_start_end_date')
         );
 
         $menu->addChild(
-            $this->trans('Choose an end date in the past to disable the entry.')
+            $this->trans('sidemenu.end_date_disable')
         );
 
         if ('edit' == $action) {
@@ -61,7 +61,7 @@ class PageAdmin extends BaseAdmin
             }
 
             $menu->addChild(
-                $this->trans('Review'),
+                $this->trans('sidemenu.review'),
                 array('uri' => $uri)
             );
         }
