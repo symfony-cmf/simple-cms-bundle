@@ -77,6 +77,11 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
         return $this->children;
     }
 
+    public function setChildren($children)
+    {
+        $this->children = $children;
+    }
+
     public function getName()
     {
         return $this->name;
