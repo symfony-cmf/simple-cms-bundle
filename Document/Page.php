@@ -53,6 +53,11 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     protected $publishEndDate;
 
     /**
+     * @PHPCRODM\String(multivalue=true)
+     */
+    protected $tags = array();
+
+    /**
      * Overwrite to be able to create route without pattern
      *
      * @param Boolean $addFormatPattern if to add ".{_format}" to the route pattern
@@ -185,5 +190,21 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     public function setPublishEndDate(\DateTime $publishEndDate = null)
     {
         $this->publishEndDate = $publishEndDate;
+    }
+
+    public function getTags()
+    {
+        if (is_array($this->tags)) {
+            return $this->tags;
+        }
+        if (empty($this->tags)) {
+            return array();
+        }
+        return $this->tags->toArray();
+    }
+
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
     }
 }
