@@ -14,7 +14,6 @@
             <argument type="service" id="symfony_cmf_menu.factory"/>
             <argument>%symfony_cmf_menu.document_manager_name%</argument>
             <argument>%symfony_cmf_simple_cms.basepath%</argument>
-            <argument>%symfony_cmf_simple_cms.document_class%</argument>
         </service>
 
     </services>
