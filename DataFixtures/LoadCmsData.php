@@ -53,9 +53,9 @@ abstract class LoadCmsData extends ContainerAware implements FixtureInterface, O
         foreach ($data['static'] as $overview) {
             $class = isset($overview['class']) ? $overview['class'] : $defaultClass;
 
-            $overview['parent'] = empty($overview['parent']) ? '/' : $overview['parent'];
+            $overview['parent'] = (!isset($overview['parent']) || empty($overview['parent']) ? '/' : $overview['parent']);
             $path = $paths[$overview['parent']].($overview['name'] ? '/'.$overview['name'] : '');
-            $paths[$overview['parent'].$overview['name']] = $path;
+            $paths[rtrim($overview['parent'], '/').'/'.$overview['name']] = $path;
 
             $page = $dm->find($class, $path);
             if (!$page) {
