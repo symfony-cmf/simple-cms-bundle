@@ -43,7 +43,7 @@ abstract class LoadCmsData extends ContainerAware implements FixtureInterface, O
         $session = $dm->getPhpcrSession();
 
         $basepath = $this->getBasePath();
-        NodeHelper::createPath($session, $basepath);
+        NodeHelper::createPath($session, dirname($basepath));
 
         $data = $this->getData();
 
