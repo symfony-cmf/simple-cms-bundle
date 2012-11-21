@@ -43,13 +43,12 @@ abstract class LoadCmsData extends ContainerAware implements FixtureInterface, O
         $session = $dm->getPhpcrSession();
 
         $basepath = $this->getBasePath();
-        NodeHelper::createPath($session, dirname($basepath));
+        NodeHelper::createPath($session, preg_replace('#/[^/]*$#', '', $basepath));
 
         $data = $this->getData();
 
         $defaultClass = $this->getDefaultClass();
 
-        $paths = array('/' => $basepath);
         foreach ($data['static'] as $overview) {
             $class = isset($overview['class']) ? $overview['class'] : $defaultClass;
 
