@@ -2,7 +2,7 @@
 
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AdminInterface;
 use Symfony\Cmf\Bundle\SimpleCmsBundle\Document\MultilangPage;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin as BaseAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -39,7 +39,7 @@ class PageAdmin extends BaseAdmin
         ;
     }
 
-    protected function configureSideMenu(MenuItemInterface $menu, $action, Admin $childAdmin = null)
+    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
     {
         if (!in_array($action, array('edit', 'create'))) {
             return;
