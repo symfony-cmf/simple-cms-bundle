@@ -54,7 +54,7 @@ class MultilangRouteRepository extends RouteRepository
 
     protected function setLocaleRequirement($route)
     {
-        if (!$route->getRequirement('_locale')) {
+        if (!$route->getRequirement('_locale') && $this->dm->isDocumentTranslatable($route)) {
             $locales = $this->dm->getLocalesFor($route, true);
             $route->setRequirement('_locale', implode('|', $locales));
         }
