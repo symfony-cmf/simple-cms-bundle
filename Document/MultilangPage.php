@@ -55,6 +55,10 @@ class MultilangPage extends Page
 
     /**
      * {@inheritDoc}
+     *
+     * automatically prepend the _locale to the pattern
+     *
+     * @see MultilangRouteRepository::getCandidates()
      */
     public function getStaticPrefix()
     {
