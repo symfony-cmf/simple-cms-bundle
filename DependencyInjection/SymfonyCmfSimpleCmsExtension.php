@@ -20,6 +20,7 @@ class SymfonyCmfSimpleCmsExtension extends Extension
         $container->setParameter($this->getAlias() . '.generic_controller', $config['generic_controller']);
         $container->setParameter($this->getAlias() . '.controllers_by_class', $config['routing']['controllers_by_class']);
         $container->setParameter($this->getAlias() . '.templates_by_class', $config['routing']['templates_by_class']);
+        $container->setParameter($this->getAlias() . '.uri_filter_regexp', $config['routing']['uri_filter_regexp']);
 
         $loader->load('services/routing.xml');
 

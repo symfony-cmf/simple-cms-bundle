@@ -26,6 +26,7 @@
 
         <service id="symfony_cmf_simple_cms.dynamic_router" class="%symfony_cmf_simple_cms.dynamic_router_class%">
             <argument type="service" id="symfony_cmf_simple_cms.route_repository" />
+            <argument>%symfony_cmf_simple_cms.uri_filter_regexp%</argument>
             <call method="setContext"><argument type="service" id="router.request_context"/></call>
             <call method="setContainer"><argument type="service" id="service_container"/></call>
             <tag name="router" priority="10" />

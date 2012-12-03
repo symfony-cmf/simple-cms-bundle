@@ -27,6 +27,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('routing')
                     ->children()
                         ->scalarNode('content_repository_id')->defaultValue('symfony_cmf_routing_extra.content_repository')->end()
+                        ->scalarNode('uri_filter_regexp')->defaultValue('')->end()
                         ->arrayNode('controllers_by_class')
                             ->useAttributeAsKey('alias')
                             ->prototype('scalar')->end()
