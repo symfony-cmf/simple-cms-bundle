@@ -30,9 +30,8 @@ class MultilangRouteRepository extends RouteRepository
      */
     private $locale;
 
-    public function __construct(ObjectManager $dm, $className = null, $locales = array())
+    public function setLocales($locales = array())
     {
-        parent::__construct($dm, $className);
         $this->locales = $locales;
     }
 

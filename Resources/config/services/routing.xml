@@ -40,7 +40,7 @@
         <service id="symfony_cmf_simple_cms.multilang_route_repository" class="%symfony_cmf_simple_cms.multilang_route_repository_class%">
             <argument type="service" id="symfony_cmf_routing_extra.manager_registry"/>
             <argument>null</argument>
-            <argument>%symfony_cmf_simple_cms.locales%</argument>
+            <call method="setLocales"><argument>%symfony_cmf_simple_cms.locales%</argument></call>
             <call method="setPrefix"><argument>%symfony_cmf_simple_cms.basepath%</argument></call>
         </service>
 
