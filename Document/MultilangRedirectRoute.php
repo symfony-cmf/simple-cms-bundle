@@ -9,7 +9,7 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
 /**
  * @PHPCRODM\Document
  *
- * privides multi language support when using MultilangRouteRepository
+ * provides multi language support when using MultilangRouteProvider
  */
 class MultilangRedirectRoute extends RedirectRoute
 {
@@ -18,7 +18,7 @@ class MultilangRedirectRoute extends RedirectRoute
      *
      * automatically prepend the _locale to the pattern
      *
-     * @see MultilangRouteRepository::getCandidates()
+     * @see MultilangRouteProvider::getCandidates()
      */
     public function getStaticPrefix()
     {
