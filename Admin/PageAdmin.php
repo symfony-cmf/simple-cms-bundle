@@ -73,11 +73,49 @@ class PageAdmin extends BaseAdmin
         $datagridMapper
             ->add('title', 'doctrine_phpcr_string')
             ->add('name',  'doctrine_phpcr_string')
-            ;
+        ;
     }
 
     public function getExportFormats()
     {
         return array();
+    }
+
+    public function prePersist($object)
+    {
+        $this->ensureOrderByDate();
+    }
+
+    public function preUpdate($object)
+    {
+        $this->ensureOrderByDate();
+    }
+
+    protected function ensureOrderByDate()
+    {
+        $dm = $this->getModelManager()->getDocumentManager();
+
+        $page = $dm->find(null, $this->root);
+        $items = $page->getChildren();
+
+        $itemsByDate = array();
+        foreach ($items as $item) {
+            $itemsByDate[$item->getDate()->format('U')][$item->getCreateDate()->format('U')][] = $item;
+        }
+
+        ksort($itemsByDate);
+        $sortedItems = array();
+        foreach ($itemsByDate as $itemsForDate) {
+            ksort($itemsForDate);
+            foreach ($itemsForDate as $itemsForCreateDate) {
+                foreach ($itemsForCreateDate as $item) {
+                    $sortedItems[$item->getName()] = $item;
+                }
+            }
+        }
+
+        if ($sortedItems !== $items->getKeys()) {
+            $page->setChildren($sortedItems);
+        }
     }
 }
