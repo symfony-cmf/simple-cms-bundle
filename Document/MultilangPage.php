@@ -18,8 +18,9 @@ class MultilangPage extends Page
     /**
      * Overwrite to be able to create route without pattern
      *
-     * @param Boolean $addFormatPattern if to add ".{_format}" to the route pattern
+     * @param Boolean $addFormatPattern whether to add ".{_format}" to the route pattern
      *                                  also implicitly sets a default/require on "_format" to "html"
+     * @param Boolean $addLocalePattern whether to add "/{_locale}" to the route pattern
      */
     public function __construct($addFormatPattern = false, $addLocalePattern = true)
     {
