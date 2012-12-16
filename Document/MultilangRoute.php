@@ -16,7 +16,7 @@ class MultilangRoute extends Route
      *
      * automatically prepend the _locale to the pattern
      *
-     * @see MultilangRouteRepository::getCandidates()
+     * @see MultilangRouteProvider::getCandidates()
      */
     public function getStaticPrefix()
     {
