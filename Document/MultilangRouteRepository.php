@@ -30,9 +30,8 @@ class MultilangRouteRepository extends RouteRepository
      */
     private $locale;
 
-    public function __construct(ObjectManager $dm, $className = null, $locales = array())
+    public function setLocales($locales = array())
     {
-        parent::__construct($dm, $className);
         $this->locales = $locales;
     }
 
@@ -50,5 +49,34 @@ class MultilangRouteRepository extends RouteRepository
         }
 
         return parent::getCandidates($url);
+    }
+
+    protected function setLocaleRequirement($route)
+    {
+        if (!$route->getRequirement('_locale') && $this->dm->isDocumentTranslatable($route)) {
+            $locales = $this->dm->getLocalesFor($route, true);
+            $route->setRequirement('_locale', implode('|', $locales));
+        }
+    }
+
+    public function findManyByUrl($url)
+    {
+        $collection = parent::findManyByUrl($url);
+        foreach ($collection as $route) {
+            $this->setLocaleRequirement($route);
+        }
+
+        return $collection;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRouteByName($name, $parameters = array())
+    {
+        $route = parent::getRouteByName($name, $parameters);
+        $this->setLocaleRequirement($route);
+
+        return $route;
     }
 }

@@ -26,6 +26,7 @@
 
         <service id="symfony_cmf_simple_cms.dynamic_router" class="%symfony_cmf_simple_cms.dynamic_router_class%">
             <argument type="service" id="symfony_cmf_simple_cms.route_repository" />
+            <argument>%symfony_cmf_simple_cms.uri_filter_regexp%</argument>
             <call method="setContext"><argument type="service" id="router.request_context"/></call>
             <call method="setContainer"><argument type="service" id="service_container"/></call>
             <tag name="router" priority="10" />
@@ -40,7 +41,7 @@
         <service id="symfony_cmf_simple_cms.multilang_route_repository" class="%symfony_cmf_simple_cms.multilang_route_repository_class%">
             <argument type="service" id="symfony_cmf_routing_extra.manager_registry"/>
             <argument>null</argument>
-            <argument>%symfony_cmf_simple_cms.locales%</argument>
+            <call method="setLocales"><argument>%symfony_cmf_simple_cms.locales%</argument></call>
             <call method="setPrefix"><argument>%symfony_cmf_simple_cms.basepath%</argument></call>
         </service>
 

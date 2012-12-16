@@ -2,9 +2,9 @@
 
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AdminInterface;
 use Symfony\Cmf\Bundle\SimpleCmsBundle\Document\MultilangPage;
-use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin AS BaseAdmin;
+use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin as BaseAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -16,9 +16,9 @@ class PageAdmin extends BaseAdmin
     {
         $listMapper
             ->addIdentifier('path', 'text')
-            ->add('title')
-            ->add('label')
-            ->add('name')
+            ->add('title', 'text')
+            ->add('label', 'text')
+            ->add('name', 'text')
             ->add('createDate', 'date')
             ->add('publishStartDate', 'date')
             ->add('publishEndDate', 'date')
@@ -28,30 +28,29 @@ class PageAdmin extends BaseAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('General')
-                ->add('parent', 'doctrine_phpcr_type_tree_model', array('choice_list' => array(), 'root_node' => $this->root))
-                ->add('name', 'text', array('label' => 'Last URL part'))
-                ->add('label', null, array('required' => false, 'label' => 'Menu label'))
-                ->add('title', null, array('label' => 'Page Title'))
-                ->add('createDate', null, array('label' => 'Create date'))
-                ->add('publishStartDate', null, array('required' => false, 'label' => 'Start date'))
-                ->add('publishEndDate', null, array('required' => false, 'label' => 'End date'))
-                ->add('body', 'textarea')
-            ->end();
+            ->add('parent', 'doctrine_phpcr_type_tree_model', array('choice_list' => array(), 'root_node' => $this->root))
+            ->add('name', 'text')
+            ->add('label', null, array('required' => false))
+            ->add('title')
+            ->add('createDate')
+            ->add('publishStartDate', null, array('required' => false))
+            ->add('publishEndDate', null, array('required' => false))
+            ->add('body', 'textarea')
+        ;
     }
 
-    protected function configureSideMenu(MenuItemInterface $menu, $action, Admin $childAdmin = null)
+    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
     {
         if (!in_array($action, array('edit', 'create'))) {
             return;
         }
 
         $menu->addChild(
-            $this->trans('Set a start and/or end date to limit the time-frame during which the page will be shown.')
+            $this->trans('sidemenu.publish_start_end_date')
         );
 
         $menu->addChild(
-            $this->trans('Choose an end date in the past to disable the entry.')
+            $this->trans('sidemenu.end_date_disable')
         );
 
         if ('edit' == $action) {
@@ -62,7 +61,7 @@ class PageAdmin extends BaseAdmin
             }
 
             $menu->addChild(
-                $this->trans('Review'),
+                $this->trans('sidemenu.review'),
                 array('uri' => $uri)
             );
         }

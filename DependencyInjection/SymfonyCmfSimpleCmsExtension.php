@@ -20,6 +20,7 @@ class SymfonyCmfSimpleCmsExtension extends Extension
         $container->setParameter($this->getAlias() . '.generic_controller', $config['generic_controller']);
         $container->setParameter($this->getAlias() . '.controllers_by_class', $config['routing']['controllers_by_class']);
         $container->setParameter($this->getAlias() . '.templates_by_class', $config['routing']['templates_by_class']);
+        $container->setParameter($this->getAlias() . '.uri_filter_regexp', $config['routing']['uri_filter_regexp']);
 
         $loader->load('services/routing.xml');
 
@@ -35,8 +36,8 @@ class SymfonyCmfSimpleCmsExtension extends Extension
 
         $dynamic->addMethodCall('setContentRepository', array(new Reference($config['routing']['content_repository_id'])));
 
-        if (!empty($config['routing']['multilang'])) {
-            $container->setParameter($this->getAlias() . '.locales', $config['routing']['multilang']['locales']);
+        if (!empty($config['multilang'])) {
+            $container->setParameter($this->getAlias() . '.locales', $config['multilang']['locales']);
             $container->setAlias('symfony_cmf_simple_cms.route_repository', 'symfony_cmf_simple_cms.multilang_route_repository');
             if ('Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page' === $config['document_class']) {
                 $config['document_class'] = 'Symfony\Cmf\Bundle\SimpleCmsBundle\Document\MultilangPage';
@@ -46,11 +47,31 @@ class SymfonyCmfSimpleCmsExtension extends Extension
         $container->setParameter($this->getAlias() . '.document_class', $config['document_class']);
 
         if ($config['use_menu']) {
-            $loader->load('services/menu.xml');
+            $this->loadMenu($config, $loader, $container);
         }
 
         if ($config['use_sonata_admin']) {
-            $loader->load('services/admin.xml');
+            $this->loadSonataAdmin($config, $loader, $container);
         }
+    }
+
+    protected function loadMenu($config, XmlFileLoader $loader, ContainerBuilder $container)
+    {
+        $bundles = $container->getParameter('kernel.bundles');
+        if ('auto' === $config['use_menu'] && !isset($bundles['SymfonyCmfMenuBundle'])) {
+            return;
+        }
+
+        $loader->load('services/menu.xml');
+    }
+
+    protected function loadSonataAdmin($config, XmlFileLoader $loader, ContainerBuilder $container)
+    {
+        $bundles = $container->getParameter('kernel.bundles');
+        if ('auto' === $config['use_sonata_admin'] && !isset($bundles['SonataDoctrinePHPCRAdminBundle'])) {
+            return;
+        }
+
+        $loader->load('services/admin.xml');
     }
 }
