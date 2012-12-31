@@ -58,6 +58,11 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     protected $tags = array();
 
     /**
+     * @PHPCRODM\String(assoc="")
+     */
+    protected $extras;
+
+    /**
      * Overwrite to be able to create route without pattern
      *
      * @param Boolean $addFormatPattern if to add ".{_format}" to the route pattern
@@ -200,5 +205,15 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     public function setTags($tags)
     {
         $this->tags = $tags;
+    }
+
+    public function getExtras()
+    {
+        return $this->extras;
+    }
+
+    public function setExtras($extras)
+    {
+        $this->extras = $extras;
     }
 }
