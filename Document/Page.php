@@ -233,10 +233,9 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
      * @param string $key
      * @param mixed $value
      */
-    public function addExtra($key, $value) {
-        $extras = $this->extras;
-        $extras[$key] = $value;
-        $this->extras = $extras;
+    public function addExtra($key, $value)
+    {
+        $this->extras[$key] = $value;
     }
 
     /**
@@ -244,12 +243,10 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
      *
      * @param string $key
      */
-    public function removeExtra($key) {
-        $extras = $this->extras;
-
-        if(array_key_exists($key, $extras)) {
-            unset($extras[$key]);
-            $this->extras = $extras;
+    public function removeExtra($key)
+    {
+        if(array_key_exists($key, $this->extras)) {
+            unset($this->extras[$key]);
         }
     }
 
@@ -260,9 +257,9 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
      * @param mixed $default
      * @return mixed
      */
-    public function getExtra($key, $default = null) {
-        $extras = $this->extras;
-        return array_key_exists($key, $extras) ? $extras[$key] : $default;
+    public function getExtra($key, $default = null)
+    {
+        return array_key_exists($key, $this->extras) ? $this->extras[$key] : $default;
     }
 
 }
