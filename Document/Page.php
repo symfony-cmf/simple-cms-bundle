@@ -245,7 +245,7 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
      */
     public function removeExtra($key)
     {
-        if(array_key_exists($key, $this->extras)) {
+        if (array_key_exists($key, $this->extras)) {
             unset($this->extras[$key]);
         }
     }
