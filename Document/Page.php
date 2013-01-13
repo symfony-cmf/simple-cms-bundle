@@ -207,13 +207,62 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
         $this->tags = $tags;
     }
 
+    /**
+     * Get extras
+     *
+     * @return array
+     */
     public function getExtras()
     {
         return $this->extras;
     }
 
+    /**
+     * Set extras
+     *
+     * @param array $extras
+     */
     public function setExtras($extras)
     {
         $this->extras = $extras;
     }
+
+    /**
+     * Add a single key value pair to extras
+     *
+     * @param string $key
+     * @param mixed $value
+     */
+    public function addExtra($key, $value) {
+        $extras = $this->extras;
+        $extras[$key] = $value;
+        $this->extras = $extras;
+    }
+
+    /**
+     * Remove a single key value pair from extras
+     *
+     * @param string $key
+     */
+    public function removeExtra($key) {
+        $extras = $this->extras;
+
+        if(array_key_exists($key, $extras)) {
+            unset($extras[$key]);
+            $this->extras = $extras;
+        }
+    }
+
+    /**
+     * Return a single extras value for the provided key
+     *
+     * @param string $key
+     * @param mixed $default
+     * @return mixed
+     */
+    public function getExtra($key, $default = null) {
+        $extras = $this->extras;
+        return array_key_exists($key, $extras) ? $extras[$key] : $default;
+    }
+
 }
