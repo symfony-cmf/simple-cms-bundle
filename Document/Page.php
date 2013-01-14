@@ -58,6 +58,11 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     protected $tags = array();
 
     /**
+     * @PHPCRODM\String(assoc="")
+     */
+    protected $extras;
+
+    /**
      * Overwrite to be able to create route without pattern
      *
      * @param Boolean $addFormatPattern if to add ".{_format}" to the route pattern
@@ -201,4 +206,60 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     {
         $this->tags = $tags;
     }
+
+    /**
+     * Get extras
+     *
+     * @return array
+     */
+    public function getExtras()
+    {
+        return $this->extras;
+    }
+
+    /**
+     * Set extras
+     *
+     * @param array $extras
+     */
+    public function setExtras($extras)
+    {
+        $this->extras = $extras;
+    }
+
+    /**
+     * Add a single key value pair to extras
+     *
+     * @param string $key
+     * @param mixed $value
+     */
+    public function addExtra($key, $value)
+    {
+        $this->extras[$key] = $value;
+    }
+
+    /**
+     * Remove a single key value pair from extras
+     *
+     * @param string $key
+     */
+    public function removeExtra($key)
+    {
+        if (array_key_exists($key, $this->extras)) {
+            unset($this->extras[$key]);
+        }
+    }
+
+    /**
+     * Return a single extras value for the provided key
+     *
+     * @param string $key
+     * @param mixed $default
+     * @return mixed
+     */
+    public function getExtra($key, $default = null)
+    {
+        return array_key_exists($key, $this->extras) ? $this->extras[$key] : $default;
+    }
+
 }
