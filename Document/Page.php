@@ -58,6 +58,8 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     protected $tags = array();
 
     /**
+     * Extra values an application can store along with a page
+     * 
      * @PHPCRODM\String(assoc="")
      */
     protected $extras;
@@ -208,7 +210,7 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     }
 
     /**
-     * Get extras
+     * Get extras - a flat key-value hashmap
      *
      * @return array
      */
@@ -220,7 +222,7 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     /**
      * Set extras
      *
-     * @param array $extras
+     * @param array $extras a flat key-value hashmap
      */
     public function setExtras($extras)
     {
@@ -231,7 +233,7 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
      * Add a single key value pair to extras
      *
      * @param string $key
-     * @param mixed $value
+     * @param string $value - if this is not a string it is converted into one
      */
     public function addExtra($key, $value)
     {
