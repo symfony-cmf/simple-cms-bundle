@@ -59,7 +59,7 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
 
     /**
      * Extra values an application can store along with a page
-     * 
+     *
      * @PHPCRODM\String(assoc="")
      */
     protected $extras;
@@ -226,6 +226,10 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
      */
     public function setExtras($extras)
     {
+        foreach ($extras as $key => $value) {
+            $extras[$key] = (string) $value;
+        }
+
         $this->extras = $extras;
     }
 
@@ -237,7 +241,7 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
      */
     public function addExtra($key, $value)
     {
-        $this->extras[$key] = $value;
+        $this->extras[$key] = (string) $value;
     }
 
     /**
@@ -256,8 +260,8 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
      * Return a single extras value for the provided key
      *
      * @param string $key
-     * @param mixed $default
-     * @return mixed
+     * @param string $default
+     * @return string
      */
     public function getExtra($key, $default = null)
     {
