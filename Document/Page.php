@@ -12,6 +12,12 @@ use Symfony\Cmf\Bundle\RoutingExtraBundle\Document\Route;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowInterface;
 
 /**
+ * This document is a route, a menu node and a content document with publish
+ * workflow all at the same time.
+ *
+ * Additionally you can store "extra" string values in it for application
+ * specific purposes.
+ *
  * @PHPCRODM\Document
  */
 class Page extends Route implements RouteAwareInterface, NodeInterface, PublishWorkflowInterface
@@ -77,18 +83,30 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     }
 
     /**
-     * @return array of route objects that point to this content
+     * Content method: Get the routes that point to this content
+     *
+     * {@inheritDoc}
      */
     public function getRoutes()
     {
         return array($this);
     }
 
+    /**
+     * Menu method: Get child menu nodes.
+     *
+     * @return \Traversable the child nodes
+     */
     public function getChildren()
     {
         return $this->children;
     }
 
+    /**
+     * Menu method: List of child menu nodes
+     *
+     * @param object[] $children
+     */
     public function setChildren($children)
     {
         $this->children = $children;
@@ -99,11 +117,22 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
         return $this->name;
     }
 
+    /**
+     * Route method: The content of this route is the object itself.
+     *
+     * {@inheritDoc}
+     */
     public function getRouteContent()
     {
         return $this;
     }
 
+    /**
+     * Route method and Menu method - provides menu options merged with the
+     * route options
+     *
+     * {@inheritDoc}
+     */
     public function getOptions()
     {
         return parent::getOptions() + array(
@@ -122,38 +151,73 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
         );
     }
 
+    /**
+     * Menu method: set the menu label
+     *
+     * @param string $label
+     */
     public function setLabel($label)
     {
         $this->label = $label;
     }
 
+    /**
+     * Menu method: get the label for the menu
+     *
+     * @return string
+     */
     public function getLabel()
     {
         return $this->label;
     }
 
+    /**
+     * Content method: set the page title
+     *
+     * @param string $title
+     */
     public function setTitle($title)
     {
         $this->title = $title;
     }
 
+    /**
+     * Content method: get the page title
+     *
+     * @return string
+     */
     public function getTitle()
     {
         return $this->title;
     }
 
+    /**
+     * Content method: set the page body
+     *
+     * @param string $body
+     */
     public function setBody($body)
     {
         $this->body = $body;
     }
 
+    /**
+     * Content method: get the page body
+     *
+     * @return string
+     */
     public function getBody()
     {
         return $this->body;
     }
 
     /**
-     * Get the date
+     * Get the date this page was published.
+     *
+     * If the publish workflow is used, this is the publish start date rather
+     * than the creation date.
+     *
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -161,49 +225,83 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     }
 
     /**
-     * Get the create date
+     * Get the creation date
+     *
+     * @return \DateTime
      */
     public function getCreateDate()
     {
         return $this->createDate;
     }
 
+    /**
+     * Overwrite the creation date manually
+     *
+     * On creation of a Page, the createDate is automatically set to the
+     * current time.
+     *
+     * @param \DateTime $createDate
+     */
     public function setCreateDate(\DateTime $createDate = null)
     {
         $this->createDate = $createDate;
     }
 
     /**
-     * Get the publish start date
+     * Publish workflow: Get the publish start date
+     *
+     * {@inheritDoc}
      */
     public function getPublishStartDate()
     {
         return $this->publishStartDate;
     }
 
+    /**
+     * Publish workflow: Set the publish start date
+     *
+     * {@inheritDoc}
+     */
     public function setPublishStartDate(\DateTime $publishStartDate = null)
     {
         $this->publishStartDate = $publishStartDate;
     }
 
     /**
-     * Get the publish end date
+     * Publish workflow: Get the publish end date
+     *
+     * {@inheritDoc}
      */
     public function getPublishEndDate()
     {
         return $this->publishEndDate;
     }
 
+    /**
+     * Publish workflow: Set the publish end date
+     *
+     * {@inheritDoc}
+     */
     public function setPublishEndDate(\DateTime $publishEndDate = null)
     {
         $this->publishEndDate = $publishEndDate;
     }
 
+    /**
+     * Content method: Get tags of this page
+     *
+     * @return \Traversable list of tag strings
+     */
     public function getTags()
     {
         return $this->tags;
     }
 
+    /**
+     * Content method: Set tags of this page
+     *
+     * @param $tags \Traversable list of tag strings
+     */
     public function setTags($tags)
     {
         $this->tags = $tags;
