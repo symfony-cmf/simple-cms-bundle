@@ -310,7 +310,7 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     /**
      * Get extras - a flat key-value hashmap
      *
-     * @return array
+     * @return array with only string values
      */
     public function getExtras()
     {
@@ -318,9 +318,12 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     }
 
     /**
-     * Set extras
+     * Set extras - applications can store additional information on a page
+     * without needing to extend the document class.
      *
-     * @param array $extras a flat key-value hashmap
+     * @param array $extras a flat key-value hashmap. The values are cast to
+     *      string as PHPCR stores multivalue data with only one data type for
+     *      all values.
      */
     public function setExtras($extras)
     {
@@ -332,10 +335,10 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     }
 
     /**
-     * Add a single key value pair to extras
+     * Add a single key - value pair to extras
      *
      * @param string $key
-     * @param string $value - if this is not a string it is converted into one
+     * @param string $value - if this is not a string it is cast to one
      */
     public function addExtra($key, $value)
     {
@@ -343,7 +346,7 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     }
 
     /**
-     * Remove a single key value pair from extras
+     * Remove a single key - value pair from extras, if it was set.
      *
      * @param string $key
      */
@@ -355,11 +358,13 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     }
 
     /**
-     * Return a single extras value for the provided key
+     * Return a single extras value for the provided key or the $default if
+     * the key is not defined.
      *
      * @param string $key
-     * @param string $default
-     * @return string
+     * @param string|null $default
+     *
+     * @return string|null The value at $key or if not existing $default
      */
     public function getExtra($key, $default = null)
     {
