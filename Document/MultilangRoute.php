@@ -23,7 +23,7 @@ class MultilangRoute extends Route
     public function getStaticPrefix()
     {
         $prefix = $this->getPrefix();
-        $path = substr($this->getPath(), strlen($prefix));
+        $path = substr($this->getId(), strlen($prefix));
         $path = $prefix.'/{_locale}'.$path;
 
         return $this->generateStaticPrefix($path, $this->idPrefix);

@@ -70,7 +70,7 @@ class MultilangPage extends Page
         }
 
         $prefix = $this->getPrefix();
-        $path = substr(parent::getPath(), strlen($prefix));
+        $path = substr(parent::getId(), strlen($prefix));
         $path = $prefix.'/{_locale}'.$path;
 
         return $this->generateStaticPrefix($path, $this->idPrefix);
