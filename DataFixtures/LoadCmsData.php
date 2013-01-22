@@ -107,7 +107,7 @@ abstract class LoadCmsData extends ContainerAware implements FixtureInterface, O
                 } elseif (!isset($overview['label'])) {
                     $page->setLabel($overview['title']);
                 }
-                $page->setBody($overview['content']);
+                $page->setBody($overview['body']);
             }
 
             if (isset($overview['create_date'])) {
