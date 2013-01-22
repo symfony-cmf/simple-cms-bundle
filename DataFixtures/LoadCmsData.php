@@ -9,7 +9,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use PHPCR\Util\NodeHelper;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
-use Symfony\Component\Yaml\Parser;
 
 use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 
@@ -22,9 +21,13 @@ abstract class LoadCmsData extends ContainerAware implements FixtureInterface, O
 
     abstract protected function getData();
 
-    protected function createPageInstance($class)
+    /**
+     * @param $className
+     * @return \Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page
+     */
+    protected function createPageInstance($className)
     {
-        return new $class(true);
+        return new $className(true);
     }
 
     protected function getBasePath()
@@ -62,7 +65,7 @@ abstract class LoadCmsData extends ContainerAware implements FixtureInterface, O
             $page = $dm->find($class, $path);
             if (!$page) {
                 $page = $this->createPageInstance($class);
-                $page->setPath($path);
+                $page->setId($path);
             }
 
             if (isset($overview['formats'])) {
