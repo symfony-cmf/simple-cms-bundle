@@ -39,6 +39,11 @@ class MultilangPage extends Page
     /**
      * @PHPCRODM\String(translated=true)
      */
+    protected $label;
+
+    /**
+     * @PHPCRODM\String(translated=true)
+     */
     public $body;
 
     /**
