@@ -28,7 +28,7 @@ class PageAdmin extends BaseAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('parent', 'doctrine_phpcr_type_tree_model', array('choice_list' => array(), 'root_node' => $this->root))
+            ->add('parent', 'doctrine_phpcr_odm_tree', array('choice_list' => array(), 'root_node' => $this->root))
             ->add('name', 'text')
             ->add('label', null, array('required' => false))
             ->add('title')
