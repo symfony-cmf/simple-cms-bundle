@@ -72,7 +72,7 @@ class PageAdmin extends BaseAdmin
     {
         $datagridMapper
             ->add('title', 'doctrine_phpcr_string')
-            ->add('name',  'doctrine_phpcr_string')
+            ->add('name',  'doctrine_phpcr_nodename')
             ;
     }
 
