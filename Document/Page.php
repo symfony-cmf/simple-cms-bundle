@@ -3,9 +3,11 @@
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
-use Knp\Menu\NodeInterface;
-
 use Symfony\Component\Validator\Constraints as Assert;
+
+use Doctrine\Common\Collections\ArrayCollection;
+
+use Knp\Menu\NodeInterface;
 
 use Symfony\Cmf\Component\Routing\RouteAwareInterface;
 use Symfony\Cmf\Bundle\RoutingExtraBundle\Document\Route;
@@ -95,7 +97,7 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     /**
      * Menu method: Get child menu nodes.
      *
-     * @return \Traversable the child nodes
+     * @return ArrayCollection the child nodes
      */
     public function getChildren()
     {

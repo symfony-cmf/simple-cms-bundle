@@ -14,6 +14,14 @@ use Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page;
 
 class PageAdmin extends BaseAdmin
 {
+    private $sortOrder = false;
+    public function setSortOrder($sortOrder)
+    {
+        if (! in_array($sortOrder, array(false, 'asc', 'desc'))) {
+            throw new \InvalidArgumentException($sortOrder);
+        }
+        $this->sortOrder = $sortOrder;
+    }
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -85,32 +93,40 @@ class PageAdmin extends BaseAdmin
 
     public function prePersist($object)
     {
-        $this->ensureOrderByDate();
+        if ($this->sortOrder) {
+            $this->ensureOrderByDate($object);
+        }
     }
 
     public function preUpdate($object)
     {
-        $this->ensureOrderByDate();
+        if ($this->sortOrder) {
+            $this->ensureOrderByDate($object);
+        }
     }
 
-    protected function ensureOrderByDate()
+    protected function ensureOrderByDate($page)
     {
-        /** @var $dm DocumentManager */
-        $dm = $this->getModelManager()->getDocumentManager();
-
         /** @var $page Page */
-        $page = $dm->find(null, $this->root);
-        $items = $page->getChildren();
+        $items = $page->getParent()->getChildren();
 
         $itemsByDate = array();
         foreach ($items as $item) {
             $itemsByDate[$item->getDate()->format('U')][$item->getCreateDate()->format('U')][] = $item;
         }
 
-        ksort($itemsByDate);
+        if ('asc' == $this->sortOrder) {
+            ksort($itemsByDate);
+        } else {
+            krsort($itemsByDate);
+        }
         $sortedItems = array();
         foreach ($itemsByDate as $itemsForDate) {
-            ksort($itemsForDate);
+            if ('asc' == $this->sortOrder) {
+                ksort($itemsForDate);
+            } else {
+                krsort($itemsForDate);
+            }
             foreach ($itemsForDate as $itemsForCreateDate) {
                 foreach ($itemsForCreateDate as $item) {
                     $sortedItems[$item->getName()] = $item;
@@ -119,7 +135,10 @@ class PageAdmin extends BaseAdmin
         }
 
         if ($sortedItems !== $items->getKeys()) {
-            $page->setChildren($sortedItems);
+            $items->clear();
+            foreach($sortedItems as $key => $item) {
+                $items[$key] = $item;
+            }
         }
     }
 }
