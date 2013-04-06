@@ -2,6 +2,7 @@
 
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Admin;
 
+use Doctrine\ODM\PHPCR\DocumentManager;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Symfony\Cmf\Bundle\SimpleCmsBundle\Document\MultilangPage;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin as BaseAdmin;
@@ -9,6 +10,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Knp\Menu\ItemInterface as MenuItemInterface;
+use Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page;
 
 class PageAdmin extends BaseAdmin
 {
@@ -28,7 +30,7 @@ class PageAdmin extends BaseAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('parent', 'doctrine_phpcr_type_tree_model', array('choice_list' => array(), 'root_node' => $this->root))
+            ->add('parent', 'doctrine_phpcr_odm_tree', array('choice_list' => array(), 'root_node' => $this->root))
             ->add('name', 'text')
             ->add('label', null, array('required' => false))
             ->add('title')
@@ -72,7 +74,7 @@ class PageAdmin extends BaseAdmin
     {
         $datagridMapper
             ->add('title', 'doctrine_phpcr_string')
-            ->add('name',  'doctrine_phpcr_string')
+            ->add('name',  'doctrine_phpcr_nodename')
         ;
     }
 
@@ -93,8 +95,10 @@ class PageAdmin extends BaseAdmin
 
     protected function ensureOrderByDate()
     {
+        /** @var $dm DocumentManager */
         $dm = $this->getModelManager()->getDocumentManager();
 
+        /** @var $page Page */
         $page = $dm->find(null, $this->root);
         $items = $page->getChildren();
 

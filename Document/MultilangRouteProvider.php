@@ -2,19 +2,16 @@
 
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Document;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Request;
 
-use Symfony\Cmf\Bundle\RoutingExtraBundle\Document\RouteRepository;
+use Symfony\Cmf\Bundle\RoutingExtraBundle\Document\RouteProvider;
 
 /**
- * Repository to load routes from PHPCR-ODM by locale
- *
- * This is <strong>NOT</strong> not a doctrine repository but just the proxy
- * for the DynamicRouter implementing RouteRepositoryInterface
+ * Provider to load routes from PHPCR-ODM by locale
  *
  * @author smith@pooteeweet.org
  */
-class MultilangRouteRepository extends RouteRepository
+class MultilangRouteProvider extends RouteProvider
 {
     /**
      * Locales
@@ -59,9 +56,9 @@ class MultilangRouteRepository extends RouteRepository
         }
     }
 
-    public function findManyByUrl($url)
+    public function getRouteCollectionForRequest(Request $request)
     {
-        $collection = parent::findManyByUrl($url);
+        $collection = parent::getRouteCollectionForRequest($request);
         foreach ($collection as $route) {
             $this->setLocaleRequirement($route);
         }
