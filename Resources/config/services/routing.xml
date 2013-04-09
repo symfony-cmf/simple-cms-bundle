@@ -15,7 +15,6 @@
         <parameter key="symfony_cmf_simple_cms.enhancer_explicit_template_class">Symfony\Cmf\Component\Routing\Enhancer\FieldPresenceEnhancer</parameter>
         <parameter key="symfony_cmf_simple_cms.enhancer_controllers_by_alias_class">Symfony\Cmf\Component\Routing\Enhancer\FieldMapEnhancer</parameter>
         <parameter key="symfony_cmf_simple_cms.enhancer_field_by_class_class">Symfony\Cmf\Component\Routing\Enhancer\FieldByClassEnhancer</parameter>
-        <parameter key="symfony_cmf_simple_cms.migrator_page_class">Symfony\Cmf\Bundle\SimpleCmsBundle\Migrator\Page</parameter>
         <parameter key="symfony_cmf_simple_cms.locales" />
     </parameters>
 
@@ -59,13 +58,6 @@
             <argument>%symfony_cmf_simple_cms.basepath%</argument>
             <tag name="doctrine_phpcr.event_listener" event="postLoad" />
             <tag name="doctrine_phpcr.event_listener" event="postPersist" />
-        </service>
-
-        <service id="symfony_cmf_simple_cms.migrator.page" class="%symfony_cmf_simple_cms.migrator_page_class%">
-            <argument type="service" id="doctrine_phpcr"/>
-            <argument>%symfony_cmf_simple_cms.basepath%</argument>
-            <argument>%kernel.root_dir%/Resources/data/pages</argument>
-            <tag name="doctrine_phpcr.migrator" alias="page" />
         </service>
 
     </services>
