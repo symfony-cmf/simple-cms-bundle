@@ -20,6 +20,7 @@ class SymfonyCmfSimpleCmsExtension extends Extension
         $container->setParameter($this->getAlias() . '.uri_filter_regexp', $config['routing']['uri_filter_regexp']);
 
         $loader->load('services/routing.xml');
+        $loader->load('services/migrator.xml');
 
         $dynamic = $container->getDefinition($this->getAlias().'.dynamic_router');
 
