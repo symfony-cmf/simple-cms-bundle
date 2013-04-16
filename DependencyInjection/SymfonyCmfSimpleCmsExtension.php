@@ -100,9 +100,11 @@ class SymfonyCmfSimpleCmsExtension extends Extension
             return;
         }
 
-        if (isset($config['sonata_admin'])) {
-            $container->setParameter($this->getAlias() . '.admin.sort', $config['sonata_admin']['sort']);
-        }
+        $container->setParameter($this->getAlias() . '.admin.sort',
+            isset($config['sonata_admin'])
+                ? $config['sonata_admin']['sort']
+                : false
+        );
 
         $loader->load('services/admin.xml');
     }
