@@ -2,6 +2,7 @@
 
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Admin;
 
+use Doctrine\ODM\PHPCR\DocumentManager;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Symfony\Cmf\Bundle\SimpleCmsBundle\Document\MultilangPage;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin as BaseAdmin;
@@ -9,9 +10,18 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Knp\Menu\ItemInterface as MenuItemInterface;
+use Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page;
 
 class PageAdmin extends BaseAdmin
 {
+    private $sortOrder = false;
+    public function setSortOrder($sortOrder)
+    {
+        if (! in_array($sortOrder, array(false, 'asc', 'desc'))) {
+            throw new \InvalidArgumentException($sortOrder);
+        }
+        $this->sortOrder = $sortOrder;
+    }
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -73,11 +83,62 @@ class PageAdmin extends BaseAdmin
         $datagridMapper
             ->add('title', 'doctrine_phpcr_string')
             ->add('name',  'doctrine_phpcr_nodename')
-            ;
+        ;
     }
 
     public function getExportFormats()
     {
         return array();
+    }
+
+    public function prePersist($object)
+    {
+        if ($this->sortOrder) {
+            $this->ensureOrderByDate($object);
+        }
+    }
+
+    public function preUpdate($object)
+    {
+        if ($this->sortOrder) {
+            $this->ensureOrderByDate($object);
+        }
+    }
+
+    protected function ensureOrderByDate($page)
+    {
+        /** @var $page Page */
+        $items = $page->getParent()->getChildren();
+
+        $itemsByDate = array();
+        foreach ($items as $item) {
+            $itemsByDate[$item->getDate()->format('U')][$item->getCreateDate()->format('U')][] = $item;
+        }
+
+        if ('asc' == $this->sortOrder) {
+            ksort($itemsByDate);
+        } else {
+            krsort($itemsByDate);
+        }
+        $sortedItems = array();
+        foreach ($itemsByDate as $itemsForDate) {
+            if ('asc' == $this->sortOrder) {
+                ksort($itemsForDate);
+            } else {
+                krsort($itemsForDate);
+            }
+            foreach ($itemsForDate as $itemsForCreateDate) {
+                foreach ($itemsForCreateDate as $item) {
+                    $sortedItems[$item->getName()] = $item;
+                }
+            }
+        }
+
+        if ($sortedItems !== $items->getKeys()) {
+            $items->clear();
+            foreach($sortedItems as $key => $item) {
+                $items[$key] = $item;
+            }
+        }
     }
 }

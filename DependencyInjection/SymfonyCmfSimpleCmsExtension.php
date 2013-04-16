@@ -1,6 +1,7 @@
 <?php
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -77,6 +78,8 @@ class SymfonyCmfSimpleCmsExtension extends Extension
 
         if ($config['use_sonata_admin']) {
             $this->loadSonataAdmin($config, $loader, $container);
+        } elseif (isset($config['sonata_admin'])) {
+            throw new InvalidConfigurationException('Do not define sonata_admin options when use_sonata_admin is set to false');
         }
     }
 
@@ -95,6 +98,10 @@ class SymfonyCmfSimpleCmsExtension extends Extension
         $bundles = $container->getParameter('kernel.bundles');
         if ('auto' === $config['use_sonata_admin'] && !isset($bundles['SonataDoctrinePHPCRAdminBundle'])) {
             return;
+        }
+
+        if (isset($config['sonata_admin'])) {
+            $container->setParameter($this->getAlias() . '.admin.sort', $config['sonata_admin']['sort']);
         }
 
         $loader->load('services/admin.xml');
