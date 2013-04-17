@@ -60,5 +60,13 @@
             <tag name="doctrine_phpcr.event_listener" event="postPersist" />
         </service>
 
+
+        <service id="symfony_cmf_simple_cms.initializer" class="Doctrine\Bundle\PHPCRBundle\Initializer\GenericInitializer">
+            <argument type="collection">
+                <argument>%symfony_cmf_simple_cms.basepath%</argument>
+            </argument>
+            <tag name="doctrine_phpcr.initializer"/>
+        </service>
+
     </services>
 </container>

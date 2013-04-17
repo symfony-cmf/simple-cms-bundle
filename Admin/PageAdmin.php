@@ -14,7 +14,10 @@ use Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page;
 
 class PageAdmin extends BaseAdmin
 {
+    protected $translationDomain = 'SymfonyCmfSimpleCmsBundle';
+
     private $sortOrder = false;
+
     public function setSortOrder($sortOrder)
     {
         if (! in_array($sortOrder, array(false, 'asc', 'desc'))) {
@@ -22,6 +25,7 @@ class PageAdmin extends BaseAdmin
         }
         $this->sortOrder = $sortOrder;
     }
+
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -38,7 +42,11 @@ class PageAdmin extends BaseAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('parent', 'doctrine_phpcr_odm_tree', array('choice_list' => array(), 'root_node' => $this->root))
+            ->add(
+                'parent',
+                'doctrine_phpcr_odm_tree',
+                array('choice_list' => array(), 'select_root_node' => true, 'root_node' => $this->root)
+            )
             ->add('name', 'text')
             ->add('label', null, array('required' => false))
             ->add('title')
