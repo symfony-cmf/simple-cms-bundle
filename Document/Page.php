@@ -63,7 +63,7 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     /**
      * @PHPCRODM\Boolean()
      */
-    protected $publishable;
+    protected $publishable = true;
 
     /**
      * @PHPCRODM\String(multivalue=true)
