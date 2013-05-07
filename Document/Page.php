@@ -61,6 +61,11 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     protected $publishEndDate;
 
     /**
+     * @PHPCRODM\Boolean()
+     */
+    protected $publishable;
+
+    /**
      * @PHPCRODM\String(multivalue=true)
      */
     protected $tags = array();
@@ -287,6 +292,26 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishW
     public function setPublishEndDate(\DateTime $publishEndDate = null)
     {
         $this->publishEndDate = $publishEndDate;
+    }
+
+    /**
+     * Publish workflow: Gets whether page is publishable
+     *
+     * {@inheritDoc}
+     */
+    public function isPublishable()
+    {
+        return $this->publishable;
+    }
+
+    /**
+     * Publish workflow: Sets whether the page is publishable
+     *
+     * @param $publishable
+     */
+    public function setPublishable($publishable)
+    {
+        $this->publishable = $publishable;
     }
 
     /**
