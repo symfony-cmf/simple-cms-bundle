@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Knp\Menu\NodeInterface;
 
 use Symfony\Cmf\Component\Routing\RouteAwareInterface;
-use Symfony\Cmf\Bundle\RoutingExtraBundle\Document\Route;
+use Symfony\Cmf\Bundle\RoutingBundle\Document\Route;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowInterface;
 
 /**

@@ -26,19 +26,19 @@ class SymfonyCmfSimpleCmsExtension extends Extension
         $dynamic = $container->getDefinition($this->getAlias().'.dynamic_router');
 
         if (!empty($config['generic_controller'])) {
-            $definition = new DefinitionDecorator('symfony_cmf_routing_extra.enhancer_explicit_template');
+            $definition = new DefinitionDecorator('symfony_cmf_routing.enhancer_explicit_template');
             $definition->replaceArgument(2, $config['generic_controller']);
             $container->setDefinition($this->getAlias() . '.enhancer_explicit_template', $definition);
             $dynamic->addMethodCall('addRouteEnhancer', array(new Reference($this->getAlias() . '.enhancer_explicit_template')));
         }
         if (!empty($config['routing']['controllers_by_alias'])) {
-            $definition = new DefinitionDecorator('symfony_cmf_routing_extra.enhancer_controllers_by_class');
+            $definition = new DefinitionDecorator('symfony_cmf_routing.enhancer_controllers_by_class');
             $definition->replaceArgument(2, $config['routing']['controllers_by_alias']);
             $container->setDefinition($this->getAlias() . '.enhancer_controllers_by_class', $definition);
             $dynamic->addMethodCall('addRouteEnhancer', array(new Reference($this->getAlias() . '.enhancer_controllers_by_alias')));
         }
         if (!empty($config['routing']['controllers_by_class'])) {
-            $definition = new DefinitionDecorator('symfony_cmf_routing_extra.enhancer_controllers_by_class');
+            $definition = new DefinitionDecorator('symfony_cmf_routing.enhancer_controllers_by_class');
             $definition->replaceArgument(2, $config['routing']['controllers_by_class']);
             $container->setDefinition($this->getAlias() . '.enhancer_controllers_by_class', $definition);
             $dynamic->addMethodCall('addRouteEnhancer', array(new Reference($this->getAlias() . '.enhancer_controllers_by_class')));
@@ -49,10 +49,10 @@ class SymfonyCmfSimpleCmsExtension extends Extension
                 $controllerForTemplates[$key] = $config['generic_controller'];
             }
 
-            $definition = new DefinitionDecorator('symfony_cmf_routing_extra.enhancer_controller_for_templates_by_class');
+            $definition = new DefinitionDecorator('symfony_cmf_routing.enhancer_controller_for_templates_by_class');
             $definition->replaceArgument(2, $controllerForTemplates);
             $container->setDefinition($this->getAlias() . '.enhancer_controller_for_templates_by_class', $definition);
-            $definition = new DefinitionDecorator('symfony_cmf_routing_extra.enhancer_templates_by_class');
+            $definition = new DefinitionDecorator('symfony_cmf_routing.enhancer_templates_by_class');
             $definition->replaceArgument(2, $config['routing']['templates_by_class']);
             $container->setDefinition($this->getAlias() . '.enhancer_templates_by_class', $definition);
             $dynamic->addMethodCall('addRouteEnhancer', array(new Reference($this->getAlias() . '.enhancer_controller_for_templates_by_class')));

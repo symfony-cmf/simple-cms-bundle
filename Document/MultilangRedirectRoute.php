@@ -2,7 +2,7 @@
 
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Document;
 
-use Symfony\Cmf\Bundle\RoutingExtraBundle\Document\RedirectRoute;
+use Symfony\Cmf\Bundle\RoutingBundle\Document\RedirectRoute;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
 
