@@ -34,7 +34,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('basepath')->defaultValue('/cms/simple')->end()
                 ->arrayNode('routing')
                     ->children()
-                        ->scalarNode('content_repository_id')->defaultValue('symfony_cmf_routing_extra.content_repository')->end()
+                        ->scalarNode('content_repository_id')->defaultValue('symfony_cmf_routing.content_repository')->end()
                         ->scalarNode('uri_filter_regexp')->defaultValue('')->end()
                         ->arrayNode('controllers_by_alias')
                             ->useAttributeAsKey('alias')

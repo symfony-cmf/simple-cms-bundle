@@ -4,7 +4,7 @@ namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Document;
 
 use Symfony\Component\HttpFoundation\Request;
 
-use Symfony\Cmf\Bundle\RoutingExtraBundle\Document\RouteProvider;
+use Symfony\Cmf\Bundle\RoutingBundle\Document\RouteProvider;
 
 /**
  * Provider to load routes from PHPCR-ODM by locale
