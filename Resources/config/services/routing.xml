@@ -36,14 +36,16 @@
         </service>
 
         <service id="symfony_cmf_simple_cms.route_provider" class="%symfony_cmf_simple_cms.route_provider_class%">
-            <argument type="service" id="symfony_cmf_routing.manager_registry"/>
+            <argument/>
             <argument>null</argument>
+            <call method="setManagerName"><argument>%symfony_cmf_simple_cms.manager_name%</argument></call>
             <call method="setPrefix"><argument>%symfony_cmf_simple_cms.basepath%</argument></call>
         </service>
 
         <service id="symfony_cmf_simple_cms.multilang_route_provider" class="%symfony_cmf_simple_cms.multilang_route_provider_class%">
-            <argument type="service" id="symfony_cmf_routing.manager_registry"/>
+            <argument/>
             <argument>null</argument>
+            <call method="setManagerName"><argument>%symfony_cmf_simple_cms.manager_name%</argument></call>
             <call method="setLocales"><argument>%symfony_cmf_simple_cms.locales%</argument></call>
             <call method="setPrefix"><argument>%symfony_cmf_simple_cms.basepath%</argument></call>
         </service>

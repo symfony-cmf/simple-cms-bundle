@@ -62,6 +62,12 @@ class SymfonyCmfSimpleCmsExtension extends Extension
         $generator = $container->getDefinition($this->getAlias().'.generator');
         $generator->addMethodCall('setContentRepository', array(new Reference($config['routing']['content_repository_id'])));
 
+        $container->setParameter($this->getAlias() . '.manager_name', $config['manager_name']);
+        $routeProvider = $container->getDefinition($this->getAlias() . '.route_provider');
+        $routeProvider->replaceArgument(0, new Reference($config['manager_registry']));
+        $multilangRouteProvider = $container->getDefinition($this->getAlias() . '.multilang_route_provider');
+        $multilangRouteProvider->replaceArgument(0, new Reference($config['manager_registry']));
+
         if (!empty($config['multilang'])) {
             $container->setParameter($this->getAlias() . '.locales', $config['multilang']['locales']);
             $container->setAlias('symfony_cmf_simple_cms.route_provider', 'symfony_cmf_simple_cms.multilang_route_provider');

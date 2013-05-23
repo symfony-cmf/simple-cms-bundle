@@ -32,6 +32,8 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('document_class')->defaultValue('Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page')->end()
                 ->scalarNode('generic_controller')->defaultValue('symfony_cmf_content.controller:indexAction')->end()
                 ->scalarNode('basepath')->defaultValue('/cms/simple')->end()
+                ->scalarNode('manager_registry')->defaultValue('doctrine_phpcr')->end()
+                ->scalarNode('manager_name')->defaultValue('default')->end()
                 ->arrayNode('routing')
                     ->children()
                         ->scalarNode('content_repository_id')->defaultValue('symfony_cmf_routing.content_repository')->end()
