@@ -11,10 +11,11 @@
             "homepage": "https://github.com/symfony-cmf/SimpleCmsBundle/contributors"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.2",
         "symfony/framework-bundle": ">=2.1,<2.3-dev",
-        "symfony-cmf/routing-bundle": "1.1.*",
+        "symfony-cmf/routing-bundle": ">1.1.0-alpha1,<1.2.0-dev",
         "symfony-cmf/content-bundle": "1.0.*",
         "doctrine/phpcr-bundle": "1.0.*",
         "doctrine/phpcr-odm": "1.0.*"
