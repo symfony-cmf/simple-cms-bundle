@@ -14,7 +14,7 @@ use Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page;
 
 class PageAdmin extends BaseAdmin
 {
-    protected $translationDomain = 'SymfonyCmfSimpleCmsBundle';
+    protected $translationDomain = 'CmfSimpleCmsBundle';
 
     private $sortOrder = false;
 

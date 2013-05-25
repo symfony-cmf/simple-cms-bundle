@@ -3,30 +3,30 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter id="symfony_cmf_simple_cms.admin.sort">false</parameter>
+        <parameter id="cmf_simple_cms.admin.sort">false</parameter>
     </parameters>
 
     <services>
 
-        <service id="symfony_cmf_simple_cms.admin.page_controller" class="Symfony\Cmf\Bundle\SimpleCmsBundle\Controller\PageAdminController">
+        <service id="cmf_simple_cms.admin.page_controller" class="Symfony\Cmf\Bundle\SimpleCmsBundle\Controller\PageAdminController">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="symfony_cmf_simple_cms.admin.page" class="Symfony\Cmf\Bundle\SimpleCmsBundle\Admin\PageAdmin">
+        <service id="cmf_simple_cms.admin.page" class="Symfony\Cmf\Bundle\SimpleCmsBundle\Admin\PageAdmin">
             <argument/>
-            <argument>%symfony_cmf_simple_cms.document_class%</argument>
-            <argument>symfony_cmf_simple_cms.admin.page_controller</argument>
+            <argument>%cmf_simple_cms.document_class%</argument>
+            <argument>cmf_simple_cms.admin.page_controller</argument>
             <tag name="sonata.admin" manager_type="doctrine_phpcr" group="simple cms" label="page"/>
             <call method="setRouteBuilder">
                 <argument type="service" id="sonata.admin.route.path_info_slashes"/>
             </call>
             <call method="setRoot">
-                <argument>%symfony_cmf_simple_cms.basepath%</argument>
+                <argument>%cmf_simple_cms.basepath%</argument>
             </call>
             <call method="setSortOrder">
-                <argument>%symfony_cmf_simple_cms.admin.sort%</argument>
+                <argument>%cmf_simple_cms.admin.sort%</argument>
             </call>
         </service>
 
