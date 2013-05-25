@@ -32,12 +32,12 @@ abstract class LoadCmsData extends ContainerAware implements FixtureInterface, O
 
     protected function getBasePath()
     {
-        return $this->container->getParameter('symfony_cmf_simple_cms.basepath');
+        return $this->container->getParameter('cmf_simple_cms.basepath');
     }
 
     protected function getDefaultClass()
     {
-        return $this->container->getParameter('symfony_cmf_simple_cms.locales')
+        return $this->container->getParameter('cmf_simple_cms.locales')
             ? $this->defaultClass['multilangpage'] : $this->defaultClass['page'];
     }
 

@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Definition\Processor;
 
-class SymfonyCmfSimpleCmsExtension extends Extension
+class CmfSimpleCmsExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -26,19 +26,19 @@ class SymfonyCmfSimpleCmsExtension extends Extension
         $dynamic = $container->getDefinition($this->getAlias().'.dynamic_router');
 
         if (!empty($config['generic_controller'])) {
-            $definition = new DefinitionDecorator('symfony_cmf_routing.enhancer_explicit_template');
+            $definition = new DefinitionDecorator('cmf_routing.enhancer_explicit_template');
             $definition->replaceArgument(2, $config['generic_controller']);
             $container->setDefinition($this->getAlias() . '.enhancer_explicit_template', $definition);
             $dynamic->addMethodCall('addRouteEnhancer', array(new Reference($this->getAlias() . '.enhancer_explicit_template')));
         }
         if (!empty($config['routing']['controllers_by_alias'])) {
-            $definition = new DefinitionDecorator('symfony_cmf_routing.enhancer_controllers_by_class');
+            $definition = new DefinitionDecorator('cmf_routing.enhancer_controllers_by_class');
             $definition->replaceArgument(2, $config['routing']['controllers_by_alias']);
             $container->setDefinition($this->getAlias() . '.enhancer_controllers_by_class', $definition);
             $dynamic->addMethodCall('addRouteEnhancer', array(new Reference($this->getAlias() . '.enhancer_controllers_by_alias')));
         }
         if (!empty($config['routing']['controllers_by_class'])) {
-            $definition = new DefinitionDecorator('symfony_cmf_routing.enhancer_controllers_by_class');
+            $definition = new DefinitionDecorator('cmf_routing.enhancer_controllers_by_class');
             $definition->replaceArgument(2, $config['routing']['controllers_by_class']);
             $container->setDefinition($this->getAlias() . '.enhancer_controllers_by_class', $definition);
             $dynamic->addMethodCall('addRouteEnhancer', array(new Reference($this->getAlias() . '.enhancer_controllers_by_class')));
@@ -49,10 +49,10 @@ class SymfonyCmfSimpleCmsExtension extends Extension
                 $controllerForTemplates[$key] = $config['generic_controller'];
             }
 
-            $definition = new DefinitionDecorator('symfony_cmf_routing.enhancer_controller_for_templates_by_class');
+            $definition = new DefinitionDecorator('cmf_routing.enhancer_controller_for_templates_by_class');
             $definition->replaceArgument(2, $controllerForTemplates);
             $container->setDefinition($this->getAlias() . '.enhancer_controller_for_templates_by_class', $definition);
-            $definition = new DefinitionDecorator('symfony_cmf_routing.enhancer_templates_by_class');
+            $definition = new DefinitionDecorator('cmf_routing.enhancer_templates_by_class');
             $definition->replaceArgument(2, $config['routing']['templates_by_class']);
             $container->setDefinition($this->getAlias() . '.enhancer_templates_by_class', $definition);
             $dynamic->addMethodCall('addRouteEnhancer', array(new Reference($this->getAlias() . '.enhancer_controller_for_templates_by_class')));
@@ -70,7 +70,7 @@ class SymfonyCmfSimpleCmsExtension extends Extension
 
         if (!empty($config['multilang'])) {
             $container->setParameter($this->getAlias() . '.locales', $config['multilang']['locales']);
-            $container->setAlias('symfony_cmf_simple_cms.route_provider', 'symfony_cmf_simple_cms.multilang_route_provider');
+            $container->setAlias('cmf_simple_cms.route_provider', 'cmf_simple_cms.multilang_route_provider');
             if ('Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page' === $config['document_class']) {
                 $config['document_class'] = 'Symfony\Cmf\Bundle\SimpleCmsBundle\Document\MultilangPage';
             }
@@ -92,7 +92,7 @@ class SymfonyCmfSimpleCmsExtension extends Extension
     protected function loadMenu($config, XmlFileLoader $loader, ContainerBuilder $container)
     {
         $bundles = $container->getParameter('kernel.bundles');
-        if ('auto' === $config['use_menu'] && !isset($bundles['SymfonyCmfMenuBundle'])) {
+        if ('auto' === $config['use_menu'] && !isset($bundles['CmfMenuBundle'])) {
             return;
         }
 
