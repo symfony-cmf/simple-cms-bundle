@@ -42,7 +42,7 @@ class MultilangRouteProvider extends RouteProvider
 
             // the normal listener "waits" until the routing completes
             // as the locale could be defined inside the route
-            $this->dm->getLocaleChooserStrategy()->setLocale($this->locale);
+            $this->getObjectManager()->getLocaleChooserStrategy()->setLocale($this->locale);
         }
 
         return parent::getCandidates($url);
@@ -50,8 +50,8 @@ class MultilangRouteProvider extends RouteProvider
 
     protected function setLocaleRequirement($route)
     {
-        if (!$route->getRequirement('_locale') && $this->dm->isDocumentTranslatable($route)) {
-            $locales = $this->dm->getLocalesFor($route, true);
+        if (!$route->getRequirement('_locale') && $this->getObjectManager()->isDocumentTranslatable($route)) {
+            $locales = $this->getObjectManager()->getLocalesFor($route, true);
             $route->setRequirement('_locale', implode('|', $locales));
         }
     }
