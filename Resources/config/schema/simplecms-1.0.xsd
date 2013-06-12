@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xsd:schema xmlns="http://cmf.symfony.com/schema/dic/simplecms"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://cmf.symfony.com/schema/dic/simplecms"
+    elementFormDefault="qualified">
+
+    <xsd:element name="config" type="config" />
+
+    <xsd:complexType name="config">
+        <xsd:sequence>
+            <xsd:element name="sonata-admin" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:attribute name="sort" type="sort" />
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="routing" type="routing" minOccurs="0" />
+            <xsd:element name="multilang" type="multilang" minOccurs="0" />
+        </xsd:sequence>
+
+        <xsd:attribute name="use-sonata-admin" type="aboolean" />
+        <xsd:attribute name="use-menu" type="aboolean" />
+        <xsd:attribute name="document-class" type="xsd:string" />
+        <xsd:attribute name="generic-controller" type="xsd:string" />
+        <xsd:attribute name="basepath" type="xsd:string" />
+        <xsd:attribute name="manager-registry" type="xsd:string" />
+        <xsd:attribute name="manager-name" type="xsd:string" />
+    </xsd:complexType>
+
+    <xsd:complexType name="multilang">
+        <xsd:sequence>
+            <xsd:element name="locale" type="xsd:string" minOccurs="1" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="routing">
+        <xsd:sequence>
+            <xsd:element name="controller-by-alias" type="routing_option" />
+            <xsd:element name="controller-by-class" type="routing_option" />
+            <xsd:element name="template-by-class" type="routing_option" />
+        </xsd:sequence>
+
+        <xsd:attribute name="content-repository-id" type="xsd:string" />
+        <xsd:attribute name="uri-filter-regexp" type="xsd:string" />
+    </xsd:complexType>
+
+    <xsd:complexType name="routing_option">
+        <xsd:attribute name="alias" type="xsd:string" use="required" />
+    </xsd:complexType>
+
+    <xsd:simpleType name="sort">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="false" />
+            <xsd:enumeration value="asc" />
+            <xsd:enumeration value="desc" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="aboolean">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="true" />
+            <xsd:enumeration value="false" />
+            <xsd:enumeration value="auto" />
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>
