@@ -3,6 +3,8 @@
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableWriteInterface;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodWriteInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -11,7 +13,7 @@ use Knp\Menu\NodeInterface;
 
 use Symfony\Cmf\Component\Routing\RouteAwareInterface;
 use Symfony\Cmf\Bundle\RoutingBundle\Document\Route;
-use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowInterface;
+
 
 /**
  * This document is a route, a menu node and a content document with publish
@@ -22,7 +24,7 @@ use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowInterface;
  *
  * @PHPCRODM\Document
  */
-class Page extends Route implements RouteAwareInterface, NodeInterface, PublishWorkflowInterface
+class Page extends Route implements RouteAwareInterface, NodeInterface, PublishTimePeriodWriteInterface, PublishableWriteInterface
 {
     /**
      * @PHPCRODM\Node
