@@ -5,12 +5,12 @@
 
     <parameters>
         <parameter key="cmf_simple_cms.dynamic_router_class">Symfony\Cmf\Bundle\RoutingBundle\Routing\DynamicRouter</parameter>
-        <parameter key="cmf_simple_cms.route_provider_class">Symfony\Cmf\Bundle\RoutingBundle\Document\RouteProvider</parameter>
+        <parameter key="cmf_simple_cms.route_provider_class">Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RouteProvider</parameter>
         <parameter key="cmf_simple_cms.multilang_route_provider_class">Symfony\Cmf\Bundle\SimpleCmsBundle\Document\MultilangRouteProvider</parameter>
         <parameter key="cmf_simple_cms.nested_matcher_class">Symfony\Cmf\Component\Routing\NestedMatcher\NestedMatcher</parameter>
         <parameter key="cmf_simple_cms.final_matcher_class">Symfony\Cmf\Component\Routing\NestedMatcher\ConfigurableUrlMatcher</parameter>
         <parameter key="cmf_simple_cms.generator_class">Symfony\Cmf\Bundle\RoutingBundle\Routing\ContentAwareGenerator</parameter>
-        <parameter key="cmf_simple_cms.phpcrodm_route_idprefix_listener_class">Symfony\Cmf\Bundle\RoutingBundle\Listener\IdPrefix</parameter>
+        <parameter key="cmf_simple_cms.phpcrodm_route_idprefix_listener_class">Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\IdPrefixListener</parameter>
         <parameter key="cmf_simple_cms.enhancer_route_content_class">Symfony\Cmf\Component\Routing\Enhancer\RouteContentEnhancer</parameter>
         <parameter key="cmf_simple_cms.enhancer_explicit_template_class">Symfony\Cmf\Component\Routing\Enhancer\FieldPresenceEnhancer</parameter>
         <parameter key="cmf_simple_cms.enhancer_controllers_by_alias_class">Symfony\Cmf\Component\Routing\Enhancer\FieldMapEnhancer</parameter>

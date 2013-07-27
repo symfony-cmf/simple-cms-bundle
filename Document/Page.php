@@ -2,6 +2,7 @@
 
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Document;
 
+use \LogicException;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableWriteInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodWriteInterface;
@@ -12,8 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Knp\Menu\NodeInterface;
 
 use Symfony\Cmf\Component\Routing\RouteAwareInterface;
-use Symfony\Cmf\Bundle\RoutingBundle\Document\Route;
-
+use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
 
 /**
  * This document is a route, a menu node and a content document with publish
@@ -131,9 +131,22 @@ class Page extends Route implements RouteAwareInterface, NodeInterface, PublishT
      *
      * {@inheritDoc}
      */
-    public function getRouteContent()
+    public function getContent()
     {
         return $this;
+    }
+
+    /**
+     * Never call this, it makes no sense. The SimpleCms Page is its own
+     * content.
+     *
+     * @param $document
+     *
+     * @throws LogicException
+     */
+    public function setContent($document)
+    {
+        throw new LogicException('Do not set a content for the redirect route. It is its own content.');
     }
 
     /**

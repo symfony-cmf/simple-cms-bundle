@@ -2,9 +2,8 @@
 
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Document;
 
+use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RouteProvider;
 use Symfony\Component\HttpFoundation\Request;
-
-use Symfony\Cmf\Bundle\RoutingBundle\Document\RouteProvider;
 
 /**
  * Provider to load routes from PHPCR-ODM by locale
