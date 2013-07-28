@@ -2,6 +2,7 @@
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -10,8 +11,19 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Definition\Processor;
 
-class CmfSimpleCmsExtension extends Extension
+class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterface
 {
+    /**
+     * Allow an extension to prepend the extension configurations.
+     *
+     * @param ContainerBuilder $container
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        $prependConfig = array('dynamic' => array('enabled' => true, 'phpcr_provider' => (array('enabled' => true))));
+        $container->prependExtensionConfig('cmf_routing', $prependConfig);
+    }
+
     public function load(array $configs, ContainerBuilder $container)
     {
         $config = $this->processConfiguration(new Configuration(), $configs);
