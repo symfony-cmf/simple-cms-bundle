@@ -22,7 +22,9 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
      */
     public function prepend(ContainerBuilder $container)
     {
-        $prependConfig = array('dynamic' => array('enabled' => true, 'phpcr_provider' => (array('enabled' => true))));
+        $prependConfig = array('persistence' => array('phpcr' => (array('enabled' => true))));
+        $container->prependExtensionConfig('cmf_menu', $prependConfig);
+        $prependConfig = array('dynamic' => $prependConfig);
         $container->prependExtensionConfig('cmf_routing', $prependConfig);
     }
 
