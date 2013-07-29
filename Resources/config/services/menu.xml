@@ -13,7 +13,7 @@
             <argument type="service" id="service_container"/>
             <argument type="service" id="cmf_menu.factory"/>
             <argument>%cmf_simple_cms.manager_name%</argument>
-            <argument>%cmf_simple_cms.basepath%</argument>
+            <argument>%cmf_simple_cms.menu_basepath%</argument>
         </service>
 
     </services>

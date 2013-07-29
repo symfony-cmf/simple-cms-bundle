@@ -1,4 +1,5 @@
 <?php
+
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
@@ -9,7 +10,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\Config\Definition\Processor;
+
+use PHPCR\Util\PathHelper;
 
 class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterface
 {
@@ -30,6 +32,7 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $container->setParameter($this->getAlias() . '.basepath', $config['basepath']);
+        $container->setParameter($this->getAlias() . '.menu_basepath', PathHelper::getParentPath($config['basepath']));
         $container->setParameter($this->getAlias() . '.uri_filter_regexp', $config['routing']['uri_filter_regexp']);
 
         $loader->load('services/routing.xml');
