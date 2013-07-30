@@ -12,8 +12,9 @@
             <tag name="knp_menu.provider" />
             <argument type="service" id="service_container"/>
             <argument type="service" id="cmf_menu.factory"/>
-            <argument>%cmf_simple_cms.manager_name%</argument>
+            <argument type="service" id="doctrine_phpcr"/>
             <argument>%cmf_simple_cms.menu_basepath%</argument>
+            <call method="setManagerName"><argument>%cmf_simple_cms.manager_name%</argument></call>
         </service>
 
     </services>

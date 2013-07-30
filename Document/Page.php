@@ -12,7 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 use Knp\Menu\NodeInterface;
 
-use Symfony\Cmf\Component\Routing\RouteAwareInterface;
+use Symfony\Cmf\Component\Routing\RouteReferrersInterface;
 use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
 
 /**
@@ -24,7 +24,7 @@ use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
  *
  * @PHPCRODM\Document
  */
-class Page extends Route implements RouteAwareInterface, NodeInterface, PublishTimePeriodWriteInterface, PublishableWriteInterface
+class Page extends Route implements RouteReferrersInterface, NodeInterface, PublishTimePeriodWriteInterface, PublishableWriteInterface
 {
     /**
      * @PHPCRODM\Node
