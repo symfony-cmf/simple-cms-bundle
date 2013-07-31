@@ -4,8 +4,8 @@ namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Document;
 
 use \LogicException;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
-use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableWriteInterface;
-use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodWriteInterface;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -27,8 +27,8 @@ use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
 class Page extends Route implements
     RouteReferrersReadInterface, // this must not be the write interface, it would make no sense
     NodeInterface,
-    PublishTimePeriodWriteInterface,
-    PublishableWriteInterface
+    PublishTimePeriodInterface,
+    PublishableInterface
 {
     /**
      * @PHPCRODM\Node
