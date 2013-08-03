@@ -1,4 +1,4 @@
-# Symfony CMF SimpleCmsBundle Bundle
+# Symfony CMF SimpleCms Bundle
 
 [![Build Status](https://secure.travis-ci.org/symfony-cmf/SimpleCmsBundle.png)](http://travis-ci.org/symfony-cmf/SimpleCmsBundle)
 [![Latest Stable Version](https://poser.pugx.org/symfony-cmf/simple-cms-bundle/version.png)](https://packagist.org/packages/symfony-cmf/simple-cms-bundle)
@@ -29,7 +29,7 @@ See also:
 ## Contributing
 
 Pull requests are welcome. Please see our
-[CONTRIBUTING](https://github.com/symfony-cmf/symfony-cmf/blob/master/CONTRIBUTING.md)
+[CONTRIBUTING](https://github.com/symfony-cmf/SimpleCmsBundle/blob/master/CONTRIBUTING.md)
 guide.
 
 Unit and/or functional tests exist for this bundle. See the

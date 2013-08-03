@@ -38,6 +38,7 @@ class Configuration implements ConfigurationInterface
                     ->fixXmlConfig('controller_by_alias', 'controllers_by_alias')
                     ->fixXmlConfig('controller_by_class', 'controllers_by_class')
                     ->fixXmlConfig('template_by_class', 'templates_by_class')
+                    ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('content_repository_id')->defaultValue('cmf_routing.content_repository')->end()
                         ->scalarNode('uri_filter_regexp')->defaultValue('')->end()

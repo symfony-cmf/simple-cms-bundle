@@ -17,7 +17,9 @@
         "symfony/framework-bundle": "~2.2",
         "symfony-cmf/core-bundle": "~1.0.0-RC1",
         "symfony-cmf/routing-bundle": "~1.1.0-RC1",
+        "symfony-cmf/menu-bundle": "~1.0.0-RC1",
         "symfony-cmf/content-bundle": "~1.0.0-RC1",
+        "symfony-cmf/core-bundle": "~1.0.0-RC1",
         "doctrine/phpcr-bundle": "1.0.*",
         "doctrine/phpcr-odm": "1.0.*"
     },

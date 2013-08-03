@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services">
+
+    <config xmlns="http://cmf.symfony.com/schema/dic/simplecms"
+        basepath="/test/page"
+        >
+    </config>
+
+</container>
+
