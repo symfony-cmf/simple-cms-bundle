@@ -13,6 +13,7 @@ use Doctrine\Bundle\PHPCRBundle\ManagerRegistry;
 use Doctrine\Bundle\PHPCRBundle\Migrator\MigratorInterface;
 use Doctrine\ODM\PHPCR\DocumentManager;
 
+// dan: What does this do ??
 class Page implements MigratorInterface
 {
     /**

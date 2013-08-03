@@ -21,6 +21,11 @@
         "doctrine/phpcr-bundle": "1.0.*",
         "doctrine/phpcr-odm": "1.0.*"
     },
+    "require-dev": {
+        "symfony-cmf/testing": "1.0.*",
+        "sonata-project/doctrine-phpcr-admin-bundle": "1.0.*",
+        "symfony/monolog-bundle": "2.2.*"
+    },
     "suggest": {
         "symfony-cmf/create-bundle": "1.0.*",
         "symfony-cmf/menu-bundle": "~1.0.0-RC1",
