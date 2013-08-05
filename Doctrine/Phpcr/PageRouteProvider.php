@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author smith@pooteeweet.org
  */
-class MultilangRouteProvider extends RouteProvider
+class PageRouteProvider extends RouteProvider
 {
     /**
      * Locales
