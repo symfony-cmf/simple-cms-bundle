@@ -37,8 +37,8 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
         $container->setParameter($this->getAlias() . '.menu_basepath', PathHelper::getParentPath($config['basepath']));
         $container->setParameter($this->getAlias() . '.uri_filter_regexp', $config['routing']['uri_filter_regexp']);
 
-        $loader->load('services/routing.xml');
-        $loader->load('services/migrator.xml');
+        $loader->load('routing.xml');
+        $loader->load('migrator.xml');
 
         $dynamic = $container->getDefinition($this->getAlias().'.dynamic_router');
 
@@ -113,7 +113,7 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
             return;
         }
 
-        $loader->load('services/menu.xml');
+        $loader->load('menu.xml');
     }
 
     protected function loadSonataAdmin($config, XmlFileLoader $loader, ContainerBuilder $container)
@@ -129,7 +129,7 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
                 : false
         );
 
-        $loader->load('services/admin.xml');
+        $loader->load('admin.xml');
     }
 
     /**

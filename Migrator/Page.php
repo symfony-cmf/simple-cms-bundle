@@ -13,6 +13,11 @@ use Doctrine\Bundle\PHPCRBundle\ManagerRegistry;
 use Doctrine\Bundle\PHPCRBundle\Migrator\MigratorInterface;
 use Doctrine\ODM\PHPCR\DocumentManager;
 
+/**
+ * Doctrine migrator for pages
+ *
+ * Provides a way of creating and maintaining pages from YAML files.
+ */
 class Page implements MigratorInterface
 {
     /**

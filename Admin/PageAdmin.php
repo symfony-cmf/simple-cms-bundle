@@ -16,6 +16,9 @@ class PageAdmin extends Admin
 {
     protected $translationDomain = 'CmfSimpleCmsBundle';
 
+    protected $baseRouteName = 'cmf_simplecms_page';
+    protected $baseRoutePattern = '/cmf/simplecms/page';
+
     private $sortOrder = false;
 
     public function setSortOrder($sortOrder)
@@ -51,39 +54,8 @@ class PageAdmin extends Admin
             ->add('label', null, array('required' => false))
             ->add('title')
             ->add('createDate')
-            ->add('publishStartDate', null, array('required' => false))
-            ->add('publishEndDate', null, array('required' => false))
             ->add('body', 'textarea')
         ;
-    }
-
-    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
-    {
-        if (!in_array($action, array('edit', 'create'))) {
-            return;
-        }
-
-        $menu->addChild(
-            $this->trans('sidemenu.publish_start_end_date')
-        );
-
-        $menu->addChild(
-            $this->trans('sidemenu.end_date_disable')
-        );
-
-        if ('edit' == $action) {
-            $page = $this->getSubject();
-            $uri = $this->routeGenerator->generate($page);
-            if ($page instanceof MultilangPage) {
-                $uri.= '#'.$page->getTitle();
-            }
-
-            $menu->addChild(
-                $this->trans('sidemenu.review'),
-                array('uri' => $uri)
-            );
-        }
-
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
