@@ -33,8 +33,12 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
         $config = $this->processConfiguration(new Configuration(), $configs);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $container->setParameter($this->getAlias() . '.basepath', $config['basepath']);
-        $container->setParameter($this->getAlias() . '.menu_basepath', PathHelper::getParentPath($config['basepath']));
+        if (isset($config['persistence'])) {
+            if (isset($config['phpcr'])) {
+                $this->loadPhpcr($config['phpcr'], $loader, $container);
+            }
+        }
+
         $container->setParameter($this->getAlias() . '.uri_filter_regexp', $config['routing']['uri_filter_regexp']);
 
         $loader->load('routing.xml');
@@ -76,10 +80,33 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
             $dynamic->addMethodCall('addRouteEnhancer', array(new Reference($this->getAlias() . '.enhancer_templates_by_class')));
         }
 
+
+        if ($config['use_menu']) {
+            $this->loadMenu($config, $loader, $container);
+        }
+
+    }
+
+    protected function loadPhpcr($config, XmlFileLoader $loader, ContainerBuilder $container)
+    {
+        $prefix = $this->getAlias() . '.persistence.phpcr';
+
+        $container->setParameter($prefix . '.basepath', $config['basepath']);
+        $container->setParameter($prefix . '.menu_basepath', PathHelper::getParentPath($config['basepath']));
+
+        if ($config['use_sonata_admin']) {
+            $this->loadSonataAdmin($config, $loader, $container);
+        } elseif (isset($config['sonata_admin'])) {
+            throw new InvalidConfigurationException('Do not define sonata_admin options when use_sonata_admin is set to false');
+        }
+
         $generator = $container->getDefinition($this->getAlias().'.generator');
-        $generator->addMethodCall('setContentRepository', array(new Reference($config['routing']['content_repository_id'])));
+        $generator->addMethodCall('setContentRepository', array(
+            new Reference($config['routing']['content_repository_id'])
+        ));
 
         $container->setParameter($this->getAlias() . '.manager_name', $config['manager_name']);
+
         $routeProvider = $container->getDefinition($this->getAlias() . '.route_provider');
         $routeProvider->replaceArgument(0, new Reference($config['manager_registry']));
         $multilangRouteProvider = $container->getDefinition($this->getAlias() . '.multilang_route_provider');
@@ -94,16 +121,6 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
         }
 
         $container->setParameter($this->getAlias() . '.document_class', $config['document_class']);
-
-        if ($config['use_menu']) {
-            $this->loadMenu($config, $loader, $container);
-        }
-
-        if ($config['use_sonata_admin']) {
-            $this->loadSonataAdmin($config, $loader, $container);
-        } elseif (isset($config['sonata_admin'])) {
-            throw new InvalidConfigurationException('Do not define sonata_admin options when use_sonata_admin is set to false');
-        }
     }
 
     protected function loadMenu($config, XmlFileLoader $loader, ContainerBuilder $container)
