@@ -1,4 +1,4 @@
-# Symfony CMF SimpleCms Bundle
+# Symfony CMF Simple CMS Bundle
 
 [![Build Status](https://secure.travis-ci.org/symfony-cmf/SimpleCmsBundle.png)](http://travis-ci.org/symfony-cmf/SimpleCmsBundle)
 [![Latest Stable Version](https://poser.pugx.org/symfony-cmf/simple-cms-bundle/version.png)](https://packagist.org/packages/symfony-cmf/simple-cms-bundle)
@@ -7,18 +7,25 @@
 This bundle is part of the [Symfony Content Management Framework (CMF)](http://cmf.symfony.com/)
 and licensed under the [MIT License](LICENSE).
 
-A trivial content management system based on the [Symfony Cmf](https://github.com/symfony-cmf/symfony-cmf)
+The SimpleCmsBundle builds on other Symfony CMF components. It provides a
+solution that can easily map content, routes and menu items based on a single
+tree structure in the content repository.
+
+While the core CMF components focus on flexibility, the Simple CMS Bundle
+trades away some of that flexibility in favor of simplicity.
+
 
 ## Requirements
 
 * Symfony 2.2.x
 * See also the `require` section of [composer.json](composer.json)
 
+
 ## Documentation
 
 For the install guide and reference, see:
 
-* [SimpleCmsBundle documentation](http://symfony.com/doc/master/cmf/bundles/simple-cms-bundle.html)
+* [SimpleCmsBundle documentation](http://symfony.com/doc/master/cmf/bundles/simple_cms.html)
 
 See also:
 
