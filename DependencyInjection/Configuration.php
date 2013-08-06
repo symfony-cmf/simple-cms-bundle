@@ -46,7 +46,6 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('auto')
                 ->end()
 
-                ->scalarNode('generic_controller')->defaultValue('cmf_content.controller:indexAction')->end()
 
                 ->arrayNode('routing')
                     ->fixXmlConfig('controller_by_alias', 'controllers_by_alias')
@@ -54,6 +53,7 @@ class Configuration implements ConfigurationInterface
                     ->fixXmlConfig('template_by_class', 'templates_by_class')
                     ->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('generic_controller')->defaultValue('cmf_content.controller:indexAction')->end()
                         ->scalarNode('content_repository_id')->defaultValue('cmf_routing.content_repository')->end()
                         ->scalarNode('uri_filter_regexp')->defaultValue('')->end()
                         ->arrayNode('controllers_by_alias')

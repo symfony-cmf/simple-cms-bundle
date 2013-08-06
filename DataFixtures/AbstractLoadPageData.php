@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 
 use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 
-abstract class LoadCmsData extends ContainerAware implements FixtureInterface, OrderedFixtureInterface
+abstract class AbstractLoadPageData extends ContainerAware implements FixtureInterface, OrderedFixtureInterface
 {
     protected $defaultClass = array(
         'multilangpage' => 'Symfony\Cmf\Bundle\SimpleCmsBundle\Document\MultilangPage',
