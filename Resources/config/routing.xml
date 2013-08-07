@@ -6,13 +6,12 @@
     <parameters>
         <parameter key="cmf_simple_cms.dynamic_router_class">Symfony\Cmf\Bundle\RoutingBundle\Routing\DynamicRouter</parameter>
         <parameter key="cmf_simple_cms.nested_matcher_class">Symfony\Cmf\Component\Routing\NestedMatcher\NestedMatcher</parameter>
-        <parameter key="cmf_simple_cms.final_matcher_class">Symfony\Cmf\Component\Routing\NestedMatcher\ConfigurableUrlMatcher</parameter>
         <parameter key="cmf_simple_cms.generator_class">Symfony\Cmf\Bundle\RoutingBundle\Routing\ContentAwareGenerator</parameter>
         <parameter key="cmf_simple_cms.enhancer_route_content_class">Symfony\Cmf\Component\Routing\Enhancer\RouteContentEnhancer</parameter>
         <parameter key="cmf_simple_cms.enhancer_explicit_template_class">Symfony\Cmf\Component\Routing\Enhancer\FieldPresenceEnhancer</parameter>
         <parameter key="cmf_simple_cms.enhancer_controllers_by_alias_class">Symfony\Cmf\Component\Routing\Enhancer\FieldMapEnhancer</parameter>
         <parameter key="cmf_simple_cms.enhancer_field_by_class_class">Symfony\Cmf\Component\Routing\Enhancer\FieldByClassEnhancer</parameter>
-        <parameter key="cmf_simple_cms.locales" />
+        <parameter key="cmf_simple_cms.multilang.locales" />
     </parameters>
 
     <services>

@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>Simple CMS Test Application</title>
+    </head>
+    <body>
+        <section id="header">
+            <img src="/images/logo-horizontal.png"/>
+            <h1>Simple CMS Test Application</h1>
+        </section>
+        <nav>
+        {{ knp_menu_render('page') }}
+        </nav>
+        <section id="content">
+            {% block content %}
+            {% endblock %}
+        </section>
+    </body>
+</html>

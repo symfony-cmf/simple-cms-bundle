@@ -7,6 +7,15 @@
                 basepath="/test/page"
                 />
         </persistence>
+
+        <multilang>
+            <locale>en</locale>
+            <locale>fr</locale>
+        </multilang>
+
+        <routing>
+            <template-by-class alias="Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page">::layout.html.twig</template-by-class>
+        </routing>
     </config>
 
 </container>

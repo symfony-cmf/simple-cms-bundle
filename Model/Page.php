@@ -91,7 +91,7 @@ class Page extends PageBase implements
      *
      * automatically prepend the _locale to the pattern
      *
-     * @see MultilangRouteProvider::getCandidates()
+     * @see PageRouteProvider::getCandidates()
      */
     public function getStaticPrefix()
     {

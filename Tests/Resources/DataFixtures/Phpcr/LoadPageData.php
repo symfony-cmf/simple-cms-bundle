@@ -6,7 +6,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\ODM\PHPCR\Document\Generic;
-use Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page;
+use Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page;
 
 class LoadPageData implements FixtureInterface, DependentFixtureInterface
 {
@@ -20,8 +20,10 @@ class LoadPageData implements FixtureInterface, DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $root = $manager->find(null, '/test');
-        $base = new Generic;
-        $base->setNodename('page');
+
+        $base = new Page;
+        $base->setName('page');
+        $base->setLabel('Simple Cmf');
         $base->setParent($root);
         $manager->persist($base);
 
@@ -31,7 +33,22 @@ class LoadPageData implements FixtureInterface, DependentFixtureInterface
         $page->setLabel('homepage');
         $page->setPublishable(true);
         $page->setParent($base);
+        $manager->persist($page);
 
+        $page = new Page;
+        $page->setName('simple-cms');
+        $page->setTitle('Simple CMS');
+        $page->setLabel('Simple CMS');
+        $page->setPublishable(true);
+        $page->setParent($base);
+        $manager->persist($page);
+
+        $page = new Page;
+        $page->setName('contact');
+        $page->setTitle('Contact');
+        $page->setLabel('Contact');
+        $page->setPublishable(true);
+        $page->setParent($base);
         $manager->persist($page);
 
         $manager->flush();

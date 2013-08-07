@@ -33,11 +33,14 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
         $config = $this->processConfiguration(new Configuration(), $configs);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        if (isset($config['multilang'])) {
-            $container->setParameter($this->getAlias() . '.locales', $config['multilang']['locales']);
-        }
-
         $this->loadRouting($config['routing'], $loader, $container);
+
+        // set locales
+        $locales = array();
+        if (isset($config['multilang'])) {
+            $locales = $config['multilang']['locales'];
+        }
+        $container->setParameter($this->getAlias() . '.multilang.locales', $locales);
 
         if (isset($config['persistence'])) {
             if (isset($config['persistence']['phpcr'])) {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Document;
+namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr;
 
 use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RouteProvider;
 use Symfony\Component\HttpFoundation\Request;
