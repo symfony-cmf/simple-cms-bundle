@@ -7,12 +7,14 @@
             <img src="/images/logo-horizontal.png"/>
             <h1>Simple CMS Test Application</h1>
         </section>
+        <ul>
+            <li><a href="/admin/dashboard">Admin</a></li>
+        </ul>
         <nav>
         {{ knp_menu_render('page') }}
         </nav>
         <section id="content">
-            {% block content %}
-            {% endblock %}
+            {{ cmfMainContent.body|raw }}
         </section>
     </body>
 </html>

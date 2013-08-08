@@ -1,0 +1,14 @@
+<h3>Welcome to the Simple CMS Bundle Test Application</h3>
+<h4>Rendering the Menu</h4>
+
+<p>The Menu represents the structure of the Simple CMS and is generated with the aid of CMF MenuBundle and KnpMenuBundle</p>
+<pre>
+    {{ knp_menu_render('page') }}
+</pre>
+<p>The <code>page</code> represents the node name of the <code>basepath</code> of the Simple CMS.</p>
+
+<h4>Rendering content in a template</h4>
+
+<pre>
+    {{ cmfMainContent.body|raw }}
+</pre>

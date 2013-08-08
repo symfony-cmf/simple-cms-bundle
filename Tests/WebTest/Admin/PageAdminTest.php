@@ -51,8 +51,9 @@ class PageAdminTest extends BaseTestCase
         $uniqId = substr(strchr($actionUrl, '='), 1);
 
         $form[$uniqId.'[parent]'] = '/test/page';
-        $form[$uniqId.'[name]'] = 'foo-test';
-        $form[$uniqId.'[title]'] = 'Foo Test';
+        $form[$uniqId.'[name]'] = 'foo-page';
+        $form[$uniqId.'[title]'] = 'Foo Page';
+        $form[$uniqId.'[label]'] = 'Foo Page';
 
         $this->client->submit($form);
         $res = $this->client->getResponse();

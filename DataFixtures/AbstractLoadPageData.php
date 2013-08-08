@@ -15,7 +15,6 @@ use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 abstract class AbstractLoadPageData extends ContainerAware implements FixtureInterface, OrderedFixtureInterface
 {
     protected $defaultClass = array(
-        'multilangpage' => 'Symfony\Cmf\Bundle\SimpleCmsBundle\Document\MultilangPage',
         'page' => 'Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page'
     );
 

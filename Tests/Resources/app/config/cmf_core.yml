@@ -1,0 +1,3 @@
+cmf_core:
+    multilang:
+        locales: [ en, fr ]

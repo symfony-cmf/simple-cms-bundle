@@ -48,13 +48,6 @@ class Page extends PageBase implements
     protected $addLocalePattern;
 
     /**
-     * Runtime flag set by route provider
-     *
-     * @var boolean
-     */
-    protected $isTranslated = false;
-
-    /**
      * @var string
      */
     protected $locale;
@@ -82,15 +75,16 @@ class Page extends PageBase implements
         $this->addLocalePattern = $addLocalePattern;
     }
 
-    /**
-     * Method is called by PageRouteProvider to indicate whether or not we should
-     * append the {locale}
-     */
-    public function setIsTranslated($isTranslated)
+    public function getAddLocalePattern() 
     {
-        $this->isTranslated = (boolean) $isTranslated;
+        return $this->addLocalePattern;
     }
-
+    
+    public function setAddLocalePattern($addLocalePattern)
+    {
+        $this->addLocalePattern = $addLocalePattern;
+    }
+    
     public function getLocale()
     {
         return $this->locale;
@@ -110,7 +104,7 @@ class Page extends PageBase implements
      */
     public function getStaticPrefix()
     {
-        if (!$this->addLocalePattern || !$this->isTranslated) {
+        if (!$this->addLocalePattern) {
             return parent::getStaticPrefix();
         }
 

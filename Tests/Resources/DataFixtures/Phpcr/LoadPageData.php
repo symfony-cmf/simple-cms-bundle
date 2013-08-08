@@ -17,6 +17,11 @@ class LoadPageData implements FixtureInterface, DependentFixtureInterface
         );
     }
 
+    protected function getContent($filename)
+    {
+        return file_get_contents(__DIR__.'/content/'.$filename);
+    }
+
     public function load(ObjectManager $manager)
     {
         $root = $manager->find(null, '/test');
@@ -30,24 +35,30 @@ class LoadPageData implements FixtureInterface, DependentFixtureInterface
         $page = new Page;
         $page->setName('homepage');
         $page->setTitle('Homepage');
-        $page->setLabel('homepage');
+        $page->setLabel('Homepage');
         $page->setPublishable(true);
+        $page->setParent($base);
+        $page->setBody($this->getContent('homepage.html'));
+        $manager->persist($page);
+
+        $page = new Page;
+        $page->setName('french-page');
+        $page->setTitle('French Page');
+        $page->setLabel('French Page');
+        $page->setPublishable(true);
+        $page->setLocale('fr');
+        $page->setBody($this->getContent('french-page.html'));
         $page->setParent($base);
         $manager->persist($page);
 
         $page = new Page;
-        $page->setName('simple-cms');
-        $page->setTitle('Simple CMS');
-        $page->setLabel('Simple CMS');
+        $page->setName('no-locale-prefix');
+        $page->setTitle('No Locale Prefix Page');
+        $page->setLabel('No Locale Prefix Page');
         $page->setPublishable(true);
+        $page->setAddLocalePattern(false);
         $page->setParent($base);
-        $manager->persist($page);
-
-        $page = new Page;
-        $page->setName('contact');
-        $page->setTitle('Contact');
-        $page->setLabel('Contact');
-        $page->setPublishable(true);
+        $page->setBody($this->getContent('no-locale-prefix.html'));
         $page->setParent($base);
         $manager->persist($page);
 
