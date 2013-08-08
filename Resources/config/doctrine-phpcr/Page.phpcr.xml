@@ -8,6 +8,7 @@
     <document
         name="Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page"
         >
+        <node name="node"/>
     </document>
 
 </doctrine-mapping>

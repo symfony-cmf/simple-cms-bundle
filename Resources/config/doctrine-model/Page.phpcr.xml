@@ -12,7 +12,6 @@
         <locale name="locale"/>
 
         <!-- Base Page !-->
-        <node name="node"/>
         <field name="title" type="string" translated="true"/>
         <field name="label" type="string" translated="true"/>
         <field name="body" type="string" translated="true"/>

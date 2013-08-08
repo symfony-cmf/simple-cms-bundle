@@ -20,8 +20,6 @@ class PageBase extends Route implements
     RouteReferrersReadInterface, // this must not be the write interface, it would make no sense
     NodeInterface
 {
-    public $node;
-
     /**
      * @Assert\NotBlank
      */

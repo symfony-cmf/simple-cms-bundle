@@ -9,4 +9,5 @@ use Symfony\Cmf\Bundle\SimpleCmsBundle\Model\Page as ModelPage;
  */
 class Page extends ModelPage
 {
+    public $node;
 }

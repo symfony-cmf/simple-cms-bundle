@@ -81,6 +81,10 @@ class PageTest extends BaseTestCase
 
         $page = $this->dm->findTranslation(null, '/test/page-name', 'fr');
         $this->assertEquals('fr', $page->getLocale());
+
+        // test node
+        $node = $page->node;
+        $this->assertInstanceOf('PHPCR\NodeInterface', $node);
     }
 }
 
