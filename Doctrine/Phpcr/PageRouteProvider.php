@@ -4,6 +4,7 @@ namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr;
 
 use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RouteProvider;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page;
 
 /**
  * Provider to load routes from PHPCR-ODM by locale
@@ -47,11 +48,21 @@ class PageRouteProvider extends RouteProvider
         return parent::getCandidates($url);
     }
 
-    protected function setLocaleRequirement($route)
+    protected function configureLocale($route)
     {
-        if (!$route->getRequirement('_locale') && $this->getObjectManager()->isDocumentTranslatable($route)) {
-            $locales = $this->getObjectManager()->getLocalesFor($route, true);
-            $route->setRequirement('_locale', implode('|', $locales));
+        if ($this->getObjectManager()->isDocumentTranslatable($route)) {
+
+            // set the translated flag - tell the document if it should add
+            // the {locale} parameter.
+            if ($route instanceOf Page) {
+                $route->setIsTranslated(true);
+            }
+
+            // add locale requirement
+            if (!$route->getRequirement('_locale')) {
+                $locales = $this->getObjectManager()->getLocalesFor($route, true);
+                $route->setRequirement('_locale', implode('|', $locales));
+            }
         }
     }
 
@@ -59,7 +70,7 @@ class PageRouteProvider extends RouteProvider
     {
         $collection = parent::getRouteCollectionForRequest($request);
         foreach ($collection as $route) {
-            $this->setLocaleRequirement($route);
+            $this->configureLocale($route);
         }
 
         return $collection;
@@ -71,7 +82,7 @@ class PageRouteProvider extends RouteProvider
     public function getRouteByName($name, $parameters = array())
     {
         $route = parent::getRouteByName($name, $parameters);
-        $this->setLocaleRequirement($route);
+        $this->configureLocale($route);
 
         return $route;
     }

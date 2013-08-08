@@ -3,11 +3,10 @@
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Tests\Functional\Doctrine\Phpcr;
 
 use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
-use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode;
 use Symfony\Cmf\Component\Testing\Document\Content;
 use Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page;
 
-class MenuNodeTest extends BaseTestCase
+class PageTest extends BaseTestCase
 {
     public function setUp()
     {
@@ -16,7 +15,7 @@ class MenuNodeTest extends BaseTestCase
         $this->baseNode = $this->dm->find(null, '/test');
     }
 
-    public function testMenuNode()
+    public function testPage()
     {
         $data = array(
             'name' => 'page-name',
