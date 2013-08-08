@@ -2,7 +2,7 @@
 
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Document;
 
-use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
+use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RedirectRoute;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
 
@@ -11,7 +11,7 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
  *
  * provides multi language support when using MultilangRouteProvider
  */
-class PageRoute extends Route
+class MultilangRedirectRoute extends RedirectRoute
 {
     /**
      * {@inheritDoc}

@@ -23,7 +23,7 @@ class CmfSimpleCmsBundle extends Bundle
                         realpath(__DIR__ . '/Resources/config/doctrine-model') => 'Symfony\Cmf\Bundle\SimpleCmsBundle\Model',
                         realpath(__DIR__ . '/Resources/config/doctrine-phpcr') => 'Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr',
                     ),
-                    array('cmf_simple_cms.manager_name')
+                    array('cmf_simple_cms.persistence.phpcr.manager_name')
                 )
             );
         }

@@ -3,7 +3,6 @@
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Model;
 
 use \LogicException;
-use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,8 +15,6 @@ use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
 /**
  * This document is a route, a menu node and a content document with publish
  * workflow all at the same time.
- *
- * @PHPCRODM\Document
  */
 class PageBase extends Route implements
     RouteReferrersReadInterface, // this must not be the write interface, it would make no sense
@@ -34,9 +31,6 @@ class PageBase extends Route implements
 
     protected $body;
 
-    /**
-     * @PHPCRODM\Date()
-     */
     protected $createDate;
 
     /**
@@ -203,7 +197,7 @@ class PageBase extends Route implements
      */
     public function getDate()
     {
-        return $this->date;
+        return $this->createDate;
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\SimpleCmsBundle\DataFixtures;
+namespace Symfony\Cmf\Bundle\SimpleCmsBundle\DataFixtures\Phpcr;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;

@@ -2,7 +2,6 @@
 
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Model;
 
-use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
@@ -19,8 +18,6 @@ use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
  *
  * Additionally you can store "extra" string values in it for application
  * specific purposes.
- *
- * @PHPCRODM\Document(translator="attribute")
  */
 class Page extends PageBase implements
     PublishTimePeriodInterface,

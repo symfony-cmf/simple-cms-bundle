@@ -13,7 +13,7 @@
             <argument type="service" id="doctrine_phpcr"/>
             <argument>%cmf_simple_cms.persistence.phpcr.basepath%</argument>
             <argument>%kernel.root_dir%/Resources/data/pages</argument>
-            <tag name="doctrine_phpcr.mmigrator" alias="page" />
+            <tag name="doctrine_phpcr.migrator" alias="page" />
         </service>
 
     </services>

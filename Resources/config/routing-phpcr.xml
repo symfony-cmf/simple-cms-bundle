@@ -25,7 +25,7 @@
             <argument/>
             <argument>null</argument>
             <call method="setManagerName"><argument>%cmf_simple_cms.persistence.phpcr.manager_name%</argument></call>
-            <call method="setLocales"><argument>%cmf_simple_cms.multilang.locales%</argument></call>
+            <call method="setLocales"><argument>%cmf_core.multilang.locales%</argument></call>
             <call method="setPrefix"><argument>%cmf_simple_cms.persistence.phpcr.basepath%</argument></call>
         </service>
 
