@@ -24,19 +24,18 @@ class PageAdminTest extends BaseTestCase
 
     public function testPageEdit()
     {
-        $crawler = $this->client->request('GET', '/admin/cmf/simplecms/page/test/pages/homepage/edit');
+        $crawler = $this->client->request('GET', '/admin/cmf/simplecms/page/test/page/homepage/edit');
         $res = $this->client->getResponse();
         $this->assertEquals(200, $res->getStatusCode());
-        $this->assertCount(1, $crawler->filter('input[value="homepage"]'));
+        $this->assertCount(2, $crawler->filter('input[value="homepage"]'));
     }
 
     public function testPageShow()
     {
-        return;
-        $crawler = $this->client->request('GET', '/admin/cmf/simplecms/page/test/pages/homepage/show');
+        $crawler = $this->client->request('GET', '/admin/cmf/simplecms/page/test/page/homepage/show');
         $res = $this->client->getResponse();
         $this->assertEquals(200, $res->getStatusCode());
-        $this->assertCount(2, $crawler->filter('td:contains("test-page")'));
+        $this->assertCount(1, $crawler->filter('html:contains("homepage")'));
     }
 
     public function testPageCreate()
@@ -51,9 +50,9 @@ class PageAdminTest extends BaseTestCase
         $actionUrl = $node->getAttribute('action');
         $uniqId = substr(strchr($actionUrl, '='), 1);
 
-        $form[$uniqId.'[parent]'] = '/test/pages';
-        $form[$uniqId.'[title]'] = 'foo-page';
-        $form[$uniqId.'[label]'] = 'Foo Page';
+        $form[$uniqId.'[parent]'] = '/test/page';
+        $form[$uniqId.'[name]'] = 'foo-test';
+        $form[$uniqId.'[title]'] = 'Foo Test';
 
         $this->client->submit($form);
         $res = $this->client->getResponse();
