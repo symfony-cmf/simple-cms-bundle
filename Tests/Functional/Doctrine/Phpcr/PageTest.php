@@ -27,7 +27,6 @@ class PageTest extends BaseTestCase
             'publishStartDate' => new \DateTime('2013-06-18'),
             'publishEndDate' => new \DateTime('2013-06-18'),
             'addLocalePattern' => true,
-            'tags' => array('tag1', 'tag2'),
             'extras' => array(
                 'extra_1' => 'foobar',
                 'extra_2' => 'barfoo',

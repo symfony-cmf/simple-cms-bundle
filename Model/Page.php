@@ -2,28 +2,52 @@
 
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Model;
 
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
+use Knp\Menu\NodeInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
 use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
+use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
+use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * This is the standard Page document.
+ * This is the standard Simple CMS Page document.
  *
- * It adds the following to the base document
+ * It supports:
  *
- * - Translatable
+ * - Multilang
  * - Publish Workflow
- * - Tags
  *
  * Additionally you can store "extra" string values in it for application
  * specific purposes.
  */
-class Page extends PageBase implements
+class Page extends Route implements
+    NodeInterface,
+    RouteReferrersReadInterface, // this must not be the write interface, it would make no sense
     PublishTimePeriodInterface,
     PublishableInterface,
     TranslatableInterface
 {
+    /**
+     * @Assert\NotBlank
+     */
+    public $title;
+
+    /**
+     * @var string
+     */
+    protected $label;
+
+    /**
+     * @var string
+     */
+    protected $body;
+
+    /**
+     * @var \DateTime
+     */
+    protected $createDate;
+
     /**
      * @var \DateTime
      */
@@ -50,11 +74,6 @@ class Page extends PageBase implements
     protected $locale;
 
     /**
-     * @var array
-     */
-    protected $tags = array();
-
-    /**
      * Extra values an application can store along with a page
      */
     protected $extras;
@@ -70,6 +89,7 @@ class Page extends PageBase implements
     {
         parent::__construct($addFormatPattern);
         $this->addLocalePattern = $addLocalePattern;
+        $this->createDate = new \DateTime();
     }
 
     public function getAddLocalePattern() 
@@ -81,12 +101,18 @@ class Page extends PageBase implements
     {
         $this->addLocalePattern = $addLocalePattern;
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     public function getLocale()
     {
         return $this->locale;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function setLocale($locale)
     {
         $this->locale = $locale;
@@ -169,26 +195,6 @@ class Page extends PageBase implements
     }
 
     /**
-     * Content method: Get tags of this page
-     *
-     * @return \Traversable list of tag strings
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
-
-    /**
-     * Content method: Set tags of this page
-     *
-     * @param $tags \Traversable list of tag strings
-     */
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
-    }
-
-    /**
      * Get extras - a flat key-value hashmap
      *
      * @return array with only string values
@@ -250,5 +256,171 @@ class Page extends PageBase implements
     public function getExtra($key, $default = null)
     {
         return array_key_exists($key, $this->extras) ? $this->extras[$key] : $default;
+    }
+
+    /**
+     * Content method: Get the routes that point to this content
+     *
+     * {@inheritDoc}
+     */
+    public function getRoutes()
+    {
+        return array($this);
+    }
+
+    /**
+     * Menu method: Get child menu nodes.
+     *
+     * @return ArrayCollection the child nodes
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * Menu method: List of child menu nodes
+     *
+     * @param object[] $children
+     */
+    public function setChildren($children)
+    {
+        $this->children = $children;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Route method: The content of this route is the object itself.
+     *
+     * {@inheritDoc}
+     */
+    public function getContent()
+    {
+        return $this;
+    }
+
+    /**
+     * Never call this, it makes no sense. The SimpleCms Page is its own
+     * content.
+     *
+     * @param $document
+     *
+     * @throws LogicException
+     */
+    public function setContent($document)
+    {
+        throw new LogicException('Do not set a content for the redirect route. It is its own content.');
+    }
+
+    /**
+     * Route method and Menu method - provides menu options merged with the
+     * route options
+     *
+     * {@inheritDoc}
+     */
+    public function getOptions()
+    {
+        return parent::getOptions() + array(
+            'label' => $this->getLabel(),
+            'attributes' => array(),
+            'childrenAttributes' => array(),
+            'display' => ! empty($this->label),
+            'displayChildren' => true,
+            'content' => $this,
+            'routeParameters' => array(),
+            'routeAbsolute' => false,
+            'linkAttributes' => array(),
+            'labelAttributes' => array(),
+        );
+    }
+
+    /**
+     * Menu method: set the menu label
+     *
+     * @param string $label
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
+    }
+
+    /**
+     * Menu method: get the label for the menu
+     *
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * Content method: set the page title
+     *
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * Content method: get the page title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Content method: set the page body
+     *
+     * @param string $body
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+    }
+
+    /**
+     * Content method: get the page body
+     *
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * Get the creation date
+     *
+     * @return \DateTime
+     */
+    public function getCreateDate()
+    {
+        return $this->createDate;
+    }
+
+    /**
+     * Overwrite the creation date manually
+     *
+     * On creation of a Page, the createDate is automatically set to the
+     * current time.
+     *
+     * @param \DateTime $createDate
+     */
+    public function setCreateDate(\DateTime $createDate = null)
+    {
+        $this->createDate = $createDate;
     }
 }
