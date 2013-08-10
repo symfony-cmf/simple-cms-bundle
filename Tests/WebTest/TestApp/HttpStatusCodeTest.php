@@ -24,9 +24,12 @@ class HttpStatusCodeTest extends BaseTestCase
         );
     }
 
-    public function testPageList()
+    /**
+     * @dataProvider provideStatusCodeTest
+     */
+    public function testStatusCode($url)
     {
-        $crawler = $this->client->request('GET', '/admin/cmf/simplecms/page/list');
+        $crawler = $this->client->request('GET', $url);
         $res = $this->client->getResponse();
         $this->assertEquals(200, $res->getStatusCode());
     }

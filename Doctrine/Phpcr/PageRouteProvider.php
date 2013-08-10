@@ -51,7 +51,6 @@ class PageRouteProvider extends RouteProvider
     protected function configureLocale($route)
     {
         if ($this->getObjectManager()->isDocumentTranslatable($route)) {
-
             // add locale requirement
             if (!$route->getRequirement('_locale')) {
                 $locales = $this->getObjectManager()->getLocalesFor($route, true);
