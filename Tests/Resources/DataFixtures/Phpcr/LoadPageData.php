@@ -28,7 +28,8 @@ class LoadPageData implements FixtureInterface, DependentFixtureInterface
 
         $base = new Page;
         $base->setName('page');
-        $base->setLabel('Simple Cmf');
+        $base->setTitle('Simple Cms');
+        $base->setLabel('Simple Cms');
         $base->setParent($root);
         $manager->persist($base);
 
