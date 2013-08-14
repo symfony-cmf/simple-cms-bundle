@@ -52,9 +52,9 @@ class LoadPageData implements FixtureInterface, DependentFixtureInterface
         $manager->persist($page);
 
         $page = new Page;
-        $page->setName('not-translated');
-        $page->setTitle('Not Translated');
-        $page->setLabel('Not Translated');
+        $page->setName('no-locale-prefix');
+        $page->setTitle('No Locale Prefix');
+        $page->setLabel('No Locale Prefix');
         $page->setPublishable(true);
         $page->setAddLocalePattern(false);
         $page->setParent($base);

@@ -17,7 +17,7 @@ class HttpStatusCodeTest extends BaseTestCase
     public function provideStatusCodeTest()
     {
         return array(
-            array('/'),
+            array('/', 301),
             array('/en/homepage'),
             array('/en/french-page'),
             array('/no-locale-prefix'),
@@ -27,10 +27,10 @@ class HttpStatusCodeTest extends BaseTestCase
     /**
      * @dataProvider provideStatusCodeTest
      */
-    public function testStatusCode($url)
+    public function testStatusCode($url, $expectedStatusCode = 200)
     {
         $crawler = $this->client->request('GET', $url);
         $res = $this->client->getResponse();
-        $this->assertEquals(200, $res->getStatusCode());
+        $this->assertEquals($expectedStatusCode, $res->getStatusCode());
     }
 }
