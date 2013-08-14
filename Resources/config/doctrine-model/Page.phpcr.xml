@@ -16,10 +16,10 @@
         <field name="body" type="string" translated="true"/>
         <field name="createDate" type="date"/>
         <field name="publishable" type="boolean"/>
-        <field name="publishStartDate" type="date"/>
-        <field name="publishEndDate" type="date"/>
+        <field name="publishStartDate" type="date" nullable="true"/>
+        <field name="publishEndDate" type="date" nullable="true"/>
         <field name="addLocalePattern" type="boolean"/>
-        <field name="extras" type="string" assoc=""/>
+        <field name="extras" type="string" assoc="" nullable="true"/>
 
     </mapped-superclass>
 

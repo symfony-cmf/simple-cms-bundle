@@ -75,8 +75,9 @@ class Page extends Route implements
 
     /**
      * Extra values an application can store along with a page
+     * @var array
      */
-    protected $extras;
+    protected $extras = array();
 
     /**
      * Overwrite to be able to create route without pattern
