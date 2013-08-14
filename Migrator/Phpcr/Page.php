@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Migrator;
+namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Migrator\Phpcr;
 
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -70,7 +70,7 @@ class Page implements MigratorInterface
 
         NodeHelper::createPath($this->session, preg_replace('#/[^/]*$#', '', $this->basepath));
 
-        $class = isset($data['class']) ? $data['class'] : 'Symfony\\Cmf\\Bundle\\SimpleCmsBundle\\Document\\MultilangPage';
+        $class = isset($data['class']) ? $data['class'] : 'Symfony\\Cmf\\Bundle\\SimpleCmsBundle\\Doctrine\\Phpcr\\Page';
 
         $page = $this->dm->find($class, $path);
         if (!$page) {
@@ -98,6 +98,7 @@ class Page implements MigratorInterface
         $this->dm->persist($page);
 
         if (is_array($data['title'])) {
+            $page->setAddLocalePattern(true);
             foreach ($data['title'] as $locale => $title) {
                 $page->setTitle($title);
                 if (isset($data['label'][$locale]) && $data['label'][$locale]) {
