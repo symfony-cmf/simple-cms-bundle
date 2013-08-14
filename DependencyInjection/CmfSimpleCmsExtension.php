@@ -33,87 +33,141 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
         $config = $this->processConfiguration(new Configuration(), $configs);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $container->setParameter($this->getAlias() . '.basepath', $config['basepath']);
-        $container->setParameter($this->getAlias() . '.menu_basepath', PathHelper::getParentPath($config['basepath']));
-        $container->setParameter($this->getAlias() . '.uri_filter_regexp', $config['routing']['uri_filter_regexp']);
+        $this->loadRouting($config['routing'], $loader, $container);
+
+        if (isset($config['persistence'])) {
+            if (isset($config['persistence']['phpcr'])) {
+                $this->loadPhpcr($config['persistence']['phpcr'], $loader, $container);
+                $this->loadPhpcrRouting($config, $loader, $container);
+
+                if ($config['use_menu']) {
+                    $this->loadPhpcrMenu($config, $loader, $container);
+                }
+            }
+        }
+    }
+
+    protected function loadRouting($config, XmlFileLoader $loader, ContainerBuilder $container)
+    {
+        $container->setParameter($this->getAlias() . '.uri_filter_regexp', $config['uri_filter_regexp']);
 
         $loader->load('routing.xml');
-        $loader->load('migrator.xml');
 
         $dynamic = $container->getDefinition($this->getAlias().'.dynamic_router');
 
         if (!empty($config['generic_controller'])) {
             $definition = new DefinitionDecorator('cmf_routing.enhancer_explicit_template');
             $definition->replaceArgument(2, $config['generic_controller']);
-            $container->setDefinition($this->getAlias() . '.enhancer_explicit_template', $definition);
-            $dynamic->addMethodCall('addRouteEnhancer', array(new Reference($this->getAlias() . '.enhancer_explicit_template')));
+            $container->setDefinition(
+                $this->getAlias() . '.enhancer_explicit_template', 
+                $definition
+            );
+            $dynamic->addMethodCall('addRouteEnhancer', array(
+                new Reference($this->getAlias() . '.enhancer_explicit_template')
+            ));
         }
-        if (!empty($config['routing']['controllers_by_alias'])) {
+
+        if (!empty($config['controllers_by_alias'])) {
             $definition = new DefinitionDecorator('cmf_routing.enhancer_controllers_by_class');
             $definition->replaceArgument(2, $config['routing']['controllers_by_alias']);
-            $container->setDefinition($this->getAlias() . '.enhancer_controllers_by_class', $definition);
-            $dynamic->addMethodCall('addRouteEnhancer', array(new Reference($this->getAlias() . '.enhancer_controllers_by_alias')));
+            $container->setDefinition(
+                $this->getAlias() . '.enhancer_controllers_by_class', 
+                $definition
+            );
+            $dynamic->addMethodCall('addRouteEnhancer', array(
+                new Reference($this->getAlias() . '.enhancer_controllers_by_alias')
+            ));
         }
-        if (!empty($config['routing']['controllers_by_class'])) {
+
+        if (!empty($config['controllers_by_class'])) {
             $definition = new DefinitionDecorator('cmf_routing.enhancer_controllers_by_class');
-            $definition->replaceArgument(2, $config['routing']['controllers_by_class']);
-            $container->setDefinition($this->getAlias() . '.enhancer_controllers_by_class', $definition);
-            $dynamic->addMethodCall('addRouteEnhancer', array(new Reference($this->getAlias() . '.enhancer_controllers_by_class')));
+            $definition->replaceArgument(2, $config['controllers_by_class']);
+            $container->setDefinition(
+                $this->getAlias() . '.enhancer_controllers_by_class', 
+                $definition
+            );
+            $dynamic->addMethodCall('addRouteEnhancer', array(
+                new Reference($this->getAlias() . '.enhancer_controllers_by_class')
+            ));
         }
-        if (!empty($config['generic_controller']) && !empty($config['routing']['templates_by_class'])) {
+
+        if (!empty($config['generic_controller']) && !empty($config['templates_by_class'])) {
             $controllerForTemplates = array();
-            foreach ($config['routing']['templates_by_class'] as $key => $value) {
+            foreach ($config['templates_by_class'] as $key => $value) {
                 $controllerForTemplates[$key] = $config['generic_controller'];
             }
 
             $definition = new DefinitionDecorator('cmf_routing.enhancer_controller_for_templates_by_class');
             $definition->replaceArgument(2, $controllerForTemplates);
-            $container->setDefinition($this->getAlias() . '.enhancer_controller_for_templates_by_class', $definition);
+
+            $container->setDefinition(
+                $this->getAlias() . '.enhancer_controller_for_templates_by_class', 
+                $definition
+            );
+
             $definition = new DefinitionDecorator('cmf_routing.enhancer_templates_by_class');
-            $definition->replaceArgument(2, $config['routing']['templates_by_class']);
-            $container->setDefinition($this->getAlias() . '.enhancer_templates_by_class', $definition);
-            $dynamic->addMethodCall('addRouteEnhancer', array(new Reference($this->getAlias() . '.enhancer_controller_for_templates_by_class')));
-            $dynamic->addMethodCall('addRouteEnhancer', array(new Reference($this->getAlias() . '.enhancer_templates_by_class')));
+            $definition->replaceArgument(2, $config['templates_by_class']);
+
+            $container->setDefinition(
+                $this->getAlias() . '.enhancer_templates_by_class', 
+                $definition
+            );
+
+            $dynamic->addMethodCall('addRouteEnhancer', array(
+                new Reference($this->getAlias() . '.enhancer_controller_for_templates_by_class')
+            ));
+            $dynamic->addMethodCall('addRouteEnhancer', array(
+                new Reference($this->getAlias() . '.enhancer_templates_by_class')
+            ));
         }
+    }
 
-        $generator = $container->getDefinition($this->getAlias().'.generator');
-        $generator->addMethodCall('setContentRepository', array(new Reference($config['routing']['content_repository_id'])));
+    protected function loadPhpcr($config, XmlFileLoader $loader, ContainerBuilder $container)
+    {
+        // migrator is only for PHPCR
+        $loader->load('migrator.xml');
 
-        $container->setParameter($this->getAlias() . '.manager_name', $config['manager_name']);
-        $routeProvider = $container->getDefinition($this->getAlias() . '.route_provider');
-        $routeProvider->replaceArgument(0, new Reference($config['manager_registry']));
-        $multilangRouteProvider = $container->getDefinition($this->getAlias() . '.multilang_route_provider');
-        $multilangRouteProvider->replaceArgument(0, new Reference($config['manager_registry']));
+        // save some characters
+        $prefix = $this->getAlias() . '.persistence.phpcr';
 
-        if (!empty($config['multilang'])) {
-            $container->setParameter($this->getAlias() . '.locales', $config['multilang']['locales']);
-            $container->setAlias('cmf_simple_cms.route_provider', 'cmf_simple_cms.multilang_route_provider');
-            if ('Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page' === $config['document_class']) {
-                $config['document_class'] = 'Symfony\Cmf\Bundle\SimpleCmsBundle\Document\MultilangPage';
-            }
-        }
+        $container->setParameter($prefix . '.basepath', $config['basepath']);
 
-        $container->setParameter($this->getAlias() . '.document_class', $config['document_class']);
-
-        if ($config['use_menu']) {
-            $this->loadMenu($config, $loader, $container);
-        }
+        $container->setParameter($prefix . '.menu_basepath', PathHelper::getParentPath($config['basepath']));
 
         if ($config['use_sonata_admin']) {
             $this->loadSonataAdmin($config, $loader, $container);
         } elseif (isset($config['sonata_admin'])) {
             throw new InvalidConfigurationException('Do not define sonata_admin options when use_sonata_admin is set to false');
         }
+
+        $container->setParameter($prefix . '.manager_name', $config['manager_name']);
+
+        $container->setParameter($prefix . '.document_class', $config['document_class']);
     }
 
-    protected function loadMenu($config, XmlFileLoader $loader, ContainerBuilder $container)
+    protected function loadPhpcrRouting($config, XmlFileLoader $loader, ContainerBuilder $container) 
+    {
+        $loader->load('routing-phpcr.xml');
+        $prefix = $this->getAlias() . '.persistence.phpcr';
+
+        $routeProvider = $container->getDefinition($prefix.'.route_provider');
+        $routeProvider->replaceArgument(0, new Reference($config['persistence']['phpcr']['manager_registry']));
+        $container->setAlias($this->getAlias() . '.route_provider', $prefix.'.route_provider');
+
+        $generator = $container->getDefinition($this->getAlias().'.generator');
+        $generator->addMethodCall('setContentRepository', array(
+            new Reference($config['routing']['content_repository_id'])
+        ));
+    }
+
+    protected function loadPhpcrMenu($config, XmlFileLoader $loader, ContainerBuilder $container)
     {
         $bundles = $container->getParameter('kernel.bundles');
         if ('auto' === $config['use_menu'] && !isset($bundles['CmfMenuBundle'])) {
             return;
         }
 
-        $loader->load('menu.xml');
+        $loader->load('menu-phpcr.xml');
     }
 
     protected function loadSonataAdmin($config, XmlFileLoader $loader, ContainerBuilder $container)
@@ -123,10 +177,10 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
             return;
         }
 
-        $container->setParameter($this->getAlias() . '.admin.sort',
+        $container->setParameter($this->getAlias() . '.persistence.phpcr.admin.sort',
             isset($config['sonata_admin'])
-                ? $config['sonata_admin']['sort']
-                : false
+            ? $config['sonata_admin']['sort']
+            : false
         );
 
         $loader->load('admin.xml');

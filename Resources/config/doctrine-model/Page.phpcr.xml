@@ -1,0 +1,27 @@
+<doctrine-mapping
+    xmlns="http://doctrine-project.org/schemas/phpcr-odm/phpcr-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/phpcr-odm/phpcr-mapping
+    https://github.com/doctrine/phpcr-odm/raw/master/doctrine-phpcr-odm-mapping.xsd"
+    >
+
+    <mapped-superclass
+        name="Symfony\Cmf\Bundle\SimpleCmsBundle\Model\Page"
+        translator="attribute"
+        >
+        <locale name="locale"/>
+
+        <field name="title" type="string" translated="true"/>
+        <field name="label" type="string" translated="true"/>
+        <field name="body" type="string" translated="true" nullable="true"/>
+        <field name="createDate" type="date"/>
+        <field name="publishable" type="boolean"/>
+        <field name="publishStartDate" type="date" nullable="true"/>
+        <field name="publishEndDate" type="date" nullable="true"/>
+        <field name="addLocalePattern" type="boolean"/>
+        <field name="extras" type="string" assoc="" nullable="true"/>
+
+    </mapped-superclass>
+
+</doctrine-mapping>
+

@@ -27,7 +27,7 @@ class PageAdminTest extends BaseTestCase
         $crawler = $this->client->request('GET', '/admin/cmf/simplecms/page/test/page/homepage/edit');
         $res = $this->client->getResponse();
         $this->assertEquals(200, $res->getStatusCode());
-        $this->assertCount(2, $crawler->filter('input[value="homepage"]'));
+        $this->assertCount(2, $crawler->filter('input[value="Homepage"]'));
     }
 
     public function testPageShow()
@@ -51,8 +51,9 @@ class PageAdminTest extends BaseTestCase
         $uniqId = substr(strchr($actionUrl, '='), 1);
 
         $form[$uniqId.'[parent]'] = '/test/page';
-        $form[$uniqId.'[name]'] = 'foo-test';
-        $form[$uniqId.'[title]'] = 'Foo Test';
+        $form[$uniqId.'[name]'] = 'foo-page';
+        $form[$uniqId.'[title]'] = 'Foo Page';
+        $form[$uniqId.'[label]'] = 'Foo Page';
 
         $this->client->submit($form);
         $res = $this->client->getResponse();

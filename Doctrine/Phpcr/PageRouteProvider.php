@@ -1,16 +1,17 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Document;
+namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr;
 
 use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RouteProvider;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page;
 
 /**
  * Provider to load routes from PHPCR-ODM by locale
  *
  * @author smith@pooteeweet.org
  */
-class MultilangRouteProvider extends RouteProvider
+class PageRouteProvider extends RouteProvider
 {
     /**
      * Locales
@@ -47,11 +48,14 @@ class MultilangRouteProvider extends RouteProvider
         return parent::getCandidates($url);
     }
 
-    protected function setLocaleRequirement($route)
+    protected function configureLocale($route)
     {
-        if (!$route->getRequirement('_locale') && $this->getObjectManager()->isDocumentTranslatable($route)) {
-            $locales = $this->getObjectManager()->getLocalesFor($route, true);
-            $route->setRequirement('_locale', implode('|', $locales));
+        if ($this->getObjectManager()->isDocumentTranslatable($route)) {
+            // add locale requirement
+            if (!$route->getRequirement('_locale')) {
+                $locales = $this->getObjectManager()->getLocalesFor($route, true);
+                $route->setRequirement('_locale', implode('|', $locales));
+            }
         }
     }
 
@@ -59,7 +63,7 @@ class MultilangRouteProvider extends RouteProvider
     {
         $collection = parent::getRouteCollectionForRequest($request);
         foreach ($collection as $route) {
-            $this->setLocaleRequirement($route);
+            $this->configureLocale($route);
         }
 
         return $collection;
@@ -71,7 +75,7 @@ class MultilangRouteProvider extends RouteProvider
     public function getRouteByName($name, $parameters = array())
     {
         $route = parent::getRouteByName($name, $parameters);
-        $this->setLocaleRequirement($route);
+        $this->configureLocale($route);
 
         return $route;
     }

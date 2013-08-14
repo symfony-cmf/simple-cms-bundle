@@ -5,17 +5,8 @@
 
     <parameters>
         <parameter key="cmf_simple_cms.dynamic_router_class">Symfony\Cmf\Bundle\RoutingBundle\Routing\DynamicRouter</parameter>
-        <parameter key="cmf_simple_cms.route_provider_class">Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RouteProvider</parameter>
-        <parameter key="cmf_simple_cms.multilang_route_provider_class">Symfony\Cmf\Bundle\SimpleCmsBundle\Document\MultilangRouteProvider</parameter>
         <parameter key="cmf_simple_cms.nested_matcher_class">Symfony\Cmf\Component\Routing\NestedMatcher\NestedMatcher</parameter>
-        <parameter key="cmf_simple_cms.final_matcher_class">Symfony\Cmf\Component\Routing\NestedMatcher\ConfigurableUrlMatcher</parameter>
         <parameter key="cmf_simple_cms.generator_class">Symfony\Cmf\Bundle\RoutingBundle\Routing\ContentAwareGenerator</parameter>
-        <parameter key="cmf_simple_cms.phpcrodm_route_idprefix_listener_class">Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\IdPrefixListener</parameter>
-        <parameter key="cmf_simple_cms.enhancer_route_content_class">Symfony\Cmf\Component\Routing\Enhancer\RouteContentEnhancer</parameter>
-        <parameter key="cmf_simple_cms.enhancer_explicit_template_class">Symfony\Cmf\Component\Routing\Enhancer\FieldPresenceEnhancer</parameter>
-        <parameter key="cmf_simple_cms.enhancer_controllers_by_alias_class">Symfony\Cmf\Component\Routing\Enhancer\FieldMapEnhancer</parameter>
-        <parameter key="cmf_simple_cms.enhancer_field_by_class_class">Symfony\Cmf\Component\Routing\Enhancer\FieldByClassEnhancer</parameter>
-        <parameter key="cmf_simple_cms.locales" />
     </parameters>
 
     <services>
@@ -30,44 +21,10 @@
             <tag name="router" priority="10" />
         </service>
 
-        <service id="cmf_simple_cms.nested_matcher" class="%cmf_simple_cms.nested_matcher_class%">
-            <argument type="service" id="cmf_simple_cms.route_provider" />
-            <call method="setFinalMatcher"><argument type="service" id="cmf_routing.final_matcher"/></call>
-        </service>
-
-        <service id="cmf_simple_cms.route_provider" class="%cmf_simple_cms.route_provider_class%">
-            <argument/>
-            <argument>null</argument>
-            <call method="setManagerName"><argument>%cmf_simple_cms.manager_name%</argument></call>
-            <call method="setPrefix"><argument>%cmf_simple_cms.basepath%</argument></call>
-        </service>
-
-        <service id="cmf_simple_cms.multilang_route_provider" class="%cmf_simple_cms.multilang_route_provider_class%">
-            <argument/>
-            <argument>null</argument>
-            <call method="setManagerName"><argument>%cmf_simple_cms.manager_name%</argument></call>
-            <call method="setLocales"><argument>%cmf_simple_cms.locales%</argument></call>
-            <call method="setPrefix"><argument>%cmf_simple_cms.basepath%</argument></call>
-        </service>
-
         <service id="cmf_simple_cms.generator" class="%cmf_simple_cms.generator_class%">
             <argument type="service" id="cmf_simple_cms.route_provider" />
             <argument type="service" id="logger" on-invalid="ignore" />
             <call method="setContainer"><argument type="service" id="service_container"/></call>
-        </service>
-
-        <service id="cmf_simple_cms.phpcrodm_route_idprefix_listener" class="%cmf_simple_cms.phpcrodm_route_idprefix_listener_class%">
-            <argument>%cmf_simple_cms.basepath%</argument>
-            <tag name="doctrine_phpcr.event_listener" event="postLoad" />
-            <tag name="doctrine_phpcr.event_listener" event="postPersist" />
-        </service>
-
-
-        <service id="cmf_simple_cms.initializer" class="Doctrine\Bundle\PHPCRBundle\Initializer\GenericInitializer">
-            <argument type="collection">
-                <argument>%cmf_simple_cms.basepath%</argument>
-            </argument>
-            <tag name="doctrine_phpcr.initializer"/>
         </service>
 
     </services>

@@ -1,0 +1,6 @@
+home_redirect:
+    pattern: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /en/homepage
+        permanent: true

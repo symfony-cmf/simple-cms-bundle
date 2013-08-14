@@ -7,9 +7,7 @@ use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
 
 /**
- * @PHPCRODM\Document
- *
- * provides multi language support when using MultilangRouteProvider
+ * Provides multi language support when using MultilangRouteProvider
  */
 class MultilangRoute extends Route
 {

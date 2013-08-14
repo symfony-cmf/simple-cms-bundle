@@ -1,0 +1,7 @@
+cmf_core:
+    multilang:
+        locales: [ en, fr ]
+
+cmf_routing:
+    dynamic:
+        enabled: true

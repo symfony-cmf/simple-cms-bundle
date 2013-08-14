@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="cmf_simple_cms.persistence.phpcr.route_provider_class">Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\PageRouteProvider</parameter>
+        <parameter key="cmf_simple_cms.persistence.phpcr.route_idprefix_listener_class">Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\IdPrefixListener</parameter>
+    </parameters>
+
+    <services>
+
+        <service 
+            id="cmf_simple_cms.nested_matcher" 
+            class="%cmf_simple_cms.nested_matcher_class%"
+            >
+            <argument type="service" id="cmf_simple_cms.route_provider" />
+            <call method="setFinalMatcher"><argument type="service" id="cmf_routing.final_matcher"/></call>
+        </service>
+
+        <service 
+            id="cmf_simple_cms.persistence.phpcr.route_provider" 
+            class="%cmf_simple_cms.persistence.phpcr.route_provider_class%"
+            >
+            <argument/>
+            <argument>null</argument>
+            <call method="setManagerName"><argument>%cmf_simple_cms.persistence.phpcr.manager_name%</argument></call>
+            <call method="setLocales"><argument>%cmf_core.multilang.locales%</argument></call>
+            <call method="setPrefix"><argument>%cmf_simple_cms.persistence.phpcr.basepath%</argument></call>
+        </service>
+
+        <service 
+            id="cmf_simple_cms.persistence.phpcr.route_idprefix_listener" 
+            class="%cmf_simple_cms.persistence.phpcr.route_idprefix_listener_class%"
+            >
+            <argument>%cmf_simple_cms.persistence.phpcr.basepath%</argument>
+            <tag name="doctrine_phpcr.event_listener" event="postLoad" />
+            <tag name="doctrine_phpcr.event_listener" event="postPersist" />
+        </service>
+
+
+        <service 
+            id="cmf_simple_cms.initializer" 
+            class="Doctrine\Bundle\PHPCRBundle\Initializer\GenericInitializer">
+            <argument type="collection">
+                <argument>%cmf_simple_cms.persistence.phpcr.basepath%</argument>
+            </argument>
+            <tag name="doctrine_phpcr.initializer"/>
+        </service>
+
+    </services>
+</container>
+

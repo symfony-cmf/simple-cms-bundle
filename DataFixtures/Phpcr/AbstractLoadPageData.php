@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\SimpleCmsBundle\DataFixtures;
+namespace Symfony\Cmf\Bundle\SimpleCmsBundle\DataFixtures\Phpcr;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -12,11 +12,13 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 
 use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 
-abstract class LoadCmsData extends ContainerAware implements FixtureInterface, OrderedFixtureInterface
+/**
+ * @deprecated: To be removed in 1.1
+ */
+abstract class AbstractLoadPageData extends ContainerAware implements FixtureInterface, OrderedFixtureInterface
 {
     protected $defaultClass = array(
-        'multilangpage' => 'Symfony\Cmf\Bundle\SimpleCmsBundle\Document\MultilangPage',
-        'page' => 'Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page'
+        'page' => 'Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page'
     );
 
     abstract protected function getData();

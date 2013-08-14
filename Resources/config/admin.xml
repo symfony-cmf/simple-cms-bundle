@@ -3,30 +3,30 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter id="cmf_simple_cms.admin.sort">false</parameter>
+        <parameter key="cmf_simple_cms.persistence.phpcr.admin.sort">false</parameter>
     </parameters>
 
     <services>
 
-        <service id="cmf_simple_cms.admin.page_controller" class="Symfony\Cmf\Bundle\SimpleCmsBundle\Controller\PageAdminController">
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
+        <service id="cmf_simple_cms.persistence.phpcr.admin.page" class="Symfony\Cmf\Bundle\SimpleCmsBundle\Admin\PageAdmin">
+            <tag 
+                name="sonata.admin" 
+                manager_type="doctrine_phpcr" 
+                group="simple cms" 
+                label="page"
+                />
 
-        <service id="cmf_simple_cms.admin.page" class="Symfony\Cmf\Bundle\SimpleCmsBundle\Admin\PageAdmin">
             <argument/>
-            <argument>%cmf_simple_cms.document_class%</argument>
-            <argument>cmf_simple_cms.admin.page_controller</argument>
-            <tag name="sonata.admin" manager_type="doctrine_phpcr" group="simple cms" label="page"/>
+            <argument>%cmf_simple_cms.persistence.phpcr.document_class%</argument>
+            <argument>SonataAdminBundle:CRUD</argument>
             <call method="setRouteBuilder">
                 <argument type="service" id="sonata.admin.route.path_info_slashes"/>
             </call>
             <call method="setRoot">
-                <argument>%cmf_simple_cms.basepath%</argument>
+                <argument>%cmf_simple_cms.persistence.phpcr.basepath%</argument>
             </call>
             <call method="setSortOrder">
-                <argument>%cmf_simple_cms.admin.sort%</argument>
+                <argument>%cmf_simple_cms.persistence.phpcr.admin.sort%</argument>
             </call>
         </service>
 

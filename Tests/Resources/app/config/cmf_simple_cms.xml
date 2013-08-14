@@ -1,9 +1,16 @@
 <?xml version="1.0" ?>
 <container xmlns="http://symfony.com/schema/dic/services">
 
-    <config xmlns="http://cmf.symfony.com/schema/dic/simplecms"
-        basepath="/test/page"
-        >
+    <config xmlns="http://cmf.symfony.com/schema/dic/simplecms">
+        <persistence>
+            <phpcr 
+                basepath="/test/page"
+                />
+        </persistence>
+
+        <routing>
+            <template-by-class alias="Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page">::layout.html.twig</template-by-class>
+        </routing>
     </config>
 
 </container>
