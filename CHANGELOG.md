@@ -20,21 +20,22 @@ Migration instructions:
 
 ````bash
     export CMFNS="Symfony\\Cmf\\Bundle\\SimpleCmsBundle"
-    ./app/console doctrine:phpcr:document:reclass \
+    ./app/console doctrine:phpcr:document:migrate-class \
        $CMFNS"\\Document\\MultilangPage" \
        $CMFNS"\\Doctrine\\Phpcr\\Page"
-    ./app/console doctrine:phpcr:document:reclass \
+    ./app/console doctrine:phpcr:document:migrate-class \
        $CMFNS"\\Document\\MultilangRedirectRoute" \
        $CMFNS"\\Doctrine\\Phpcr\\MultilangRedirectRoute"
-    ./app/console doctrine:phpcr:document:reclass \
+    ./app/console doctrine:phpcr:document:migrate-class \
        $CMFNS"\\Document\\MultilangRoute" \
        $CMFNS"\\Doctrine\\Phpcr\\MultilangRoute"
-    ./app/console doctrine:phpcr:document:reclass \
+    ./app/console doctrine:phpcr:document:migrate-class \
        $CMFNS"\\Document\\MultilangRouteProvider" \
        $CMFNS"\\Doctrine\\Phpcr\\MultilangRouteProvider"
-    ./app/console doctrine:phpcr:document:reclass \
+    ./app/console doctrine:phpcr:document:migrate-class \
        $CMFNS"\\Document\\Page" \
        $CMFNS"\\Doctrine\\Phpcr\\Page"
+````
          
 * **2013-08-04**: Changed name of Sonata route names / patterns - now /admin/cmf/simplecms/foo instead of /admin/bundle/simplecms/foo
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Tests\Functional\Doctrine\Phpcr;
+namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Tests\Functional\Migrator\Phpcr;
 
 use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
 use Symfony\Cmf\Component\Testing\Document\Content;
