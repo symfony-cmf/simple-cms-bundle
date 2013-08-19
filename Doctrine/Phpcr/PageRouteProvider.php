@@ -4,7 +4,6 @@ namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr;
 
 use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RouteProvider;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page;
 
 /**
  * Provider to load routes from PHPCR-ODM by locale
