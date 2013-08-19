@@ -34,13 +34,12 @@ abstract class AbstractLoadPageData extends ContainerAware implements FixtureInt
 
     protected function getBasePath()
     {
-        return $this->container->getParameter('cmf_simple_cms.basepath');
+        return $this->container->getParameter('cmf_simple_cms.persistence.phpcr.basepath');
     }
 
     protected function getDefaultClass()
     {
-        return $this->container->getParameter('cmf_simple_cms.locales')
-            ? $this->defaultClass['multilangpage'] : $this->defaultClass['page'];
+        return $this->defaultClass['page'];
     }
 
     public function load(ObjectManager $dm)
