@@ -45,6 +45,7 @@ class PageAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->with('form.group_general')
             ->add(
                 'parent',
                 'doctrine_phpcr_odm_tree',
@@ -54,6 +55,8 @@ class PageAdmin extends Admin
             ->add('label', null, array('required' => false))
             ->add('title')
             ->add('createDate')
+            ->add('addFormatPattern')
+            ->add('addTrailingSlash')
             ->add('addLocalePattern')
             ->add('body', 'textarea')
         ;

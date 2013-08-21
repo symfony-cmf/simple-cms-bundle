@@ -84,11 +84,12 @@ class Page extends Route implements
      *
      * @param Boolean $addFormatPattern whether to add ".{_format}" to the route pattern
      *                                  also implicitly sets a default/require on "_format" to "html"
+     * @param Boolean $addTrailingSlash whether to add a trailing slash to the route, defaults to not add one
      * @param Boolean $addLocalePattern whether to add "/{_locale}" to the route pattern
      */
-    public function __construct($addFormatPattern = false, $addLocalePattern = true)
+    public function __construct($addFormatPattern = false, $addTrailingSlash = false, $addLocalePattern = false)
     {
-        parent::__construct($addFormatPattern);
+        parent::__construct($addFormatPattern, $addTrailingSlash);
         $this->addLocalePattern = $addLocalePattern;
         $this->createDate = new \DateTime();
     }
