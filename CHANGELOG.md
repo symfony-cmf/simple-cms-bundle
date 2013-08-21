@@ -1,6 +1,9 @@
 Changelog
 =========
 
+1.0.0-RC1
+---------
+
 * **2013-08-10**: Removed "tags" property, see: https://github.com/symfony-cmf/SimpleCmsBundle/issues/53
 * **2013-08-08**:
   * Seperate Multilang document now incorporated in single document
