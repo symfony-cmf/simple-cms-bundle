@@ -3,7 +3,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="cmf_simple_cms.persistence.phpcr.menu_provider.class">Symfony\Cmf\Bundle\MenuBundle\Provider\PHPCRMenuProvider</parameter>
+        <parameter key="cmf_simple_cms.persistence.phpcr.menu_provider.class">Symfony\Cmf\Bundle\MenuBundle\Provider\PhpcrMenuProvider</parameter>
     </parameters>
 
     <services>
