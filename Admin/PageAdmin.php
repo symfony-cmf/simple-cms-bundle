@@ -55,9 +55,9 @@ class PageAdmin extends Admin
             ->add('label', null, array('required' => false))
             ->add('title')
             ->add('createDate')
-            ->add('addFormatPattern')
-            ->add('addTrailingSlash')
-            ->add('addLocalePattern')
+            ->add('addFormatPattern', null, array('required' => false))
+            ->add('addTrailingSlash', null, array('required' => false))
+            ->add('addLocalePattern', null, array('required' => false))
             ->add('body', 'textarea')
         ;
     }
