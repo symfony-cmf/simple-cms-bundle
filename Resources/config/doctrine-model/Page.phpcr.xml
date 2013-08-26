@@ -12,7 +12,7 @@
         <locale name="locale"/>
 
         <field name="title" type="string" translated="true"/>
-        <field name="label" type="string" translated="true"/>
+        <field name="label" type="string" translated="true" nullable="true"/>
         <field name="body" type="string" translated="true" nullable="true"/>
         <field name="createDate" type="date"/>
         <field name="publishable" type="boolean"/>
