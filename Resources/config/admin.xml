@@ -4,16 +4,26 @@
 
     <parameters>
         <parameter key="cmf_simple_cms.persistence.phpcr.admin.sort">false</parameter>
+        <parameter key="cmf_simple_cms.persistence.phpcr.admin.page.class">Symfony\Cmf\Bundle\SimpleCmsBundle\Admin\PageAdmin</parameter>
     </parameters>
 
     <services>
 
-        <service id="cmf_simple_cms.persistence.phpcr.admin.page" class="Symfony\Cmf\Bundle\SimpleCmsBundle\Admin\PageAdmin">
-            <tag name="sonata.admin" manager_type="doctrine_phpcr" group="dashboard.cmf" label_catalogue="CmfSimpleCmsBundle" label="dashboard.label_page" label_translator_strategy="sonata.admin.label.strategy.underscore" />
+        <service id="cmf_simple_cms.persistence.phpcr.admin.page"
+            class="%cmf_simple_cms.persistence.phpcr.admin.page.class%">
 
-            <argument/>
-            <argument>%cmf_simple_cms.persistence.phpcr.document_class%</argument>
+            <tag name="sonata.admin"
+                manager_type="doctrine_phpcr"
+                group="dashboard.cmf"
+                label_catalogue="CmfSimpleCmsBundle"
+                label="dashboard.label_page"
+                label_translator_strategy="sonata.admin.label.strategy.underscore"
+            />
+
+            <argument />
+            <argument>%cmf_simple_cms.persistence.phpcr.document.class%</argument>
             <argument>SonataAdminBundle:CRUD</argument>
+
             <call method="setRouteBuilder">
                 <argument type="service" id="sonata.admin.route.path_info_slashes"/>
             </call>

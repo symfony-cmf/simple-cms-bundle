@@ -142,7 +142,7 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
 
         $container->setParameter($prefix . '.manager_name', $config['manager_name']);
 
-        $container->setParameter($prefix . '.document_class', $config['document_class']);
+        $container->setParameter($prefix . '.document.class', $config['document_class']);
     }
 
     protected function loadPhpcrRouting($config, XmlFileLoader $loader, ContainerBuilder $container)
