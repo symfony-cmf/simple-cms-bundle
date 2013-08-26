@@ -46,7 +46,6 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('auto')
                 ->end()
 
-
                 ->arrayNode('routing')
                     ->fixXmlConfig('controller_by_alias', 'controllers_by_alias')
                     ->fixXmlConfig('controller_by_class', 'controllers_by_class')

@@ -10,16 +10,16 @@
 
     <services>
 
-        <service 
-            id="cmf_simple_cms.nested_matcher" 
+        <service
+            id="cmf_simple_cms.nested_matcher"
             class="%cmf_simple_cms.nested_matcher_class%"
             >
             <argument type="service" id="cmf_simple_cms.route_provider" />
             <call method="setFinalMatcher"><argument type="service" id="cmf_routing.final_matcher"/></call>
         </service>
 
-        <service 
-            id="cmf_simple_cms.persistence.phpcr.route_provider" 
+        <service
+            id="cmf_simple_cms.persistence.phpcr.route_provider"
             class="%cmf_simple_cms.persistence.phpcr.route_provider_class%"
             >
             <argument/>
@@ -29,8 +29,8 @@
             <call method="setPrefix"><argument>%cmf_simple_cms.persistence.phpcr.basepath%</argument></call>
         </service>
 
-        <service 
-            id="cmf_simple_cms.persistence.phpcr.route_idprefix_listener" 
+        <service
+            id="cmf_simple_cms.persistence.phpcr.route_idprefix_listener"
             class="%cmf_simple_cms.persistence.phpcr.route_idprefix_listener_class%"
             >
             <argument>%cmf_simple_cms.persistence.phpcr.basepath%</argument>
@@ -39,8 +39,8 @@
         </service>
 
 
-        <service 
-            id="cmf_simple_cms.initializer" 
+        <service
+            id="cmf_simple_cms.initializer"
             class="Doctrine\Bundle\PHPCRBundle\Initializer\GenericInitializer">
             <argument type="collection">
                 <argument>%cmf_simple_cms.persistence.phpcr.basepath%</argument>
@@ -50,4 +50,3 @@
 
     </services>
 </container>
-

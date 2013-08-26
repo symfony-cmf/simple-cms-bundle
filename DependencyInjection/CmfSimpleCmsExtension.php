@@ -59,7 +59,7 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
             $definition = new DefinitionDecorator('cmf_routing.enhancer_explicit_template');
             $definition->replaceArgument(2, $config['generic_controller']);
             $container->setDefinition(
-                $this->getAlias() . '.enhancer_explicit_template', 
+                $this->getAlias() . '.enhancer_explicit_template',
                 $definition
             );
             $dynamic->addMethodCall('addRouteEnhancer', array(
@@ -71,7 +71,7 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
             $definition = new DefinitionDecorator('cmf_routing.enhancer_controllers_by_class');
             $definition->replaceArgument(2, $config['routing']['controllers_by_alias']);
             $container->setDefinition(
-                $this->getAlias() . '.enhancer_controllers_by_class', 
+                $this->getAlias() . '.enhancer_controllers_by_class',
                 $definition
             );
             $dynamic->addMethodCall('addRouteEnhancer', array(
@@ -83,7 +83,7 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
             $definition = new DefinitionDecorator('cmf_routing.enhancer_controllers_by_class');
             $definition->replaceArgument(2, $config['controllers_by_class']);
             $container->setDefinition(
-                $this->getAlias() . '.enhancer_controllers_by_class', 
+                $this->getAlias() . '.enhancer_controllers_by_class',
                 $definition
             );
             $dynamic->addMethodCall('addRouteEnhancer', array(
@@ -101,7 +101,7 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
             $definition->replaceArgument(2, $controllerForTemplates);
 
             $container->setDefinition(
-                $this->getAlias() . '.enhancer_controller_for_templates_by_class', 
+                $this->getAlias() . '.enhancer_controller_for_templates_by_class',
                 $definition
             );
 
@@ -109,7 +109,7 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
             $definition->replaceArgument(2, $config['templates_by_class']);
 
             $container->setDefinition(
-                $this->getAlias() . '.enhancer_templates_by_class', 
+                $this->getAlias() . '.enhancer_templates_by_class',
                 $definition
             );
 
@@ -145,7 +145,7 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
         $container->setParameter($prefix . '.document_class', $config['document_class']);
     }
 
-    protected function loadPhpcrRouting($config, XmlFileLoader $loader, ContainerBuilder $container) 
+    protected function loadPhpcrRouting($config, XmlFileLoader $loader, ContainerBuilder $container)
     {
         $loader->load('routing-phpcr.xml');
         $prefix = $this->getAlias() . '.persistence.phpcr';

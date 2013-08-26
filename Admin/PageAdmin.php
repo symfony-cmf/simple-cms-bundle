@@ -2,14 +2,10 @@
 
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Admin;
 
-use Doctrine\ODM\PHPCR\DocumentManager;
-use Sonata\AdminBundle\Admin\AdminInterface;
-use Symfony\Cmf\Bundle\SimpleCmsBundle\Document\MultilangPage;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Knp\Menu\ItemInterface as MenuItemInterface;
 use Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page;
 
 class PageAdmin extends Admin
@@ -120,7 +116,7 @@ class PageAdmin extends Admin
 
         if ($sortedItems !== $items->getKeys()) {
             $items->clear();
-            foreach($sortedItems as $key => $item) {
+            foreach ($sortedItems as $key => $item) {
                 $items[$key] = $item;
             }
         }

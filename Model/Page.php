@@ -94,11 +94,11 @@ class Page extends Route implements
         $this->createDate = new \DateTime();
     }
 
-    public function getAddLocalePattern() 
+    public function getAddLocalePattern()
     {
         return $this->addLocalePattern;
     }
-    
+
     public function setAddLocalePattern($addLocalePattern)
     {
         $this->addLocalePattern = $addLocalePattern;
@@ -250,7 +250,7 @@ class Page extends Route implements
      * Return a single extras value for the provided key or the $default if
      * the key is not defined.
      *
-     * @param string $key
+     * @param string      $key
      * @param string|null $default
      *
      * @return string|null The value at $key or if not existing $default

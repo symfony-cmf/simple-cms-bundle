@@ -8,8 +8,8 @@
 
     <services>
 
-        <service 
-            id="cmf_simple_cms.persistence.phpcr.menu_provider" 
+        <service
+            id="cmf_simple_cms.persistence.phpcr.menu_provider"
             class="%cmf_simple_cms.persistence.phpcr.menu_provider.class%"
             >
             <tag name="knp_menu.provider" />

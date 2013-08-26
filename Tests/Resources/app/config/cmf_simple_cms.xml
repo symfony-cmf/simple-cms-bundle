@@ -3,7 +3,7 @@
 
     <config xmlns="http://cmf.symfony.com/schema/dic/simplecms">
         <persistence>
-            <phpcr 
+            <phpcr
                 basepath="/test/page"
                 />
         </persistence>
@@ -14,4 +14,3 @@
     </config>
 
 </container>
-
