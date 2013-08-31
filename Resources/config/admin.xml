@@ -27,7 +27,7 @@
             <call method="setRouteBuilder">
                 <argument type="service" id="sonata.admin.route.path_info_slashes"/>
             </call>
-            <call method="setRoot">
+            <call method="setRootPath">
                 <argument>%cmf_simple_cms.persistence.phpcr.basepath%</argument>
             </call>
             <call method="setSortOrder">

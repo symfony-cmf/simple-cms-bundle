@@ -45,7 +45,7 @@ class PageAdmin extends Admin
             ->add(
                 'parent',
                 'doctrine_phpcr_odm_tree',
-                array('choice_list' => array(), 'select_root_node' => true, 'root_node' => $this->root)
+                array('choice_list' => array(), 'select_root_node' => true, 'root_node' => $this->getRootPath())
             )
             ->add('name', 'text')
             ->add('label', null, array('required' => false))
