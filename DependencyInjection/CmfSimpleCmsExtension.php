@@ -33,12 +33,17 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
         $config = $this->processConfiguration(new Configuration(), $configs);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
+        $locales = false;
+        if (isset($config['multilang']['locales'])) {
+            $locales = $config['multilang']['locales'];
+            $container->setParameter($this->getAlias() . '.multilang.locales', $locales);
+        }
         $this->loadRouting($config['routing'], $loader, $container);
 
         if (isset($config['persistence'])) {
             if (isset($config['persistence']['phpcr'])) {
                 $this->loadPhpcr($config['persistence']['phpcr'], $loader, $container);
-                $this->loadPhpcrRouting($config, $loader, $container);
+                $this->loadPhpcrRouting($config, $loader, $container, $locales);
 
                 if ($config['use_menu']) {
                     $this->loadPhpcrMenu($config, $loader, $container);
@@ -145,13 +150,14 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
         $container->setParameter($prefix . '.document.class', $config['document_class']);
     }
 
-    protected function loadPhpcrRouting($config, XmlFileLoader $loader, ContainerBuilder $container)
+    protected function loadPhpcrRouting($config, XmlFileLoader $loader, ContainerBuilder $container, $locales)
     {
         $loader->load('routing-phpcr.xml');
         $prefix = $this->getAlias() . '.persistence.phpcr';
 
         $routeProvider = $container->getDefinition($prefix.'.route_provider');
         $routeProvider->replaceArgument(0, new Reference($config['persistence']['phpcr']['manager_registry']));
+        $routeProvider->addMethodCall('setLocales', array('%cmf_simple_cms.multilang.locales%'));
         $container->setAlias($this->getAlias() . '.route_provider', $prefix.'.route_provider');
 
         $generator = $container->getDefinition($this->getAlias().'.generator');
