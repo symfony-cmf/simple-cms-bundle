@@ -1,6 +1,9 @@
 Changelog
 =========
 
+* **2013-08-31**: The multilang.locales configuration was added back as we do
+  need to care about locales and not depend on them when no locales are used.
+
 1.0.0-RC1
 ---------
 
@@ -39,7 +42,7 @@ Migration instructions:
        $CMFNS"\\Document\\Page" \
        $CMFNS"\\Doctrine\\Phpcr\\Page"
 ````
-         
+
 * **2013-08-04**: Changed name of Sonata route names / patterns - now /admin/cmf/simplecms/foo instead of /admin/bundle/simplecms/foo
 
 1.0.0-beta3

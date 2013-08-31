@@ -69,6 +69,17 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+
+                ->arrayNode('multilang')
+                    ->fixXmlConfig('locale')
+                    ->children()
+                        ->arrayNode('locales')
+                            ->isRequired()
+                            ->requiresAtLeastOneElement()
+                            ->prototype('scalar')->end()
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 
