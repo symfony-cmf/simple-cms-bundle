@@ -1,11 +1,10 @@
 <type
-        xmlns:sioc="http://rdfs.org/sioc/ns#"
-        xmlns:dcterms="http://purl.org/dc/terms/"
-        xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-        typeof="sioc:Post"
-        >
+        xmlns:sc="http://schema.org/"
+        xmlns:cw="http://schema.org/CreativeWork"
+        typeof="sc:WebPage"
+    >
     <children>
-        <property property="dcterms:title" identifier="title" tag-name="h1"/>
-        <property property="sioc:content" identifier="body" />
+        <property property="cw:headline" identifier="title" tag-name="h1"/>
+        <property property="cw:text" identifier="body" />
     </children>
 </type>
