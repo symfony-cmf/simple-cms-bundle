@@ -17,7 +17,7 @@
             <argument type="service" id="cmf_simple_cms.generator" />
             <argument>%cmf_simple_cms.uri_filter_regexp%</argument>
             <call method="setContainer"><argument type="service" id="service_container"/></call>
-            <call method="addRouteEnhancer"><argument type="service" id="cmf_routing.enhancer_route_content"/></call>
+            <call method="addRouteEnhancer"><argument type="service" id="cmf_routing.enhancer.route_content"/></call>
             <tag name="router" priority="10" />
         </service>
 

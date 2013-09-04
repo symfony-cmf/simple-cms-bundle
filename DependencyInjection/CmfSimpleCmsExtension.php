@@ -61,38 +61,38 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
         $dynamic = $container->getDefinition($this->getAlias().'.dynamic_router');
 
         if (!empty($config['generic_controller'])) {
-            $definition = new DefinitionDecorator('cmf_routing.enhancer_explicit_template');
+            $definition = new DefinitionDecorator('cmf_routing.enhancer.explicit_template');
             $definition->replaceArgument(2, $config['generic_controller']);
             $container->setDefinition(
-                $this->getAlias() . '.enhancer_explicit_template',
+                $this->getAlias() . '.enhancer.explicit_template',
                 $definition
             );
             $dynamic->addMethodCall('addRouteEnhancer', array(
-                new Reference($this->getAlias() . '.enhancer_explicit_template')
+                new Reference($this->getAlias() . '.enhancer.explicit_template')
             ));
         }
 
         if (!empty($config['controllers_by_alias'])) {
-            $definition = new DefinitionDecorator('cmf_routing.enhancer_controllers_by_class');
+            $definition = new DefinitionDecorator('cmf_routing.enhancer.controllers_by_class');
             $definition->replaceArgument(2, $config['routing']['controllers_by_alias']);
             $container->setDefinition(
-                $this->getAlias() . '.enhancer_controllers_by_class',
+                $this->getAlias() . '.enhancer.controllers_by_class',
                 $definition
             );
             $dynamic->addMethodCall('addRouteEnhancer', array(
-                new Reference($this->getAlias() . '.enhancer_controllers_by_alias')
+                new Reference($this->getAlias() . '.enhancer.controllers_by_alias')
             ));
         }
 
         if (!empty($config['controllers_by_class'])) {
-            $definition = new DefinitionDecorator('cmf_routing.enhancer_controllers_by_class');
+            $definition = new DefinitionDecorator('cmf_routing.enhancer.controllers_by_class');
             $definition->replaceArgument(2, $config['controllers_by_class']);
             $container->setDefinition(
-                $this->getAlias() . '.enhancer_controllers_by_class',
+                $this->getAlias() . '.enhancer.controllers_by_class',
                 $definition
             );
             $dynamic->addMethodCall('addRouteEnhancer', array(
-                new Reference($this->getAlias() . '.enhancer_controllers_by_class')
+                new Reference($this->getAlias() . '.enhancer.controllers_by_class')
             ));
         }
 
@@ -102,27 +102,27 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
                 $controllerForTemplates[$key] = $config['generic_controller'];
             }
 
-            $definition = new DefinitionDecorator('cmf_routing.enhancer_controller_for_templates_by_class');
+            $definition = new DefinitionDecorator('cmf_routing.enhancer.controller_for_templates_by_class');
             $definition->replaceArgument(2, $controllerForTemplates);
 
             $container->setDefinition(
-                $this->getAlias() . '.enhancer_controller_for_templates_by_class',
+                $this->getAlias() . '.enhancer.controller_for_templates_by_class',
                 $definition
             );
 
-            $definition = new DefinitionDecorator('cmf_routing.enhancer_templates_by_class');
+            $definition = new DefinitionDecorator('cmf_routing.enhancer.templates_by_class');
             $definition->replaceArgument(2, $config['templates_by_class']);
 
             $container->setDefinition(
-                $this->getAlias() . '.enhancer_templates_by_class',
+                $this->getAlias() . '.enhancer.templates_by_class',
                 $definition
             );
 
             $dynamic->addMethodCall('addRouteEnhancer', array(
-                new Reference($this->getAlias() . '.enhancer_controller_for_templates_by_class')
+                new Reference($this->getAlias() . '.enhancer.controller_for_templates_by_class')
             ));
             $dynamic->addMethodCall('addRouteEnhancer', array(
-                new Reference($this->getAlias() . '.enhancer_templates_by_class')
+                new Reference($this->getAlias() . '.enhancer.templates_by_class')
             ));
         }
     }
