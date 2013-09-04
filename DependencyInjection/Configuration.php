@@ -13,12 +13,13 @@ class Configuration implements ConfigurationInterface
 
         $treeBuilder->root('cmf_simple_cms')
             ->children()
-
                 ->arrayNode('persistence')
+                    ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('phpcr')
+                            ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('enabled')->defaultNull()->end()
+                                ->booleanNode('enabled')->defaultFalse()->end()
                                 ->scalarNode('basepath')->defaultValue('/cms/simple')->end()
                                 ->scalarNode('manager_registry')->defaultValue('doctrine_phpcr')->end()
                                 ->scalarNode('manager_name')->defaultNull()->end()

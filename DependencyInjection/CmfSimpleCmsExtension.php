@@ -40,14 +40,12 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
         }
         $this->loadRouting($config['routing'], $loader, $container);
 
-        if (isset($config['persistence'])) {
-            if (isset($config['persistence']['phpcr'])) {
-                $this->loadPhpcr($config['persistence']['phpcr'], $loader, $container);
-                $this->loadPhpcrRouting($config, $loader, $container, $locales);
+        if ($config['persistence']['phpcr']) {
+            $this->loadPhpcr($config['persistence']['phpcr'], $loader, $container);
+            $this->loadPhpcrRouting($config, $loader, $container, $locales);
 
-                if ($config['use_menu']) {
-                    $this->loadPhpcrMenu($config, $loader, $container);
-                }
+            if ($config['use_menu']) {
+                $this->loadPhpcrMenu($config, $loader, $container);
             }
         }
     }
