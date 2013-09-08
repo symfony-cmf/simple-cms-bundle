@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="CmfSimpleCmsBundle.en.xliff">
+    <body>
+      <trans-unit id="dashboard.cmf">
+        <source>dashboard.cmf</source>
+        <target>Symfony CMF</target>
+      </trans-unit>
+      <trans-unit id="dashboard.label_page">
+        <source>dashboard.label_page</source>
+        <target>Strani</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_page_list">
+        <source>breadcrumb.link_page_list</source>
+        <target>Strani</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_page_create">
+        <source>breadcrumb.link_page_create</source>
+        <target>Ustvari</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_page_edit">
+        <source>breadcrumb.link_page_edit</source>
+        <target>Urejanje</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_page_delete">
+        <source>breadcrumb.link_page_delete</source>
+        <target>Izbris</target>
+      </trans-unit>
+      <trans-unit id="list.label_path">
+        <source>list.label_path</source>
+        <target>Pot</target>
+      </trans-unit>
+      <trans-unit id="list.label_title">
+        <source>list.label_title</source>
+        <target>Naslov</target>
+      </trans-unit>
+      <trans-unit id="list.label_locales">
+        <source>list.label_locales</source>
+        <target>Lokalizacije</target>
+      </trans-unit>
+      <trans-unit id="list.label_name">
+        <source>list.label_name</source>
+        <target>Ime</target>
+      </trans-unit>
+      <trans-unit id="list.label_label">
+        <source>list.label_label</source>
+        <target>Oznaka</target>
+      </trans-unit>
+      <trans-unit id="list.label_create_date">
+        <source>list.label_create_date</source>
+        <target>Datum nastanka</target>
+      </trans-unit>
+      <trans-unit id="list.label_publish_start_date">
+        <source>list.label_publish_start_date</source>
+        <target>Datum pričetka objave</target>
+      </trans-unit>
+      <trans-unit id="list.label_publish_end_date">
+        <source>list.label_publish_end_date</source>
+        <target>Datum konca objave</target>
+      </trans-unit>
+      <trans-unit id="filter.label_title">
+        <source>filter.label_title</source>
+        <target>Naslov</target>
+      </trans-unit>
+      <trans-unit id="filter.label_name">
+        <source>filter.label_name</source>
+        <target>Ime</target>
+      </trans-unit>
+      <trans-unit id="form.group_general">
+        <source>form.group_general</source>
+        <target>Splošno</target>
+      </trans-unit>
+      <trans-unit id="form.label_parent">
+        <source>form.label_parent</source>
+        <target>Vrhnji</target>
+      </trans-unit>
+      <trans-unit id="form.label_name">
+        <source>form.label_name</source>
+        <target>Ime</target>
+      </trans-unit>
+      <trans-unit id="form.label_label">
+        <source>form.label_label</source>
+        <target>Oznaka</target>
+      </trans-unit>
+      <trans-unit id="form.label_title">
+        <source>form.label_title</source>
+        <target>Naslov</target>
+      </trans-unit>
+      <trans-unit id="form.label_create_date">
+        <source>form.label_create_date</source>
+        <target>Datum nastanka</target>
+      </trans-unit>
+      <trans-unit id=" form.label_add_format_pattern">
+        <source>form.label_add_format_pattern</source>
+        <target>Dodaj obliko vzorca</target>
+      </trans-unit>
+      <trans-unit id=" form.label_add_trailing_slash">
+        <source>form.label_add_trailing_slash</source>
+        <target>Dodaj poševnico na koncu</target>
+      </trans-unit>
+      <trans-unit id="form.label_add_locale_pattern">
+        <source>form.label_add_locale_pattern</source>
+        <target>Dodaj vzorec lokalizacije</target>
+      </trans-unit>
+      <trans-unit id="form.label_locale">
+        <source>form.label_locale</source>
+        <target>Lokalizacija</target>
+      </trans-unit>
+      <trans-unit id="form.label_body">
+        <source>form.label_body</source>
+        <target>Vsebina</target>
+      </trans-unit>
+      <trans-unit id="help.items_help">
+        <source>help.items_help</source>
+        <target>Kliknite na element za urejanje, desni klik za nove elemente.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
