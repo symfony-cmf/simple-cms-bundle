@@ -1,6 +1,9 @@
 Changelog
 =========
 
+1.0.0-RC3
+---------
+
 * **2013-08-31**: The multilang.locales configuration was added back as we do
   need to care about locales and not depend on them when no locales are used.
 
