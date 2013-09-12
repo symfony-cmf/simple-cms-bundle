@@ -109,6 +109,18 @@
       <trans-unit id="form.label_body">
         <source>form.label_body</source>
         <target>Content</target>
+	</trans-unit>
+	<trans-unit id="form.help_add_format_pattern">
+        <source>form.help_add_format_pattern</source>
+        <target>Append format to route like /your/route.{format}. Default format is html.</target>
+      </trans-unit>
+      <trans-unit id="form.help_add_trailing_slash">
+        <source>form.help_add_trailing_slash</source>
+        <target>Append a trailing slash to route like /your/route/.</target>
+      </trans-unit>
+      <trans-unit id="form.help_add_locale_pattern">
+        <source>form.help_add_locale_pattern</source>
+        <target>Prepend locale to route like /{locale}/your/route</target>
       </trans-unit>
       <trans-unit id="help.items_help">
         <source>help.items_help</source>
