@@ -155,7 +155,9 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
 
         $routeProvider = $container->getDefinition($prefix.'.route_provider');
         $routeProvider->replaceArgument(0, new Reference($config['persistence']['phpcr']['manager_registry']));
-        $routeProvider->addMethodCall('setLocales', array('%cmf_simple_cms.multilang.locales%'));
+        if (!empty($locales)) {
+            $routeProvider->addMethodCall('setLocales', $locales);
+        }
         $container->setAlias($this->getAlias() . '.route_provider', $prefix.'.route_provider');
 
         $generator = $container->getDefinition($this->getAlias().'.generator');
