@@ -26,7 +26,7 @@ class PageRouteProvider extends RouteProvider
      */
     private $locale;
 
-    public function setLocales($locales = array())
+    public function setLocales(array $locales = array())
     {
         $this->locales = $locales;
     }
