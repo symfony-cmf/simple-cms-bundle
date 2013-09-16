@@ -36,7 +36,7 @@
       </trans-unit>
       <trans-unit id="list.label_locales">
         <source>list.label_locales</source>
-        <target>Languages</target>
+        <target>Langages</target>
       </trans-unit>
       <trans-unit id="list.label_name">
         <source>list.label_name</source>
@@ -100,11 +100,11 @@
       </trans-unit>
       <trans-unit id="form.label_add_locale_pattern">
         <source>form.label_add_locale_pattern</source>
-        <target>Ajouter le language</target>
+        <target>Ajouter le langage</target>
       </trans-unit>
       <trans-unit id="form.label_locale">
         <source>form.label_locale</source>
-        <target>Language</target>
+        <target>Langage</target>
       </trans-unit>
       <trans-unit id="form.label_body">
         <source>form.label_body</source>
@@ -120,7 +120,7 @@
       </trans-unit>
       <trans-unit id="form.help_add_locale_pattern">
         <source>form.help_add_locale_pattern</source>
-        <target>Prefix la route avec le language tel que /{locale}/your/route</target>
+        <target>Prefix la route avec le langage tel que /{locale}/your/route</target>
       </trans-unit>
       <trans-unit id="help.items_help">
         <source>help.items_help</source>
