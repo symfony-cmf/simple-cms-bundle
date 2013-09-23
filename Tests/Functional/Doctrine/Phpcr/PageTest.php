@@ -63,8 +63,8 @@ class PageTest extends BaseTestCase
         }
 
         // test publish start and end
-        $publishStartDate = $data['publishStartDate'];
-        $publishEndDate = $data['publishEndDate'];
+        $publishStartDate = $page->getPublishStartDate();
+        $publishEndDate = $page->getPublishEndDate();
 
         $this->assertInstanceOf('\DateTime', $publishStartDate);
         $this->assertInstanceOf('\DateTime', $publishEndDate);
