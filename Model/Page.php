@@ -2,12 +2,15 @@
 
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Model;
 
+use LogicException;
 use Knp\Menu\NodeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
 use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
 use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
 use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
+
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -31,7 +34,7 @@ class Page extends Route implements
     /**
      * @Assert\NotBlank
      */
-    public $title;
+    protected $title;
 
     /**
      * @var string
@@ -141,7 +144,8 @@ class Page extends Route implements
     }
 
     /**
-     * {@inheritDoc}
+     * Get the "date" of this page, which is the publishStartDate if set,
+     * otherwise the createDate.
      */
     public function getDate()
     {

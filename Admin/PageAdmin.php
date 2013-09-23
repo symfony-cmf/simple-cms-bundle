@@ -6,6 +6,7 @@ use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page;
 
 class PageAdmin extends Admin
 {
@@ -84,12 +85,15 @@ class PageAdmin extends Admin
         }
     }
 
+    /**
+     * @param Page $page
+     */
     protected function ensureOrderByDate($page)
     {
-        /** @var $page Page */
         $items = $page->getParent()->getChildren();
 
         $itemsByDate = array();
+        /** @var $item Page */
         foreach ($items as $item) {
             $itemsByDate[$item->getDate()->format('U')][$item->getCreateDate()->format('U')][] = $item;
         }
