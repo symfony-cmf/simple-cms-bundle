@@ -50,14 +50,6 @@
         <source>list.label_create_date</source>
         <target>Date de création</target>
       </trans-unit>
-      <trans-unit id="list.label_publish_start_date">
-        <source>list.label_publish_start_date</source>
-        <target>Date début de publication</target>
-      </trans-unit>
-      <trans-unit id="list.label_publish_end_date">
-        <source>list.label_publish_end_date</source>
-        <target>Date fin de publication</target>
-      </trans-unit>
       <trans-unit id="filter.label_title">
         <source>filter.label_title</source>
         <target>Titre</target>
@@ -110,7 +102,7 @@
         <source>form.label_body</source>
         <target>Contenu</target>
       </trans-unit>
-	<trans-unit id="form.help_add_format_pattern">
+	  <trans-unit id="form.help_add_format_pattern">
         <source>form.help_add_format_pattern</source>
         <target>Ajoute le format à la route tel que /your/route.{format}. Le format par défaut est html.</target>
       </trans-unit>
@@ -121,10 +113,6 @@
       <trans-unit id="form.help_add_locale_pattern">
         <source>form.help_add_locale_pattern</source>
         <target>Prefix la route avec le langage tel que /{locale}/your/route</target>
-      </trans-unit>
-      <trans-unit id="help.items_help">
-        <source>help.items_help</source>
-        <target>Cliquer sur l'élément pour modifier, clique droit pour créer un nouvel élément.</target>
       </trans-unit>
     </body>
   </file>
