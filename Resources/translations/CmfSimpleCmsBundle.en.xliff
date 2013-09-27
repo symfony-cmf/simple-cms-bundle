@@ -50,14 +50,6 @@
         <source>list.label_create_date</source>
         <target>Create Date</target>
       </trans-unit>
-      <trans-unit id="list.label_publish_start_date">
-        <source>list.label_publish_start_date</source>
-        <target>Publish Start Date</target>
-      </trans-unit>
-      <trans-unit id="list.label_publish_end_date">
-        <source>list.label_publish_end_date</source>
-        <target>Publish End Date</target>
-      </trans-unit>
       <trans-unit id="filter.label_title">
         <source>filter.label_title</source>
         <target>Title</target>
@@ -109,8 +101,8 @@
       <trans-unit id="form.label_body">
         <source>form.label_body</source>
         <target>Content</target>
-	</trans-unit>
-	<trans-unit id="form.help_add_format_pattern">
+	  </trans-unit>
+	  <trans-unit id="form.help_add_format_pattern">
         <source>form.help_add_format_pattern</source>
         <target>Append format to route like /your/route.{format}. Default format is html.</target>
       </trans-unit>
@@ -121,10 +113,6 @@
       <trans-unit id="form.help_add_locale_pattern">
         <source>form.help_add_locale_pattern</source>
         <target>Prepend locale to route like /{locale}/your/route</target>
-      </trans-unit>
-      <trans-unit id="help.items_help">
-        <source>help.items_help</source>
-        <target>Click on item to edit, right click to create new items.</target>
       </trans-unit>
     </body>
   </file>

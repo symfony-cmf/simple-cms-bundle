@@ -50,14 +50,6 @@
         <source>list.label_create_date</source>
         <target>Datum nastanka</target>
       </trans-unit>
-      <trans-unit id="list.label_publish_start_date">
-        <source>list.label_publish_start_date</source>
-        <target>Datum pričetka objave</target>
-      </trans-unit>
-      <trans-unit id="list.label_publish_end_date">
-        <source>list.label_publish_end_date</source>
-        <target>Datum konca objave</target>
-      </trans-unit>
       <trans-unit id="filter.label_title">
         <source>filter.label_title</source>
         <target>Naslov</target>
@@ -109,10 +101,6 @@
       <trans-unit id="form.label_body">
         <source>form.label_body</source>
         <target>Vsebina</target>
-      </trans-unit>
-      <trans-unit id="help.items_help">
-        <source>help.items_help</source>
-        <target>Kliknite na element za urejanje, desni klik za nove elemente.</target>
       </trans-unit>
     </body>
   </file>
