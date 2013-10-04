@@ -22,9 +22,6 @@ class PageAdmin extends Admin
 {
     protected $translationDomain = 'CmfSimpleCmsBundle';
 
-    protected $baseRouteName = 'cmf_simplecms_page';
-    protected $baseRoutePattern = '/cmf/simplecms/page';
-
     private $sortOrder = false;
 
     public function setSortOrder($sortOrder)
