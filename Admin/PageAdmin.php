@@ -17,6 +17,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page;
+use Symfony\Cmf\Bundle\SimpleCmsBundle\Model\Page as ModelPage;
 
 class PageAdmin extends Admin
 {
@@ -130,5 +131,13 @@ class PageAdmin extends Admin
                 $items[$key] = $item;
             }
         }
+    }
+
+    public function toString($object)
+    {
+        return $object instanceof ModelPage && $object->getTitle()
+            ? $object->getTitle()
+            : parent::toString($object)
+        ;
     }
 }
