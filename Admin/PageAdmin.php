@@ -137,7 +137,7 @@ class PageAdmin extends Admin
     {
         return $object instanceof ModelPage && $object->getTitle()
             ? $object->getTitle()
-            : parent::toString($object)
+            : 'page'
         ;
     }
 }
