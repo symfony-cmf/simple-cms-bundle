@@ -137,7 +137,7 @@ class PageAdmin extends Admin
     {
         return $object instanceof ModelPage && $object->getTitle()
             ? $object->getTitle()
-            : 'page'
+            : $this->trans('link_add', array(), 'SonataAdminBundle')
         ;
     }
 }
