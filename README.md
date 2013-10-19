@@ -25,7 +25,7 @@ trades away some of that flexibility in favor of simplicity.
 
 For the install guide and reference, see:
 
-* [SimpleCmsBundle documentation](http://symfony.com/doc/master/cmf/bundles/simple_cms.html)
+* [SimpleCmsBundle documentation](http://symfony.com/doc/master/cmf/bundles/simple_cms/)
 
 See also:
 
