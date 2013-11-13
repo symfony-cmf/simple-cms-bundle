@@ -54,18 +54,6 @@ class Page extends Route implements
     protected $label = '';
 
     /**
-     * @var string
-     */
-    protected $uri;
-
-    /**
-     * The name of the route to generate.
-     *
-     * @var string
-     */
-    protected $route;
-
-    /**
      * HTML attributes to add to the individual menu element.
      *
      * e.g. array('class' => 'foobar', 'style' => 'bar: foo')
@@ -102,15 +90,6 @@ class Page extends Route implements
     protected $labelAttributes = array();
 
     /**
-     * Parameters to use when generating the route.
-     *
-     * Used with the "route" option.
-     *
-     * @var array
-     */
-    protected $routeParameters = array();
-
-    /**
      * Set to false to not render
      *
      * @var boolean
@@ -123,15 +102,6 @@ class Page extends Route implements
      * @var boolean
      */
     protected $displayChildren = true;
-
-    /**
-     * Generate an absolute route
-     *
-     * To be used with the "content" or "route" option.
-     *
-     * @var boolean
-     */
-    protected $routeAbsolute = false;
 
     /**
      * @var string
@@ -501,54 +471,6 @@ class Page extends Route implements
     }
 
     /**
-     * Return the URI
-     *
-     * @return $uri string
-     */
-    public function getUri()
-    {
-        return $this->uri;
-    }
-
-    /**
-     * Set the URI
-     *
-     * @param $uri string
-     *
-     * @return Page The current Page instance
-     */
-    public function setUri($uri)
-    {
-        $this->uri = $uri;
-
-        return $this;
-    }
-
-    /**
-     * Return the route name
-     *
-     * @return string
-     */
-    public function getRoute()
-    {
-        return $this->route;
-    }
-
-    /**
-     * Set the route name
-     *
-     * @param $route string - name of route
-     *
-     * @return Page The current Page instance
-     */
-    public function setRoute($route)
-    {
-        $this->route = $route;
-
-        return $this;
-    }
-
-    /**
      * Return the attributes associated with this menu node
      *
      * @return array
@@ -624,30 +546,6 @@ class Page extends Route implements
     public function setChildrenAttributes(array $attributes)
     {
         $this->childrenAttributes = $attributes;
-
-        return $this;
-    }
-
-    /**
-     * Gets the route parameters.
-     *
-     * @return array
-     */
-    public function getRouteParameters()
-    {
-        return $this->routeParameters;
-    }
-
-    /**
-     * Sets the route parameters.
-     *
-     * @param array $routeParameters
-     *
-     * @return Page The current Page instance
-     */
-    public function setRouteParameters($routeParameters)
-    {
-        $this->routeParameters = $routeParameters;
 
         return $this;
     }
@@ -749,31 +647,6 @@ class Page extends Route implements
     }
 
     /**
-     * Whether to generate absolute links for route or content.
-     *
-     * @return boolean
-     */
-    public function getRouteAbsolute()
-    {
-        return $this->routeAbsolute;
-    }
-
-    /**
-     * Set whether to generate absolute links when generating from a route
-     * or the content.
-     *
-     * @param boolean $routeAbsolute
-     *
-     * @return Page The current Page instance
-     */
-    public function setRouteAbsolute($routeAbsolute)
-    {
-        $this->routeAbsolute = $routeAbsolute;
-
-        return $this;
-    }
-
-    /**
      * Route method and Menu method - provides menu options merged with the
      * route options
      *
@@ -782,15 +655,13 @@ class Page extends Route implements
     public function getOptions()
     {
         return parent::getOptions() + array(
-            'uri' => $this->getUri(),
-            'route' => $this->getRoute(),
             'label' => $this->getLabel(),
             'attributes' => $this->getAttributes(),
             'childrenAttributes' => $this->getChildrenAttributes(),
             'display' => $this->display,
             'displayChildren' => $this->displayChildren,
-            'routeParameters' => $this->getRouteParameters(),
-            'routeAbsolute' => $this->routeAbsolute,
+            'routeParameters' => array(),
+            'routeAbsolute' => false,
             'linkAttributes' => $this->linkAttributes,
             'labelAttributes' => $this->labelAttributes,
             'content' => $this,
