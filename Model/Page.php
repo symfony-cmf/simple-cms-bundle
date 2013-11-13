@@ -90,14 +90,14 @@ class Page extends Route implements
     protected $labelAttributes = array();
 
     /**
-     * Set to false to not render
+     * Set to false to not render a menu item for this.
      *
      * @var boolean
      */
     protected $display = true;
 
     /**
-     * Set to false to not render the children.
+     * Set to false to not render the child menu items of this page.
      *
      * @var boolean
      */
@@ -599,7 +599,7 @@ class Page extends Route implements
     }
 
     /**
-     * Whether to display this menu node.
+     * Whether to display the menu item for this.
      *
      * @return boolean
      */
@@ -609,7 +609,7 @@ class Page extends Route implements
     }
 
     /**
-     * Set whether to display this menu node.
+     * Set whether to display the menu item for this.
      *
      * @param boolean $display
      *
@@ -623,7 +623,7 @@ class Page extends Route implements
     }
 
     /**
-     * Whether to display the children of this menu node.
+     * Whether to display the child menu items of this page.
      *
      * @return boolean
      */
@@ -633,7 +633,7 @@ class Page extends Route implements
     }
 
     /**
-     * Set whether to display the children of this menu node.
+     * Set whether to display the child menu items of this page.
      *
      * @param boolean $displayChildren
      *
