@@ -1,6 +1,10 @@
 Changelog
 =========
 
+* **2013-11-14**: The Page now supports the menu options that make sense for a
+  page: display, displayChildren, attributes, children|link|labelAttributes.
+  Note that those only affect the menu rendering, not anything else.
+
 1.0.0-RC3
 ---------
 
