@@ -20,6 +20,12 @@
         <field name="publishEndDate" type="date" nullable="true"/>
         <field name="addLocalePattern" type="boolean"/>
         <field name="extras" type="string" assoc="" nullable="true"/>
+        <field name="display" type="boolean"/>
+        <field name="displayChildren" type="boolean"/>
+        <field name="attributes" type="string" assoc=""/>
+        <field name="childrenAttributes" type="string" assoc=""/>
+        <field name="linkAttributes" type="string" assoc=""/>
+        <field name="labelAttributes" type="string" assoc=""/>
 
     </mapped-superclass>
 

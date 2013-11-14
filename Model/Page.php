@@ -47,9 +47,61 @@ class Page extends Route implements
     protected $title;
 
     /**
+     * Menu label.
+     *
      * @var string
      */
-    protected $label;
+    protected $label = '';
+
+    /**
+     * HTML attributes to add to the individual menu element.
+     *
+     * e.g. array('class' => 'foobar', 'style' => 'bar: foo')
+     *
+     * @var array
+     */
+    protected $attributes = array();
+
+    /**
+     * HTML attributes to add to the children list element.
+     *
+     * e.g. array('class' => 'foobar', 'style' => 'bar: foo')
+     *
+     * @var array
+     */
+    protected $childrenAttributes = array();
+
+    /**
+     * HTML attributes to add to items link.
+     *
+     * e.g. array('class' => 'foobar', 'style' => 'bar: foo')
+     *
+     * @var array
+     */
+    protected $linkAttributes = array();
+
+    /**
+     * HTML attributes to add to the items label.
+     *
+     * e.g. array('class' => 'foobar', 'style' => 'bar: foo')
+     *
+     * @var array
+     */
+    protected $labelAttributes = array();
+
+    /**
+     * Set to false to not render a menu item for this.
+     *
+     * @var boolean
+     */
+    protected $display = true;
+
+    /**
+     * Set to false to not render the child menu items of this page.
+     *
+     * @var boolean
+     */
+    protected $displayChildren = true;
 
     /**
      * @var string
@@ -336,28 +388,6 @@ class Page extends Route implements
     }
 
     /**
-     * Route method and Menu method - provides menu options merged with the
-     * route options
-     *
-     * {@inheritDoc}
-     */
-    public function getOptions()
-    {
-        return parent::getOptions() + array(
-            'label' => $this->getLabel(),
-            'attributes' => array(),
-            'childrenAttributes' => array(),
-            'display' => ! empty($this->label),
-            'displayChildren' => true,
-            'content' => $this,
-            'routeParameters' => array(),
-            'routeAbsolute' => false,
-            'linkAttributes' => array(),
-            'labelAttributes' => array(),
-        );
-    }
-
-    /**
      * Menu method: set the menu label
      *
      * @param string $label
@@ -438,5 +468,203 @@ class Page extends Route implements
     public function setCreateDate(\DateTime $createDate = null)
     {
         $this->createDate = $createDate;
+    }
+
+    /**
+     * Return the attributes associated with this menu node
+     *
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * Set the attributes associated with this menu node
+     *
+     * @param $attributes array
+     *
+     * @return Page The current Page instance
+     */
+    public function setAttributes(array $attributes)
+    {
+        $this->attributes = $attributes;
+
+        return $this;
+    }
+
+    /**
+     * Return the given attribute, optionally specifying a default value
+     *
+     * @param string $name    The name of the attribute to return
+     * @param string $default The value to return if the attribute doesn't exist
+     *
+     * @return string
+     */
+    public function getAttribute($name, $default = null)
+    {
+        if (isset($this->attributes[$name])) {
+            return $this->attributes[$name];
+        }
+
+        return $default;
+    }
+
+    /**
+     * Set the named attribute
+     *
+     * @param string $name  attribute name
+     * @param string $value attribute value
+     *
+     * @return Page The current Page instance
+     */
+    public function setAttribute($name, $value)
+    {
+        $this->attributes[$name] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Return the children attributes
+     *
+     * @return array
+     */
+    public function getChildrenAttributes()
+    {
+        return $this->childrenAttributes;
+    }
+
+    /**
+     * Set the children attributes
+     *
+     * @param array $attributes
+     *
+     * @return Page The current Page instance
+     */
+    public function setChildrenAttributes(array $attributes)
+    {
+        $this->childrenAttributes = $attributes;
+
+        return $this;
+    }
+
+    /**
+     * Get the link HTML attributes.
+     *
+     * @return array
+     */
+    public function getLinkAttributes()
+    {
+        return $this->linkAttributes;
+    }
+
+    /**
+     * Set the link HTML attributes as associative array.
+     *
+     * @param array $linkAttributes
+     *
+     * @return Page The current Page instance
+     */
+    public function setLinkAttributes($linkAttributes)
+    {
+        $this->linkAttributes = $linkAttributes;
+
+        return $this;
+    }
+
+    /**
+     * Get the label HTML attributes.
+     *
+     * @return array
+     */
+    public function getLabelAttributes()
+    {
+        return $this->labelAttributes;
+    }
+
+    /**
+     * Set the label HTML attributes as associative array.
+     *
+     * @param array $labelAttributes
+     *
+     * @return Page The current Page instance
+     */
+    public function setLabelAttributes($labelAttributes)
+    {
+        $this->labelAttributes = $labelAttributes;
+
+        return $this;
+    }
+
+    /**
+     * Whether to display the menu item for this.
+     *
+     * @return boolean
+     */
+    public function getDisplay()
+    {
+        return $this->display;
+    }
+
+    /**
+     * Set whether to display the menu item for this.
+     *
+     * @param boolean $display
+     *
+     * @return Page The current Page instance
+     */
+    public function setDisplay($display)
+    {
+        $this->display = $display;
+
+        return $this;
+    }
+
+    /**
+     * Whether to display the child menu items of this page.
+     *
+     * @return boolean
+     */
+    public function getDisplayChildren()
+    {
+        return $this->displayChildren;
+    }
+
+    /**
+     * Set whether to display the child menu items of this page.
+     *
+     * @param boolean $displayChildren
+     *
+     * @return Page The current Page instance
+     */
+    public function setDisplayChildren($displayChildren)
+    {
+        $this->displayChildren = $displayChildren;
+
+        return $this;
+    }
+
+    /**
+     * Route method and Menu method - provides menu options merged with the
+     * route options
+     *
+     * {@inheritDoc}
+     */
+    public function getOptions()
+    {
+        return parent::getOptions() + array(
+            'label' => $this->getLabel(),
+            'attributes' => $this->getAttributes(),
+            'childrenAttributes' => $this->getChildrenAttributes(),
+            'display' => $this->display,
+            'displayChildren' => $this->displayChildren,
+            'routeParameters' => array(),
+            'routeAbsolute' => false,
+            'linkAttributes' => $this->linkAttributes,
+            'labelAttributes' => $this->labelAttributes,
+            'content' => $this,
+        );
     }
 }
