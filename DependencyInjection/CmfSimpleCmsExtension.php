@@ -76,15 +76,15 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
             ));
         }
 
-        if (!empty($config['controllers_by_alias'])) {
-            $definition = new DefinitionDecorator('cmf_routing.enhancer.controllers_by_class');
-            $definition->replaceArgument(2, $config['routing']['controllers_by_alias']);
+        if (!empty($config['controllers_by_type'])) {
+            $definition = new DefinitionDecorator('cmf_routing.enhancer.controllers_by_type');
+            $definition->replaceArgument(2, $config['controllers_by_type']);
             $container->setDefinition(
-                $this->getAlias() . '.enhancer.controllers_by_class',
+                $this->getAlias() . '.enhancer.controllers_by_type',
                 $definition
             );
             $dynamic->addMethodCall('addRouteEnhancer', array(
-                new Reference($this->getAlias() . '.enhancer.controllers_by_alias')
+                new Reference($this->getAlias() . '.enhancer.controllers_by_type')
             ));
         }
 
