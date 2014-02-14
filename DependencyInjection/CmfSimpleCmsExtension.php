@@ -133,8 +133,9 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
 
     protected function loadPhpcr($config, XmlFileLoader $loader, ContainerBuilder $container)
     {
+        $loader->load('services-phpcr.xml');
         // migrator is only for PHPCR
-        $loader->load('migrator.xml');
+        $loader->load('migrator-phpcr.xml');
 
         // save some characters
         $prefix = $this->getAlias() . '.persistence.phpcr';
@@ -195,7 +196,7 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
             : false
         );
 
-        $loader->load('admin.xml');
+        $loader->load('admin-phpcr.xml');
     }
 
     /**
