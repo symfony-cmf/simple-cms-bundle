@@ -6,7 +6,6 @@
     <parameters>
         <parameter key="cmf_simple_cms.persistence.phpcr.route_provider.class">Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\PageRouteProvider</parameter>
         <parameter key="cmf_simple_cms.persistence.phpcr.route_idprefix_listener.class">Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\IdPrefixListener</parameter>
-        <parameter key="cmf_simple_cms.initializer.class">Doctrine\Bundle\PHPCRBundle\Initializer\GenericInitializer</parameter>
     </parameters>
 
     <services>
@@ -36,16 +35,6 @@
             <argument>%cmf_simple_cms.persistence.phpcr.basepath%</argument>
             <tag name="doctrine_phpcr.event_listener" event="postLoad" />
             <tag name="doctrine_phpcr.event_listener" event="postPersist" />
-        </service>
-
-
-        <service
-            id="cmf_simple_cms.initializer"
-            class="%cmf_simple_cms.initializer.class%">
-            <argument type="collection">
-                <argument>%cmf_simple_cms.persistence.phpcr.basepath%</argument>
-            </argument>
-            <tag name="doctrine_phpcr.initializer"/>
         </service>
 
     </services>
