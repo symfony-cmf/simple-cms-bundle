@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="cmf_simple_cms.enhancer.explicit_template" class="%cmf_routing.enhancer.explicit_template.class%" public="false">
+            <argument>_template</argument>
+            <argument>_controller</argument>
+            <argument>%cmf_simple_cms.generic_controller%</argument>
+        </service>
+
+        <service id="cmf_simple_cms.enhancer.controllers_by_type" class="%cmf_routing.enhancer.controllers_by_type.class%" public="false">
+            <argument>type</argument>
+            <argument>_controller</argument>
+            <argument>%cmf_simple_cms.controllers_by_type%</argument>
+        </service>
+
+        <service id="cmf_simple_cms.enhancer.controllers_by_class" class="%cmf_routing.enhancer.field_by_class.class%" public="false">
+            <argument>_content</argument>
+            <argument>_controller</argument>
+            <argument>%cmf_simple_cms.controllers_by_class%</argument>
+        </service>
+
+        <service id="cmf_simple_cms.enhancer.controller_for_templates_by_class" class="%cmf_routing.enhancer.field_by_class.class%" public="false">
+            <argument>_content</argument>
+            <argument>_controller</argument>
+            <argument type="collection" />
+        </service>
+
+        <service id="cmf_simple_cms.enhancer.templates_by_class" class="%cmf_routing.enhancer.field_by_class.class%" public="false">
+            <argument>_content</argument>
+            <argument>_template</argument>
+            <argument>%cmf_simple_cms.templates_by_class%</argument>
+        </service>
+
+    </services>
+</container>

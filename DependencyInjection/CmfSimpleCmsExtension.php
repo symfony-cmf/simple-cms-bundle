@@ -43,12 +43,12 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
         $config = $this->processConfiguration(new Configuration(), $configs);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $this->loadRouting($config['routing'], $loader, $container);
+        if ($config['routing']) {
+            $this->loadRouting($config['routing'], $loader, $container);
+        }
 
         if ($config['persistence']['phpcr']) {
             $this->loadPhpcr($config['persistence']['phpcr'], $loader, $container);
-            $locales = isset($config['multilang']['locales']) ? $config['multilang']['locales'] : false;
-            $this->loadPhpcrRouting($config, $loader, $container, $locales);
 
             if ($config['use_menu']) {
                 $this->loadPhpcrMenu($config, $loader, $container);
@@ -58,46 +58,34 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
 
     protected function loadRouting($config, XmlFileLoader $loader, ContainerBuilder $container)
     {
-        $container->setParameter($this->getAlias() . '.uri_filter_regexp', $config['uri_filter_regexp']);
+        if (!empty($config['uri_filter_regexp'])) {
+            throw new InvalidConfigurationException('cmf_simple.routing.uri_filter_regexp must be configured on cmf_routing.');
+        }
 
-        $loader->load('routing.xml');
-
-        $dynamic = $container->getDefinition($this->getAlias().'.dynamic_router');
+        $loader->load('routing-bc.xml');
 
         if (!empty($config['generic_controller'])) {
-            $definition = new DefinitionDecorator('cmf_routing.enhancer.explicit_template');
-            $definition->replaceArgument(2, $config['generic_controller']);
-            $container->setDefinition(
-                $this->getAlias() . '.enhancer.explicit_template',
-                $definition
-            );
-            $dynamic->addMethodCall('addRouteEnhancer', array(
-                new Reference($this->getAlias() . '.enhancer.explicit_template')
-            ));
+            $container->setParameter($this->getAlias() . '.generic_controller', $config['generic_controller']);
+            $definition = $container->getDefinition($this->getAlias() . '.enhancer.explicit_template');
+            $definition->addTag('dynamic_router_route_enhancer', array('priority' => -1000));
+        } else {
+            $container->removeDefinition($this->getAlias() . '.enhancer.explicit_template');
         }
 
         if (!empty($config['controllers_by_type'])) {
-            $definition = new DefinitionDecorator('cmf_routing.enhancer.controllers_by_type');
-            $definition->replaceArgument(2, $config['controllers_by_type']);
-            $container->setDefinition(
-                $this->getAlias() . '.enhancer.controllers_by_type',
-                $definition
-            );
-            $dynamic->addMethodCall('addRouteEnhancer', array(
-                new Reference($this->getAlias() . '.enhancer.controllers_by_type')
-            ));
+            $container->setParameter($this->getAlias() . '.controllers_by_type', $config['controllers_by_type']);
+            $definition = $container->getDefinition($this->getAlias() . '.enhancer.controllers_by_type');
+            $definition->addTag('dynamic_router_route_enhancer', array('priority' => -1000));
+        } else {
+            $container->removeDefinition($this->getAlias() . '.enhancer.controllers_by_type');
         }
 
         if (!empty($config['controllers_by_class'])) {
-            $definition = new DefinitionDecorator('cmf_routing.enhancer.controllers_by_class');
-            $definition->replaceArgument(2, $config['controllers_by_class']);
-            $container->setDefinition(
-                $this->getAlias() . '.enhancer.controllers_by_class',
-                $definition
-            );
-            $dynamic->addMethodCall('addRouteEnhancer', array(
-                new Reference($this->getAlias() . '.enhancer.controllers_by_class')
-            ));
+            $container->setParameter($this->getAlias() . '.controllers_by_class', $config['controllers_by_class']);
+            $definition = $container->getDefinition($this->getAlias() . '.enhancer.controllers_by_class');
+            $definition->addTag('dynamic_router_route_enhancer', array('priority' => -1000));
+        } else {
+            $container->removeDefinition($this->getAlias() . '.enhancer.controllers_by_class');
         }
 
         if (!empty($config['generic_controller']) && !empty($config['templates_by_class'])) {
@@ -105,39 +93,24 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
             foreach ($config['templates_by_class'] as $key => $value) {
                 $controllerForTemplates[$key] = $config['generic_controller'];
             }
-
-            $definition = new DefinitionDecorator('cmf_routing.enhancer.controller_for_templates_by_class');
+            $definition = $container->getDefinition($this->getAlias() . '.enhancer.controller_for_templates_by_class');
             $definition->replaceArgument(2, $controllerForTemplates);
+            $definition->addTag('dynamic_router_route_enhancer', array('priority' => -1000));
 
-            $container->setDefinition(
-                $this->getAlias() . '.enhancer.controller_for_templates_by_class',
-                $definition
-            );
-
-            $definition = new DefinitionDecorator('cmf_routing.enhancer.templates_by_class');
-            $definition->replaceArgument(2, $config['templates_by_class']);
-
-            $container->setDefinition(
-                $this->getAlias() . '.enhancer.templates_by_class',
-                $definition
-            );
-
-            $dynamic->addMethodCall('addRouteEnhancer', array(
-                new Reference($this->getAlias() . '.enhancer.controller_for_templates_by_class')
-            ));
-            $dynamic->addMethodCall('addRouteEnhancer', array(
-                new Reference($this->getAlias() . '.enhancer.templates_by_class')
-            ));
+            $container->setParameter($this->getAlias() . '.templates_by_class', $config['templates_by_class']);
+            $definition = $container->getDefinition($this->getAlias() . '.enhancer.templates_by_class');
+            $definition->addTag('dynamic_router_route_enhancer', array('priority' => -1000));
+        } else {
+            $container->removeDefinition($this->getAlias() . '.enhancer.controller_for_templates_by_class');
+            $container->removeDefinition($this->getAlias() . '.enhancer.templates_by_class');
         }
     }
 
     protected function loadPhpcr($config, XmlFileLoader $loader, ContainerBuilder $container)
     {
         $loader->load('services-phpcr.xml');
-        // migrator is only for PHPCR
         $loader->load('migrator-phpcr.xml');
 
-        // save some characters
         $prefix = $this->getAlias() . '.persistence.phpcr';
 
         $container->setParameter($prefix . '.basepath', $config['basepath']);
@@ -153,24 +126,6 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
         $container->setParameter($prefix . '.manager_name', $config['manager_name']);
 
         $container->setParameter($prefix . '.document.class', $config['document_class']);
-    }
-
-    protected function loadPhpcrRouting($config, XmlFileLoader $loader, ContainerBuilder $container, $locales)
-    {
-        $loader->load('routing-phpcr.xml');
-        $prefix = $this->getAlias() . '.persistence.phpcr';
-
-        $routeProvider = $container->getDefinition($prefix.'.route_provider');
-        $routeProvider->replaceArgument(0, new Reference($config['persistence']['phpcr']['manager_registry']));
-        if (!empty($locales)) {
-            $routeProvider->addMethodCall('setLocales', array($locales));
-        }
-        $container->setAlias($this->getAlias() . '.route_provider', $prefix.'.route_provider');
-
-        $generator = $container->getDefinition($this->getAlias().'.generator');
-        $generator->addMethodCall('setContentRepository', array(
-            new Reference($config['routing']['content_repository_id'])
-        ));
     }
 
     protected function loadPhpcrMenu($config, XmlFileLoader $loader, ContainerBuilder $container)

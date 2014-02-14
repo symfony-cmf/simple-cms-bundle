@@ -58,6 +58,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
 
                 ->arrayNode('routing')
+                    ->info('deprecated, configure routing in cmf_routing bundle configuration')
                     ->fixXmlConfig('controller_by_type', 'controllers_by_type')
                     ->fixXmlConfig('controller_by_class', 'controllers_by_class')
                     ->fixXmlConfig('template_by_class', 'templates_by_class')
@@ -65,7 +66,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('generic_controller')->defaultValue('cmf_content.controller:indexAction')->end()
                         ->scalarNode('content_repository_id')->defaultValue('cmf_routing.content_repository')->end()
-                        ->scalarNode('uri_filter_regexp')->defaultValue('')->end()
+                        ->scalarNode('uri_filter_regexp')->end()
                         ->arrayNode('controllers_by_type')
                             ->useAttributeAsKey('type')
                             ->prototype('scalar')->end()
@@ -82,6 +83,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
 
                 ->arrayNode('multilang')
+                    ->info('unused, deprecated')
                     ->fixXmlConfig('locale')
                     ->children()
                         ->arrayNode('locales')
