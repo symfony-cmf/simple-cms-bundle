@@ -1,6 +1,18 @@
 Changelog
 =========
 
+* **2014-04-01**: Refactored the RoutingBundle to provide all routing
+  features needed by SimpleCmsBundle.
+  * The configuration for document to route/template now all happens under
+    cmf_routing.dynamic and the route enhancers also apply to simplecms Pages.
+    You can configure additional base paths where to look for routes in the
+    cmf_routing.persistence.phpcr.base_routepaths field.
+  * The configuration for locales is not needed anymore. Configuring it on the
+    cmf_routing is enough.
+  * The options for the format pattern, trailing slash and locale pattern are
+    now moved into the route "options" and the Page Document now takes an
+    array of options in the constructor instead of boolean flags.
+
 * **2013-11-14**: The Page now supports the menu options that make sense for a
   page: display, displayChildren, attributes, children|link|labelAttributes.
   Note that those only affect the menu rendering, not anything else.

@@ -12,10 +12,16 @@
 
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Tests\WebTest\TestApp;
 
+use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
 
 class HttpStatusCodeTest extends BaseTestCase
 {
+    /**
+     * @var Client
+     */
+    private $client;
+
     public function setUp()
     {
         $this->db('PHPCR')->loadFixtures(array(
@@ -39,7 +45,7 @@ class HttpStatusCodeTest extends BaseTestCase
      */
     public function testStatusCode($url, $expectedStatusCode = 200)
     {
-        $crawler = $this->client->request('GET', $url);
+        $this->client->request('GET', $url);
         $res = $this->client->getResponse();
         $this->assertEquals($expectedStatusCode, $res->getStatusCode());
     }

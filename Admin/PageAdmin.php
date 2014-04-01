@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Admin;
 
-use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
+use Symfony\Cmf\Bundle\RoutingBundle\Admin\RouteAdmin;
 use Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page;
-use Symfony\Cmf\Bundle\SimpleCmsBundle\Model\Page as ModelPage;
+use Symfony\Component\Form\FormBuilder;
 
-class PageAdmin extends Admin
+class PageAdmin extends RouteAdmin
 {
     protected $translationDomain = 'CmfSimpleCmsBundle';
 
@@ -37,32 +37,41 @@ class PageAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('path', 'text')
-            ->add('title', 'text')
+            ->addIdentifier('title', 'text')
             ->add('label', 'text')
             ->add('name', 'text')
             ->add('createDate', 'date')
-            ->add('publishStartDate', 'date')
-            ->add('publishEndDate', 'date')
         ;
     }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
+        parent::configureFormFields($formMapper);
+
+        $formMapper->remove('content');
+
+        // remap to routeOptions
+        $formMapper->remove('options');
+
         $formMapper
-            ->with('form.group_general')
-            ->add(
-                'parent',
-                'doctrine_phpcr_odm_tree',
-                array('choice_list' => array(), 'select_root_node' => true, 'root_node' => $this->getRootPath())
-            )
-            ->add('name', 'text')
-            ->add('label', null, array('required' => false))
-            ->add('title')
-            ->add('createDate')
-            ->add('addFormatPattern', null, array('required' => false, 'help' => 'form.help_add_format_pattern'))
-            ->add('addTrailingSlash', null, array('required' => false, 'help' => 'form.help_add_trailing_slash'))
-            ->add('addLocalePattern', null, array('required' => false, 'help' => 'form.help_add_locale_pattern'))
-            ->add('body', 'textarea')
+            ->with('form.group_general', array(
+                'translation_domain' => 'CmfSimpleCmsBundle',
+            ))
+                ->add('label', null, array('required' => false))
+                ->add('title')
+                ->add('body', 'textarea')
+                ->add('createDate')
+            ->end()
+            ->with('form.group_advanced', array(
+                'translation_domain' => 'CmfRoutingBundle',
+            ))
+                ->add(
+                    'routeOptions',
+                    'sonata_type_immutable_array',
+                    array('keys' => $this->configureFieldsForOptions($this->getSubject()->getRouteOptions()), 'label' => 'form.label_options'),
+                    array('help' => 'form.help_options')
+                )
+            ->end()
         ;
     }
 
@@ -98,7 +107,7 @@ class PageAdmin extends Admin
      */
     protected function ensureOrderByDate($page)
     {
-        $items = $page->getParent()->getChildren();
+        $items = $page->getParentDocument()->getChildren();
 
         $itemsByDate = array();
         /** @var $item Page */
@@ -135,7 +144,7 @@ class PageAdmin extends Admin
 
     public function toString($object)
     {
-        return $object instanceof ModelPage && $object->getTitle()
+        return $object instanceof Page && $object->getTitle()
             ? $object->getTitle()
             : $this->trans('link_add', array(), 'SonataAdminBundle')
         ;

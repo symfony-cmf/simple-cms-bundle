@@ -1,0 +1,12 @@
+cmf_simple_cms:
+    persistence:
+        phpcr:
+            enabled: true
+            basepath: /cms/simple
+            manager_registry: doctrine_phpcr
+            manager_name: ~
+            document_class: Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page
+            use_sonata_admin: true
+            sonata_admin:
+                sort: asc
+    use_menu: false

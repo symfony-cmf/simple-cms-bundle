@@ -12,16 +12,23 @@
 
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Tests\Functional\Migrator\Phpcr;
 
+use Doctrine\ODM\PHPCR\DocumentManager;
 use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
 use Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page;
 
 class PageTest extends BaseTestCase
 {
+    /**
+     * @var DocumentManager
+     */
+    private $dm;
+    private $baseDocument;
+
     public function setUp()
     {
         $this->db('PHPCR')->createTestNode();
         $this->dm = $this->db('PHPCR')->getOm();
-        $this->baseNode = $this->dm->find(null, '/test');
+        $this->baseDocument = $this->dm->find(null, '/test');
     }
 
     public function testPage()
@@ -35,7 +42,6 @@ class PageTest extends BaseTestCase
             'publishable' => false,
             'publishStartDate' => new \DateTime('2013-06-18'),
             'publishEndDate' => new \DateTime('2013-06-18'),
-            'addLocalePattern' => true,
             'extras' => array(
                 'extra_1' => 'foobar',
                 'extra_2' => 'barfoo',
@@ -45,7 +51,7 @@ class PageTest extends BaseTestCase
         $page = new Page;
         $refl = new \ReflectionClass($page);
 
-        $page->setParent($this->baseNode);
+        $page->setParentDocument($this->baseDocument);
 
         foreach ($data as $key => $value) {
             $refl = new \ReflectionClass($page);
@@ -53,6 +59,7 @@ class PageTest extends BaseTestCase
             $prop->setAccessible(true);
             $prop->setValue($page, $value);
         }
+        $page->setOption('add_locale_pattern', true);
 
         $this->dm->persist($page);
         $this->dm->flush();

@@ -27,11 +27,14 @@
             <call method="setRouteBuilder">
                 <argument type="service" id="sonata.admin.route.path_info_slashes"/>
             </call>
-            <call method="setRootPath">
+            <call method="setRouteRoot">
                 <argument>%cmf_simple_cms.persistence.phpcr.basepath%</argument>
             </call>
             <call method="setSortOrder">
                 <argument>%cmf_simple_cms.persistence.phpcr.admin.sort%</argument>
+            </call>
+            <call method="setControllerResolver">
+                <argument type="service" id="controller_resolver" />
             </call>
         </service>
 

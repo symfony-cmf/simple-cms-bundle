@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services">
+
+    <config xmlns="http://cmf.symfony.com/schema/dic/simplecms"
+        use-menu="false"
+    >
+        <persistence>
+            <phpcr
+                enabled="true"
+                basepath="/cms/simple"
+                manager-registry="doctrine_phpcr"
+                manager-name="null"
+                document-class="Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page"
+                use-sonata-admin="true"
+            >
+                <sonata-admin sort="asc" />
+            </phpcr>
+        </persistence>
+    </config>
+</container>

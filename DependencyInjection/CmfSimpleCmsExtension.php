@@ -43,66 +43,12 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
         $config = $this->processConfiguration(new Configuration(), $configs);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        if ($config['routing']) {
-            $this->loadRouting($config['routing'], $loader, $container);
-        }
-
         if ($config['persistence']['phpcr']) {
             $this->loadPhpcr($config['persistence']['phpcr'], $loader, $container);
 
             if ($config['use_menu']) {
                 $this->loadPhpcrMenu($config, $loader, $container);
             }
-        }
-    }
-
-    protected function loadRouting($config, XmlFileLoader $loader, ContainerBuilder $container)
-    {
-        if (!empty($config['uri_filter_regexp'])) {
-            throw new InvalidConfigurationException('cmf_simple.routing.uri_filter_regexp must be configured on cmf_routing.');
-        }
-
-        $loader->load('routing-bc.xml');
-
-        if (!empty($config['generic_controller'])) {
-            $container->setParameter($this->getAlias() . '.generic_controller', $config['generic_controller']);
-            $definition = $container->getDefinition($this->getAlias() . '.enhancer.explicit_template');
-            $definition->addTag('dynamic_router_route_enhancer', array('priority' => -1000));
-        } else {
-            $container->removeDefinition($this->getAlias() . '.enhancer.explicit_template');
-        }
-
-        if (!empty($config['controllers_by_type'])) {
-            $container->setParameter($this->getAlias() . '.controllers_by_type', $config['controllers_by_type']);
-            $definition = $container->getDefinition($this->getAlias() . '.enhancer.controllers_by_type');
-            $definition->addTag('dynamic_router_route_enhancer', array('priority' => -1000));
-        } else {
-            $container->removeDefinition($this->getAlias() . '.enhancer.controllers_by_type');
-        }
-
-        if (!empty($config['controllers_by_class'])) {
-            $container->setParameter($this->getAlias() . '.controllers_by_class', $config['controllers_by_class']);
-            $definition = $container->getDefinition($this->getAlias() . '.enhancer.controllers_by_class');
-            $definition->addTag('dynamic_router_route_enhancer', array('priority' => -1000));
-        } else {
-            $container->removeDefinition($this->getAlias() . '.enhancer.controllers_by_class');
-        }
-
-        if (!empty($config['generic_controller']) && !empty($config['templates_by_class'])) {
-            $controllerForTemplates = array();
-            foreach ($config['templates_by_class'] as $key => $value) {
-                $controllerForTemplates[$key] = $config['generic_controller'];
-            }
-            $definition = $container->getDefinition($this->getAlias() . '.enhancer.controller_for_templates_by_class');
-            $definition->replaceArgument(2, $controllerForTemplates);
-            $definition->addTag('dynamic_router_route_enhancer', array('priority' => -1000));
-
-            $container->setParameter($this->getAlias() . '.templates_by_class', $config['templates_by_class']);
-            $definition = $container->getDefinition($this->getAlias() . '.enhancer.templates_by_class');
-            $definition->addTag('dynamic_router_route_enhancer', array('priority' => -1000));
-        } else {
-            $container->removeDefinition($this->getAlias() . '.enhancer.controller_for_templates_by_class');
-            $container->removeDefinition($this->getAlias() . '.enhancer.templates_by_class');
         }
     }
 

@@ -144,19 +144,27 @@ class Page extends Route implements
      */
     protected $extras = array();
 
-    /**
-     * Additional supported options are:
-     *
-     * * add_format_pattern: When set, ".{_format}" is appended to the route pattern.
-     *                       Also implicitly sets a default/require on "_format" to "html".
-     * * add_locale_pattern: When set, "/{_locale}" is prepended to the route pattern.
-     */
     public function __construct(array $options = array())
     {
         parent::__construct($options);
 
         $this->createDate = new \DateTime();
-        $this->children = new ArrayCollection();
+    }
+
+    /**
+     * @deprecated use getOption('add_locale_pattern') instead
+     */
+    public function getAddLocalePattern()
+    {
+        return $this->getOption('add_locale_pattern');
+    }
+
+    /**
+     * @deprecated use setOption('add_locale_pattern', $bool) instead
+     */
+    public function setAddLocalePattern($addLocalePattern)
+    {
+        $this->setOption('add_locale_pattern', $addLocalePattern);
     }
 
     /**
@@ -644,5 +652,15 @@ class Page extends Route implements
             'labelAttributes' => $this->labelAttributes,
             'content' => $this,
         );
+    }
+
+    public function getRouteOptions()
+    {
+        return parent::getOptions();
+    }
+
+    public function setRouteOptions(array $options)
+    {
+        parent::setOptions($options);
     }
 }
