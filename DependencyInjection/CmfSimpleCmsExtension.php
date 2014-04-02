@@ -32,9 +32,32 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
      */
     public function prepend(ContainerBuilder $container)
     {
-        $prependConfig = array('persistence' => array('phpcr' => (array('enabled' => true))));
-        $container->prependExtensionConfig('cmf_menu', $prependConfig);
-        $prependConfig = array('dynamic' => $prependConfig);
+        // process the configuration of CmfCoreExtension
+        $configs = $container->getExtensionConfig($this->getAlias());
+        $parameterBag = $container->getParameterBag();
+        $configs = $parameterBag->resolveValue($configs);
+        $config = $this->processConfiguration(new Configuration(), $configs);
+
+        if (empty($config['persistence']['phpcr']['enabled'])) {
+            return;
+        }
+
+        $prependConfig = array(
+            'chain' => array(
+                'routers_by_id' => array(
+                    'router.default' => 0,
+                    'cmf_routing.dynamic_router' => -100,
+                )
+            ),
+            'dynamic' => array(
+                'enabled' => true,
+            )
+        );
+        if (isset($config['persistence']['phpcr']['basepath'])
+            && '/cms/simple' != $config['persistence']['phpcr']['basepath']
+        ) {
+            $prependConfig['dynamic']['persistence']['phpcr']['route_basepaths'] = array($config['persistence']['phpcr']['basepath']);
+        }
         $container->prependExtensionConfig('cmf_routing', $prependConfig);
     }
 

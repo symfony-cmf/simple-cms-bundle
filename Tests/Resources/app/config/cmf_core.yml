@@ -6,15 +6,7 @@ cmf_core:
             enabled: true
 
 cmf_routing:
-    chain:
-        routers_by_id:
-            router.default: 200
-            cmf_routing.dynamic_router: 100
     dynamic:
         enabled: true
         templates_by_class:
             Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page: ::layout.html.twig
-        persistence:
-            phpcr:
-                route_basepaths:
-                  - "/test/page"
