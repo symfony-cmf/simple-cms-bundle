@@ -33,33 +33,20 @@ class PageTest extends BaseTestCase
 
     public function testPage()
     {
-        $data = array(
-            'name' => 'page-name',
-            'title' => 'Page Title',
-            'label' => 'Page Label',
-            'body' => 'This is body',
-            'createDate' => new \DateTime('2013-07-05'),
-            'publishable' => false,
-            'publishStartDate' => new \DateTime('2013-06-18'),
-            'publishEndDate' => new \DateTime('2013-06-18'),
-            'extras' => array(
-                'extra_1' => 'foobar',
-                'extra_2' => 'barfoo',
-            ),
-        );
-
-        $page = new Page;
-        $refl = new \ReflectionClass($page);
-
+        $page = new Page(array('add_locale_pattern' => true));
         $page->setParentDocument($this->baseDocument);
-
-        foreach ($data as $key => $value) {
-            $refl = new \ReflectionClass($page);
-            $prop = $refl->getProperty($key);
-            $prop->setAccessible(true);
-            $prop->setValue($page, $value);
-        }
-        $page->setOption('add_locale_pattern', true);
+        $page->setName('page-name');
+        $page->setTitle('Page Title');
+        $page->setLabel('Page Label');
+        $page->setBody('This is body');
+        $page->setCreateDate(new \DateTime('2013-07-05'));
+        $page->setPublishable(false);
+        $page->setPublishStartDate(new \DateTime('2013-06-18'));
+        $page->setPublishEndDate(new \DateTime('2013-06-18'));
+        $page->setExtras(array(
+            'extra_1' => 'foobar',
+            'extra_2' => 'barfoo',
+        ));
 
         $this->dm->persist($page);
         $this->dm->flush();
@@ -68,16 +55,14 @@ class PageTest extends BaseTestCase
         $page = $this->dm->find(null, '/test/page-name');
 
         $this->assertNotNull($page);
-
-        foreach ($data as $key => $value) {
-            $prop = $refl->getProperty($key);
-            $prop->setAccessible(true);
-            $v = $prop->getValue($page);
-
-            if (!is_object($value)) {
-                $this->assertEquals($value, $v);
-            }
-        }
+        $this->assertTrue($page->getOption('add_locale_pattern'));
+        $this->assertEquals('Page Title', $page->getTitle());
+        $this->assertEquals('Page Label', $page->getLabel());
+        $this->assertEquals('This is body', $page->getBody());
+        $this->assertEquals(array(
+            'extra_1' => 'foobar',
+            'extra_2' => 'barfoo',
+        ), $page->getExtras());
 
         // test publish start and end
         $publishStartDate = $page->getPublishStartDate();
@@ -85,20 +70,22 @@ class PageTest extends BaseTestCase
 
         $this->assertInstanceOf('\DateTime', $publishStartDate);
         $this->assertInstanceOf('\DateTime', $publishEndDate);
-        $this->assertEquals($data['publishStartDate']->format('Y-m-d'), $publishStartDate->format('Y-m-d'));
-        $this->assertEquals($data['publishEndDate']->format('Y-m-d'), $publishEndDate->format('Y-m-d'));
+        $this->assertEquals('2013-06-18', $publishStartDate->format('Y-m-d'));
+        $this->assertEquals('2013-06-18', $publishEndDate->format('Y-m-d'));
 
         // test multi-lang
         $page->setLocale('fr');
+        $page->setTitle('french');
         $this->dm->persist($page);
         $this->dm->flush();
         $this->dm->clear();
 
         $page = $this->dm->findTranslation(null, '/test/page-name', 'fr');
         $this->assertEquals('fr', $page->getLocale());
+        $this->assertEquals('french', $page->getTitle());
 
         // test node
-        $node = $page->node;
+        $node = $page->getNode();
         $this->assertInstanceOf('PHPCR\NodeInterface', $node);
     }
 }
