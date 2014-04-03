@@ -12,10 +12,16 @@
 
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Tests\WebTest\Admin;
 
+use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
 
 class PageAdminTest extends BaseTestCase
 {
+    /**
+     * @var Client
+     */
+    private $client;
+
     public function setUp()
     {
         $this->db('PHPCR')->loadFixtures(array(
@@ -69,6 +75,6 @@ class PageAdminTest extends BaseTestCase
         $res = $this->client->getResponse();
 
         // If we have a 302 redirect, then all is well
-        $this->assertEquals(302, $res->getStatusCode());
+        $this->assertEquals(302, $res->getStatusCode(), $res);
     }
 }

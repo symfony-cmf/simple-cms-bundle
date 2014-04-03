@@ -16,6 +16,9 @@ use Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page;
 
 class PageTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * Testing BC
+     */
     public function testGetSet()
     {
         $page = new Page;

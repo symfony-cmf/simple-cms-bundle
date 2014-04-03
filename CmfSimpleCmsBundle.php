@@ -30,7 +30,6 @@ class CmfSimpleCmsBundle extends Bundle
             $container->addCompilerPass(
                 DoctrinePhpcrMappingsPass::createXmlMappingDriver(
                     array(
-                        realpath(__DIR__ . '/Resources/config/doctrine-model') => 'Symfony\Cmf\Bundle\SimpleCmsBundle\Model',
                         realpath(__DIR__ . '/Resources/config/doctrine-phpcr') => 'Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr',
                     ),
                     array('cmf_simple_cms.persistence.phpcr.manager_name')

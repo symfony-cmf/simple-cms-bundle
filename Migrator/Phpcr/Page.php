@@ -31,17 +31,17 @@ use Doctrine\ODM\PHPCR\DocumentManager;
 class Page implements MigratorInterface
 {
     /**
-     * @var PHPCR\SessionInterface
+     * @var SessionInterface
      */
     protected $session;
 
     /*
-     * @var Symfony\Component\Console\Output\OutputInterface
+     * @var OutputInterface
      */
     protected $output;
 
     /**
-     * @var \Doctrine\ODM\PHPCR\DocumentManager
+     * @var DocumentManager
      */
     protected $dm;
 
@@ -65,7 +65,7 @@ class Page implements MigratorInterface
 
     protected function createPageInstance($className)
     {
-        return new $className(true);
+        return new $className(array('add_format_pattern' => true));
     }
 
     public function migrate($path = '/', $depth = -1)
