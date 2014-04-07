@@ -1,6 +1,9 @@
 Changelog
 =========
 
+1.1.0-RC1
+---------
+
 * **2014-04-01**: Refactored the RoutingBundle to provide all routing
   features needed by SimpleCmsBundle.
   * If you where only using the SimpleCmsBundle you now need to activate
