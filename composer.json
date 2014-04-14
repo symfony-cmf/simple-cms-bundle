@@ -14,7 +14,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.3",
-        "symfony/framework-bundle": "~2.2",
+        "symfony/framework-bundle": "~2.3",
         "symfony-cmf/core-bundle": ">=1.1.0,<1.2-dev",
         "symfony-cmf/routing-bundle": "1.2.*",
         "symfony-cmf/menu-bundle": ">=1.0.0,<1.2-dev",
@@ -27,7 +27,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "0.*",
         "matthiasnoback/symfony-config-test": "0.*",
         "sonata-project/doctrine-phpcr-admin-bundle": ">=1.0.0,<1.2-dev",
-        "symfony/monolog-bundle": "~2.2"
+        "symfony/monolog-bundle": "~2.3"
     },
     "suggest": {
         "symfony-cmf/create-bundle": "1.1.*",

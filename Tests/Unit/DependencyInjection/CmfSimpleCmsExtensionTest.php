@@ -37,12 +37,12 @@ class CmfSimpleCmsExtensionTest extends AbstractExtensionTestCase
             ),
         ));
 
-        $this->assertContainerBuilderHasService('cmf_simple_cms.initializer', '%cmf_simple_cms.initializer.class%');
-        $this->assertContainerBuilderHasService('cmf_simple_cms.persistence.phpcr.migrator.page', '%cmf_simple_cms.persistence.phpcr.migrator_page.class%');
+        $this->assertContainerBuilderHasService('cmf_simple_cms.initializer', 'Symfony\Cmf\Bundle\SimpleCmsBundle\Initializer\HomepageInitializer');
+        $this->assertContainerBuilderHasService('cmf_simple_cms.persistence.phpcr.migrator.page', 'Symfony\Cmf\Bundle\SimpleCmsBundle\Migrator\Phpcr\Page');
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall('cmf_simple_cms.persistence.phpcr.menu_provider', 'setManagerName', array(
             '%cmf_simple_cms.persistence.phpcr.manager_name%',
         ));
-        $this->assertContainerBuilderHasService('cmf_simple_cms.persistence.phpcr.admin.page', '%cmf_simple_cms.persistence.phpcr.admin.page.class%');
+        $this->assertContainerBuilderHasService('cmf_simple_cms.persistence.phpcr.admin.page', 'Symfony\Cmf\Bundle\SimpleCmsBundle\Admin\PageAdmin');
     }
 
     public function testLoadMinimal()
