@@ -34,10 +34,6 @@
         <source>list.label_title</source>
         <target>Naslov</target>
       </trans-unit>
-      <trans-unit id="list.label_locales">
-        <source>list.label_locales</source>
-        <target>Lokalizacije</target>
-      </trans-unit>
       <trans-unit id="list.label_name">
         <source>list.label_name</source>
         <target>Ime</target>
@@ -45,10 +41,6 @@
       <trans-unit id="list.label_label">
         <source>list.label_label</source>
         <target>Oznaka</target>
-      </trans-unit>
-      <trans-unit id="list.label_create_date">
-        <source>list.label_create_date</source>
-        <target>Datum nastanka</target>
       </trans-unit>
       <trans-unit id="filter.label_title">
         <source>filter.label_title</source>
@@ -77,26 +69,6 @@
       <trans-unit id="form.label_title">
         <source>form.label_title</source>
         <target>Naslov</target>
-      </trans-unit>
-      <trans-unit id="form.label_create_date">
-        <source>form.label_create_date</source>
-        <target>Datum nastanka</target>
-      </trans-unit>
-      <trans-unit id=" form.label_add_format_pattern">
-        <source>form.label_add_format_pattern</source>
-        <target>Dodaj obliko vzorca</target>
-      </trans-unit>
-      <trans-unit id=" form.label_add_trailing_slash">
-        <source>form.label_add_trailing_slash</source>
-        <target>Dodaj poševnico na koncu</target>
-      </trans-unit>
-      <trans-unit id="form.label_add_locale_pattern">
-        <source>form.label_add_locale_pattern</source>
-        <target>Dodaj vzorec lokalizacije</target>
-      </trans-unit>
-      <trans-unit id="form.label_locale">
-        <source>form.label_locale</source>
-        <target>Lokalizacija</target>
       </trans-unit>
       <trans-unit id="form.label_body">
         <source>form.label_body</source>

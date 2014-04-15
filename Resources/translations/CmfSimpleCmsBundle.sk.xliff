@@ -34,10 +34,6 @@
         <source>list.label_title</source>
         <target>Názov</target>
       </trans-unit>
-      <trans-unit id="list.label_locales">
-        <source>list.label_locales</source>
-        <target>Jazyky</target>
-      </trans-unit>
       <trans-unit id="list.label_name">
         <source>list.label_name</source>
         <target>Názov</target>
@@ -78,42 +74,10 @@
         <source>form.label_title</source>
         <target>Názov</target>
       </trans-unit>
-      <trans-unit id="form.label_create_date">
-        <source>form.label_create_date</source>
-        <target>Dátum vytvorenia</target>
-      </trans-unit>
-      <trans-unit id=" form.label_add_format_pattern">
-        <source>form.label_add_format_pattern</source>
-        <target>Pridať formát</target>
-      </trans-unit>
-      <trans-unit id=" form.label_add_trailing_slash">
-        <source>form.label_add_trailing_slash</source>
-        <target>Pridať koncové lomítko</target>
-      </trans-unit>
-      <trans-unit id="form.label_add_locale_pattern">
-        <source>form.label_add_locale_pattern</source>
-        <target>Pridať vzor lokalizácie</target>
-      </trans-unit>
-      <trans-unit id="form.label_locale">
-        <source>form.label_locale</source>
-        <target>Jazyk</target>
-      </trans-unit>
       <trans-unit id="form.label_body">
         <source>form.label_body</source>
         <target>Obsah</target>
 	  </trans-unit>
-	  <trans-unit id="form.help_add_format_pattern">
-        <source>form.help_add_format_pattern</source>
-        <target>Pridaať formát na koniec cesty, napr. /vasa/stranka.{format}. Predvolený formát je html.</target>
-      </trans-unit>
-      <trans-unit id="form.help_add_trailing_slash">
-        <source>form.help_add_trailing_slash</source>
-        <target>Pridať koncové lomítko na koniec cesty, napr. /vasa/stranka/.</target>
-      </trans-unit>
-      <trans-unit id="form.help_add_locale_pattern">
-        <source>form.help_add_locale_pattern</source>
-        <target>Pridať jazyk na začiatok cesty, napr. /{locale}/vasa/stranka</target>
-      </trans-unit>
     </body>
   </file>
 </xliff>

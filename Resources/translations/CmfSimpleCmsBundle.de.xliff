@@ -34,10 +34,6 @@
         <source>list.label_title</source>
         <target>Titel</target>
       </trans-unit>
-      <trans-unit id="list.label_locales">
-        <source>list.label_locales</source>
-        <target>Sprachen</target>
-      </trans-unit>
       <trans-unit id="list.label_name">
         <source>list.label_name</source>
         <target>Name</target>
@@ -72,19 +68,11 @@
       </trans-unit>
       <trans-unit id="form.label_label">
         <source>form.label_label</source>
-        <target>Label</target>
+        <target>Menüname</target>
       </trans-unit>
       <trans-unit id="form.label_title">
         <source>form.label_title</source>
         <target>Titel</target>
-      </trans-unit>
-      <trans-unit id="form.label_create_date">
-        <source>form.label_create_date</source>
-        <target>Erstellungsdatum</target>
-      </trans-unit>
-      <trans-unit id="form.label_locale">
-        <source>form.label_locale</source>
-        <target>Sprache</target>
       </trans-unit>
       <trans-unit id="form.label_body">
         <source>form.label_body</source>

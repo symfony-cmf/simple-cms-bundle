@@ -34,10 +34,6 @@
         <source>list.label_title</source>
         <target>Název</target>
       </trans-unit>
-      <trans-unit id="list.label_locales">
-        <source>list.label_locales</source>
-        <target>Jazyky</target>
-      </trans-unit>
       <trans-unit id="list.label_name">
         <source>list.label_name</source>
         <target>Název</target>
@@ -45,10 +41,6 @@
       <trans-unit id="list.label_label">
         <source>list.label_label</source>
         <target>Označení</target>
-      </trans-unit>
-      <trans-unit id="list.label_create_date">
-        <source>list.label_create_date</source>
-        <target>Datum vytvoření</target>
       </trans-unit>
       <trans-unit id="filter.label_title">
         <source>filter.label_title</source>
@@ -78,41 +70,9 @@
         <source>form.label_title</source>
         <target>Název</target>
       </trans-unit>
-      <trans-unit id="form.label_create_date">
-        <source>form.label_create_date</source>
-        <target>Datum vytvoření</target>
-      </trans-unit>
-      <trans-unit id=" form.label_add_format_pattern">
-        <source>form.label_add_format_pattern</source>
-        <target>Přidat formát</target>
-      </trans-unit>
-      <trans-unit id=" form.label_add_trailing_slash">
-        <source>form.label_add_trailing_slash</source>
-        <target>Přidat koncové lomítko</target>
-      </trans-unit>
-      <trans-unit id="form.label_add_locale_pattern">
-        <source>form.label_add_locale_pattern</source>
-        <target>Přidat vzor lokalizace</target>
-      </trans-unit>
-      <trans-unit id="form.label_locale">
-        <source>form.label_locale</source>
-        <target>Jazyk</target>
-      </trans-unit>
       <trans-unit id="form.label_body">
         <source>form.label_body</source>
         <target>Obsah</target>
-      </trans-unit>
-      <trans-unit id="form.help_add_format_pattern">
-        <source>form.help_add_format_pattern</source>
-        <target>Přidať formát na konec cesty, např. /vasa/stranka.{format}. Výchozí formát je html.</target>
-      </trans-unit>
-      <trans-unit id="form.help_add_trailing_slash">
-        <source>form.help_add_trailing_slash</source>
-        <target>Přidat koncové lomítko na konec cesty, např. /vasa/stranka/.</target>
-      </trans-unit>
-      <trans-unit id="form.help_add_locale_pattern">
-        <source>form.help_add_locale_pattern</source>
-        <target>Přidat jazyk na začátek cesty, např. /{locale}/vasa/stranka</target>
       </trans-unit>
     </body>
   </file>
