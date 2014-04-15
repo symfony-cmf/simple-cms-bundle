@@ -40,7 +40,6 @@ class PageAdmin extends RouteAdmin
             ->addIdentifier('title', 'text')
             ->add('label', 'text')
             ->add('name', 'text')
-            ->add('createDate', 'date')
         ;
     }
 
@@ -60,7 +59,6 @@ class PageAdmin extends RouteAdmin
                 ->add('label', null, array('required' => false))
                 ->add('title')
                 ->add('body', 'textarea')
-                ->add('createDate')
             ->end()
             ->with('form.group_advanced', array(
                 'translation_domain' => 'CmfRoutingBundle',
@@ -112,7 +110,7 @@ class PageAdmin extends RouteAdmin
         $itemsByDate = array();
         /** @var $item Page */
         foreach ($items as $item) {
-            $itemsByDate[$item->getDate()->format('U')][$item->getCreateDate()->format('U')][] = $item;
+            $itemsByDate[$item->getDate()->format('U')][$item->getPublishStartDate()->format('U')][] = $item;
         }
 
         if ('asc' == $this->sortOrder) {
@@ -127,8 +125,8 @@ class PageAdmin extends RouteAdmin
             } else {
                 krsort($itemsForDate);
             }
-            foreach ($itemsForDate as $itemsForCreateDate) {
-                foreach ($itemsForCreateDate as $item) {
+            foreach ($itemsForDate as $itemsForPublishDate) {
+                foreach ($itemsForPublishDate as $item) {
                     $sortedItems[$item->getName()] = $item;
                 }
             }

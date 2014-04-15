@@ -131,10 +131,6 @@ class Page implements MigratorInterface
             $page->setBody($data['body']);
         }
 
-        if (isset($data['create_date'])) {
-            $page->setCreateDate(date_create_from_format('U', strtotime($data['create_date'])));
-        }
-
         if (isset($data['publish_start_date'])) {
             $page->setPublishStartDate(date_create_from_format('U', strtotime($data['publish_start_date'])));
         }

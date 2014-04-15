@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use LogicException;
 use Knp\Menu\NodeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
 use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
@@ -114,9 +115,12 @@ class Page extends Route implements
     protected $body;
 
     /**
-     * @var \DateTime
+     * This will usually be a ContainerBlock but can be any block that will be
+     * rendered in the additionalInfoBlock area.
+     *
+     * @var BlockInterface
      */
-    protected $createDate;
+    protected $additionalInfoBlock;
 
     /**
      * @var \DateTime
@@ -143,13 +147,6 @@ class Page extends Route implements
      * @var array
      */
     protected $extras = array();
-
-    public function __construct(array $options = array())
-    {
-        parent::__construct($options);
-
-        $this->createDate = new \DateTime();
-    }
 
     /**
      * @deprecated use getOption('add_locale_pattern') instead
@@ -192,12 +189,25 @@ class Page extends Route implements
     }
 
     /**
-     * Get the "date" of this page, which is the publishStartDate if set,
-     * otherwise the createDate.
+     * @deprecated Since 1.1 we only have the publish start date
+     *
+     * This method is kept for BC but will return the result of getDate().
+     *
+     * @return \DateTime
+     */
+    public function getCreateDate()
+    {
+        return $this->getDate();
+    }
+
+    /**
+     * Get the "date" of this page, which is the publishStartDate.
+     *
+     * @return \DateTime
      */
     public function getDate()
     {
-        return $this->publishStartDate ? $this->publishStartDate : $this->createDate;
+        return $this->getPublishStartDate();
     }
 
     /**
@@ -251,7 +261,7 @@ class Page extends Route implements
     /**
      * Get extras - a flat key-value hashmap
      *
-     * @return array with only string values
+     * @return array hashmap with only string values
      */
     public function getExtras()
     {
@@ -434,26 +444,23 @@ class Page extends Route implements
     }
 
     /**
-     * Get the creation date
-     *
-     * @return \DateTime
+     * @return BlockInterface
      */
-    public function getCreateDate()
+    public function getAdditionalInfoBlock()
     {
-        return $this->createDate;
+        return $this->additionalInfoBlock;
     }
 
     /**
-     * Overwrite the creation date manually
+     * Set the additional info block for this content. Usually you want this to
+     * be a container block in order to be able to add several blocks.
      *
-     * On creation of a Page, the createDate is automatically set to the
-     * current time.
-     *
-     * @param \DateTime $createDate
+     * @param BlockInterface $block must be persistable through cascade by the
+     *      persistence layer.
      */
-    public function setCreateDate(\DateTime $createDate = null)
+    public function setAdditionalInfoBlock($block)
     {
-        $this->createDate = $createDate;
+        $this->additionalInfoBlock = $block;
     }
 
     /**
