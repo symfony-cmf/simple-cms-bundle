@@ -16,7 +16,7 @@
             <argument type="service" id="doctrine_phpcr"/>
             <argument>%cmf_simple_cms.persistence.phpcr.menu_basepath%</argument>
             <call method="setManagerName"><argument>%cmf_simple_cms.persistence.phpcr.manager_name%</argument></call>
-            <tag name="cmf_request_aware"/>
+            <call method="setRequest"><argument type="service" id="request" on-invalid="null" strict="false"/></call>
         </service>
 
     </services>
