@@ -4,6 +4,9 @@ Changelog
 1.1.0-RC2
 ---------
 
+* **2014-04-15**: Page now also provides the additionalInfoBlock child. Removed
+  the createDate as its redundant with the publishStartDate.
+
 * **2014-04-11**: drop Symfony 2.2 compatibility
 
 1.1.0-RC1
@@ -11,8 +14,8 @@ Changelog
 
 * **2014-04-01**: Refactored the RoutingBundle to provide all routing
   features needed by SimpleCmsBundle.
-  * If you where only using the SimpleCmsBundle you now need to activate
-    the dynamic router. SimpleCmsBundle automatically does this for you.
+  * The dynamic router of RoutingBundle needs to be active. The
+    SimpleCmsBundle automatically does this for you.
   * The configuration for document to route/template now all happens under
     cmf_routing.dynamic and the route enhancers also apply to simplecms Pages.
     You can configure additional base paths where to look for routes in the

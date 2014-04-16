@@ -14,7 +14,9 @@
         <field name="title" type="string" translated="true"/>
         <field name="label" type="string" translated="true" nullable="true"/>
         <field name="body" type="string" translated="true" nullable="true"/>
-        <field name="createDate" type="date"/>
+        <child name="additionalInfoBlock">
+            <cascade><cascade-persist /></cascade>
+        </child>
         <field name="publishable" type="boolean"/>
         <field name="publishStartDate" type="date" nullable="true"/>
         <field name="publishEndDate" type="date" nullable="true"/>

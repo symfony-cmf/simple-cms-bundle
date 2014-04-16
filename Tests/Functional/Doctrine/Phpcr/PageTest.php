@@ -39,7 +39,6 @@ class PageTest extends BaseTestCase
         $page->setTitle('Page Title');
         $page->setLabel('Page Label');
         $page->setBody('This is body');
-        $page->setCreateDate(new \DateTime('2013-07-05'));
         $page->setPublishable(false);
         $page->setPublishStartDate(new \DateTime('2013-06-18'));
         $page->setPublishEndDate(new \DateTime('2013-06-18'));
