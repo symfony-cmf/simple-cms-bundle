@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Tests\WebTest\TestApp;
 
 use Symfony\Bundle\FrameworkBundle\Client;

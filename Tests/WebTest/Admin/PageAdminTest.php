@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Tests\WebTest\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Client;

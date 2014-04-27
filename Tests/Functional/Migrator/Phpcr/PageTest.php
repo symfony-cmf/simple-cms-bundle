@@ -9,14 +9,24 @@
  * file that was distributed with this source code.
  */
 
+namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Tests\Functional\Migrator\Phpcr;
 
-namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Tests\Functional\Doctrine\Phpcr;
-
+use Doctrine\ODM\PHPCR\DocumentManager;
 use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
-use Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page;
+use Symfony\Cmf\Bundle\SimpleCmsBundle\Migrator\Phpcr\Page;
 
 class PageTest extends BaseTestCase
 {
+    /**
+     * @var Page
+     */
+    private $migrator;
+
+    /**
+     * @var DocumentManager
+     */
+    private $dm;
+
     public function setUp()
     {
         $this->db('PHPCR')->createTestNode();

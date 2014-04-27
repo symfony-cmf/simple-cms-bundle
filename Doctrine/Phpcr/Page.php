@@ -11,7 +11,6 @@
 
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr;
 
-use Doctrine\Common\Collections\Collection;
 use LogicException;
 use Knp\Menu\NodeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -273,8 +272,8 @@ class Page extends Route implements
      * without needing to extend the document class.
      *
      * @param array $extras a flat key-value hashmap. The values are cast to
-     *      string as PHPCR stores multivalue data with only one data type for
-     *      all values.
+     *                      string as PHPCR stores multivalue data with only
+     *                      one data type for all values.
      */
     public function setExtras($extras)
     {
@@ -456,7 +455,7 @@ class Page extends Route implements
      * be a container block in order to be able to add several blocks.
      *
      * @param BlockInterface $block must be persistable through cascade by the
-     *      persistence layer.
+     *                              persistence layer.
      */
     public function setAdditionalInfoBlock($block)
     {

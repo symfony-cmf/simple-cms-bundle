@@ -17,7 +17,6 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
 use Symfony\Cmf\Bundle\RoutingBundle\Admin\RouteAdmin;
 use Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page;
-use Symfony\Component\Form\FormBuilder;
 
 class PageAdmin extends RouteAdmin
 {

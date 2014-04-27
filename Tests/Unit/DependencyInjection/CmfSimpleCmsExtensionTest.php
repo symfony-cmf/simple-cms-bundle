@@ -9,12 +9,10 @@
  * file that was distributed with this source code.
  */
 
-
-namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Tests\DependencyInjection;
+namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Tests\Unit\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Symfony\Cmf\Bundle\SimpleCmsBundle\DependencyInjection\CmfSimpleCmsExtension;
-use Symfony\Component\DependencyInjection\Reference;
 
 class CmfSimpleCmsExtensionTest extends AbstractExtensionTestCase
 {
