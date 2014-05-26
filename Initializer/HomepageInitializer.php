@@ -18,15 +18,16 @@ use Doctrine\Bundle\PHPCRBundle\Initializer\InitializerInterface;
 use Doctrine\ODM\PHPCR\DocumentManager;
 
 use Doctrine\Bundle\PHPCRBundle\ManagerRegistry;
-use Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page;
 
 class HomepageInitializer implements InitializerInterface
 {
     private $basePath;
+    private $documentClass;
 
-    public function __construct($basePath)
+    public function __construct($basePath, $documentClass)
     {
         $this->basePath = $basePath;
+        $this->documentClass = $documentClass;
     }
 
     /**
@@ -43,7 +44,7 @@ class HomepageInitializer implements InitializerInterface
         $session = $dm->getPhpcrSession();
         NodeHelper::createPath($session, PathHelper::getParentPath($this->basePath));
 
-        $page = new Page();
+        $page = new $this->documentClass;
         $page->setId($this->basePath);
         $page->setLabel('Home');
         $page->setTitle('Homepage');
