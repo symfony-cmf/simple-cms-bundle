@@ -13,6 +13,7 @@
             class="%cmf_simple_cms.initializer.class%"
         >
             <argument>%cmf_simple_cms.persistence.phpcr.basepath%</argument>
+            <argument>%cmf_simple_cms.persistence.phpcr.document.class%</argument>
             <tag name="doctrine_phpcr.initializer"/>
         </service>
     </services>
