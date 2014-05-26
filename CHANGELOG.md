@@ -1,6 +1,9 @@
 Changelog
 =========
 
+* **2014-05-26**: Page now provides a convenience method that returns the UUID
+  of the document if it has one.
+
 1.1.0
 -----
 
