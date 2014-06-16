@@ -15,18 +15,18 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/framework-bundle": "~2.3",
-        "symfony-cmf/core-bundle": ">=1.1.0,<1.2-dev",
-        "symfony-cmf/routing-bundle": "1.2.*",
-        "symfony-cmf/menu-bundle": ">=1.0.0,<1.2-dev",
-        "symfony-cmf/content-bundle": ">=1.0.0,<1.2-dev",
-        "doctrine/phpcr-bundle": ">=1.1.0,<1.2-dev",
-        "doctrine/phpcr-odm": ">=1.1.0,<1.2-dev"
+        "symfony-cmf/core-bundle": ">=1.1.0,<1.3-dev",
+        "symfony-cmf/routing-bundle": ">=1.2.0,<1.4-dev",
+        "symfony-cmf/menu-bundle": ">=1.0.0,<1.3-dev",
+        "symfony-cmf/content-bundle": ">=1.0.0,<1.3-dev",
+        "doctrine/phpcr-bundle": ">=1.1.0,<1.3-dev",
+        "doctrine/phpcr-odm": ">=1.1.0,<1.3-dev"
     },
     "require-dev": {
-        "symfony-cmf/testing": ">=1.0.0,<1.2-dev",
+        "symfony-cmf/testing": "1.2.*",
         "matthiasnoback/symfony-dependency-injection-test": "0.*",
         "matthiasnoback/symfony-config-test": "0.*",
-        "sonata-project/doctrine-phpcr-admin-bundle": ">=1.0.0,<1.2-dev",
+        "sonata-project/doctrine-phpcr-admin-bundle": "1.1.*",
         "symfony/monolog-bundle": "~2.3"
     },
     "suggest": {
