@@ -18,9 +18,9 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
 use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
+use Symfony\Cmf\Bundle\MenuBundle\Model\MenuOptionsInterface;
 use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
 use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
-use PHPCR\NodeInterface as PHPCRNodeInterface;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -40,6 +40,7 @@ class Page extends Route implements
     RouteReferrersReadInterface, // this must not be the write interface, it would make no sense
     PublishTimePeriodInterface,
     PublishableInterface,
+    MenuOptionsInterface,
     TranslatableInterface
 {
     /**
@@ -670,16 +671,4 @@ class Page extends Route implements
     {
         parent::setOptions($options);
     }
-    
-    /**
-     * Retrieve UUID of Node or null if not present
-     *
-     * @return string|null
-     */
-    public function getUUID()
-    {
-        $node = $this->getNode();
-        
-        return $node instanceof PHPCRNodeInterface ? $node->getIdentifier() : null;
-    }    
 }
