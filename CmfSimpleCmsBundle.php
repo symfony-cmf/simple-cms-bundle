@@ -31,7 +31,9 @@ class CmfSimpleCmsBundle extends Bundle
                     array(
                         realpath(__DIR__ . '/Resources/config/doctrine-phpcr') => 'Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr',
                     ),
-                    array('cmf_simple_cms.persistence.phpcr.manager_name')
+                    array('cmf_simple_cms.persistence.phpcr.manager_name'),
+                    false,
+                    array('CmfSimpleCmsBundle' => 'Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr')
                 )
             );
         }
