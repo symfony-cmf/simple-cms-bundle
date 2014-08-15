@@ -594,9 +594,11 @@ class Page extends Route implements
     }
 
     /**
-     * Whether to display the menu item for this.
+     * Whether a menu item for this page should be displayed if possible.
      *
      * @return boolean
+     *
+     * @see isDisplayableMenu
      */
     public function getDisplay()
     {
@@ -642,6 +644,17 @@ class Page extends Route implements
     }
 
     /**
+     * Whether this page can be displayed in the menu, meaning getDisplay is
+     * true and there is a non-empty label.
+     *
+     * @return boolean
+     */
+    public function isDisplayableMenu()
+    {
+        return $this->getDisplay() && $this->getLabel();
+    }
+
+    /**
      * Route method and Menu method - provides menu options merged with the
      * route options
      *
@@ -653,12 +666,12 @@ class Page extends Route implements
             'label' => $this->getLabel(),
             'attributes' => $this->getAttributes(),
             'childrenAttributes' => $this->getChildrenAttributes(),
-            'display' => $this->display,
-            'displayChildren' => $this->displayChildren,
+            'display' => $this->isDisplayableMenu(),
+            'displayChildren' => $this->getDisplayChildren(),
             'routeParameters' => array(),
             'routeAbsolute' => false,
-            'linkAttributes' => $this->linkAttributes,
-            'labelAttributes' => $this->labelAttributes,
+            'linkAttributes' => $this->getLinkAttributes(),
+            'labelAttributes' => $this->getLabelAttributes(),
             'content' => $this,
         );
     }
