@@ -18,8 +18,8 @@
         "symfony/framework-bundle": "~2.3",
         "symfony-cmf/core-bundle": "~1.1",
         "symfony-cmf/routing-bundle": "~1.2",
-        "symfony-cmf/menu-bundle": "~1.2",
-        "symfony-cmf/content-bundle": "~1.0",
+        "symfony-cmf/menu-bundle": "2.0.*",
+        "symfony-cmf/content-bundle": "~1.2",
         "doctrine/phpcr-bundle": "~1.1",
         "doctrine/phpcr-odm": "~1.2"
     },
