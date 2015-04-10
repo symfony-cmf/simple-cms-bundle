@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Cmf\Bundle\RoutingBundle\Tests\Unit\DependencyInjection;
+namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Tests\Unit\DependencyInjection;
 
 use Symfony\Cmf\Component\Testing\Unit\XmlSchemaTestCase;
 
