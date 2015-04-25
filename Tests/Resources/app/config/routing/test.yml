@@ -1,5 +1,5 @@
 home_redirect:
-    pattern: /
+    path: /
     defaults:
         _controller: FrameworkBundle:Redirect:urlRedirect
         path: /en/homepage
