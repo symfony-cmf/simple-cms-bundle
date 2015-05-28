@@ -51,6 +51,8 @@ class Page extends Route implements
 
     /**
      * @Assert\NotBlank
+     * 
+     * @var string
      */
     protected $title;
 
