@@ -167,7 +167,7 @@ class Page extends Route implements
     }
 
     /**
-     * {@inheritDoc}
+     * @return NodeInterface
      */
     public function getNode()
     {
