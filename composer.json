@@ -27,6 +27,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "~0.6",
         "matthiasnoback/symfony-config-test": "0.*",
         "phpunit/phpunit": "@stable",
+        "phpunit/php-code-coverage": "@stable",
         "sonata-project/doctrine-phpcr-admin-bundle": "~1.1",
         "symfony/monolog-bundle": "~2.3"
     },
