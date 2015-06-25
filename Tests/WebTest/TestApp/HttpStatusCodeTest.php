@@ -16,11 +16,6 @@ use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
 
 class HttpStatusCodeTest extends BaseTestCase
 {
-    /**
-     * @var Client
-     */
-    private $client;
-
     public function setUp()
     {
         $this->db('PHPCR')->loadFixtures(array(
