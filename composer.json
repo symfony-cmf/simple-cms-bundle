@@ -40,7 +40,7 @@
             "Symfony\\Cmf\\Bundle\\SimpleCmsBundle\\": ""
         }
     },
-    "conflicts": {
+    "conflict": {
         "jms/di-extra-bundle": "<1.3"
     },
     "extra": {

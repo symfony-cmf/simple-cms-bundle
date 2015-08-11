@@ -45,13 +45,13 @@ class Page extends Route implements
     TranslatableInterface
 {
     /**
-     * @var NodeInterface
+     * @var PHPCRNodeInterface
      */
     protected $node;
 
     /**
      * @Assert\NotBlank
-     * 
+     *
      * @var string
      */
     protected $title;
@@ -169,7 +169,7 @@ class Page extends Route implements
     }
 
     /**
-     * @return NodeInterface
+     * @return PHPCRNodeInterface
      */
     public function getNode()
     {
