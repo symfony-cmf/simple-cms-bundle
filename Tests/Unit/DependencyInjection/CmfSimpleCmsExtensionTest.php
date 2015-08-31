@@ -25,7 +25,7 @@ class CmfSimpleCmsExtensionTest extends AbstractExtensionTestCase
 
     public function testLoadDefault()
     {
-        $this->container->setParameter('kernel.bundles', array('CmfRoutingBundle' => true, 'SonataDoctrinePHPCRAdminBundle' => true, 'CmfMenuBundle' => true));
+        $this->setParameter('kernel.bundles', array('CmfRoutingBundle' => true, 'SonataDoctrinePHPCRAdminBundle' => true, 'CmfMenuBundle' => true, 'IvoryCKEditorBundle' => true));
 
         $this->load(array(
             'persistence' => array(
@@ -41,10 +41,13 @@ class CmfSimpleCmsExtensionTest extends AbstractExtensionTestCase
             '%cmf_simple_cms.persistence.phpcr.manager_name%',
         ));
         $this->assertContainerBuilderHasService('cmf_simple_cms.persistence.phpcr.admin.page', 'Symfony\Cmf\Bundle\SimpleCmsBundle\Admin\PageAdmin');
+        $this->assertContainerBuilderHasParameter('cmf_simple_cms.ivory_ckeditor.config', array('config_name' => 'cmf_simple_cms'));
     }
 
     public function testLoadMinimal()
     {
+        $this->setParameter('kernel.bundles', array('CmfRoutingBundle' => true));
+
         $this->load(array(
             'persistence' => array(
                 'phpcr' => array(
@@ -53,9 +56,39 @@ class CmfSimpleCmsExtensionTest extends AbstractExtensionTestCase
                 ),
             ),
             'use_menu' => false,
+            'ivory_ckeditor' => false,
         ));
 
-        $this->assertFalse($this->container->has('cmf_simple_cms.persistence.phpcr.admin.page'));
-        $this->assertFalse($this->container->has('cmf_simple_cms.persistence.phpcr.menu_provider'));
+        $this->assertContainerBuilderNotHasService('cmf_simple_cms.persistence.phpcr.admin.page');
+        $this->assertContainerBuilderNotHasService('cmf_simple_cms.persistence.phpcr.menu_provider');
+        $this->assertContainerBuilderHasParameter('cmf_simple_cms.ivory_ckeditor.config', array());
+    }
+
+    public function testEnableIvoryCkeditor()
+    {
+        $this->setParameter('kernel.bundles', array('CmfRoutingBundle' => true, 'IvoryCKEditorBundle' => true));
+
+        $this->load(array(
+            'persistence' => array('phpcr' => array('enabled' => false)),
+            'ivory_ckeditor' => array('config_name' => 'default'),
+        ));
+
+        $this->assertContainerBuilderHasParameter('cmf_simple_cms.ivory_ckeditor.config', array(
+            'config_name' => 'default',
+        ));
+    }
+
+    /**
+     * @expectedException \LogicException
+     * @expectedExceptionMessage IvoryCKEditorBundle integration was explicitely enabled, but the bundle is not available
+     */
+    public function testFailIfIvoryCkeditorEnabledButNotAvailable()
+    {
+        $this->setParameter('kernel.bundles', array('CmfRoutingBundle' => true));
+
+        $this->load(array(
+            'persistence' => array('phpcr' => array('enabled' => false)),
+            'ivory_ckeditor' => array('enabled' => true),
+        ));
     }
 }

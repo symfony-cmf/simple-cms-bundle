@@ -1,6 +1,9 @@
 Changelog
 =========
 
+* **2015-08-31**: Added IvoryCKEditorBundle integration and added the
+  `ivory_ckeditor` settings.
+
 1.2.0-RC1
 ---------
 

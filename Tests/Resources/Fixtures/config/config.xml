@@ -16,5 +16,7 @@
                 <sonata-admin sort="asc" />
             </phpcr>
         </persistence>
+
+        <ivory-ckeditor config-name="my_custom_toolbar" />
     </config>
 </container>

@@ -36,6 +36,9 @@
             <call method="setControllerResolver">
                 <argument type="service" id="controller_resolver" />
             </call>
+            <call method="setIvoryCkeditor">
+                <argument>%cmf_simple_cms.ivory_ckeditor.config%</argument>
+            </call>
         </service>
 
     </services>
