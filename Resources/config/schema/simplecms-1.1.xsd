@@ -10,9 +10,15 @@
     <xsd:complexType name="config">
         <xsd:sequence>
             <xsd:element name="persistence" type="persistence" minOccurs="0" />
+            <xsd:element name="ivory-ckeditor" type="ivory_ckeditor" minOccurs="0" />
         </xsd:sequence>
 
         <xsd:attribute name="use-menu" type="aboolean" />
+    </xsd:complexType>
+
+    <xsd:complexType name="ivory_ckeditor">
+        <xsd:attribute name="enabled" type="aboolean" />
+        <xsd:attribute name="config-name" type="xsd:string" />
     </xsd:complexType>
 
     <xsd:complexType name="persistence">

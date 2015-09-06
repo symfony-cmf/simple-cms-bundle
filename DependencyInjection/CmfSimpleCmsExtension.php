@@ -70,6 +70,36 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
                 $this->loadPhpcrMenu($config, $loader, $container);
             }
         }
+
+        $this->loadIvoryCKEditor($config['ivory_ckeditor'], $container);
+    }
+
+    protected function loadIvoryCKEditor(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter($this->getAlias() . '.ivory_ckeditor.config', array());
+
+        $bundles = $container->getParameter('kernel.bundles');
+        if ('auto' === $config['enabled'] && !isset($bundles['IvoryCKEditorBundle'])) {
+            return;
+        }
+
+        if (true === $config['enabled'] && !isset($bundles['IvoryCKEditorBundle'])) {
+            $message = 'IvoryCKEditorBundle integration was explicitely enabled, but the bundle is not available';
+
+            if (class_exists('Ivory\CKEditorBundle\IvoryCKEditorBundle')) {
+                $message .= ' (did you forget to register the bundle in the AppKernel?)';
+            }
+
+            throw new \LogicException($message.'.');
+        }
+
+        if (false === $config['enabled'] || !isset($bundles['IvoryCKEditorBundle'])) {
+            return;
+        }
+
+        $container->setParameter($this->getAlias() . '.ivory_ckeditor.config', array(
+            'config_name' => $config['config_name'],
+        ));
     }
 
     protected function loadPhpcr($config, XmlFileLoader $loader, ContainerBuilder $container)

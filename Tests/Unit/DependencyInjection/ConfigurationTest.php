@@ -44,6 +44,10 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                 ),
             ),
             'use_menu' => false,
+            'ivory_ckeditor' => array(
+                'enabled' => 'auto',
+                'config_name' => 'my_custom_toolbar',
+            ),
         );
 
         $formats = array_map(function ($path) {

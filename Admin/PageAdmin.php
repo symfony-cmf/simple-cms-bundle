@@ -23,6 +23,7 @@ class PageAdmin extends RouteAdmin
     protected $translationDomain = 'CmfSimpleCmsBundle';
 
     private $sortOrder = false;
+    private $ivoryCkeditor = array();
 
     public function setSortOrder($sortOrder)
     {
@@ -30,6 +31,11 @@ class PageAdmin extends RouteAdmin
             throw new \InvalidArgumentException($sortOrder);
         }
         $this->sortOrder = $sortOrder;
+    }
+
+    public function setIvoryCkeditor($config)
+    {
+        $this->ivoryCkeditor = (array) $config;
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -57,7 +63,11 @@ class PageAdmin extends RouteAdmin
             ))
                 ->add('label', null, array('required' => false))
                 ->add('title')
-                ->add('body', 'textarea')
+                ->add(
+                    'body',
+                     $this->ivoryCkeditor ? 'ckeditor' : 'textarea',
+                     $this->ivoryCkeditor
+                )
             ->end()
             ->with('form.group_advanced', array(
                 'translation_domain' => 'CmfRoutingBundle',

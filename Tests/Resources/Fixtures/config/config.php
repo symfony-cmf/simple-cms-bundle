@@ -15,4 +15,7 @@ $container->loadFromExtension('cmf_simple_cms', array(
         ),
     ),
     'use_menu' => false,
+    'ivory_ckeditor' => array(
+        'config_name' => 'my_custom_toolbar',
+    ),
 ));
