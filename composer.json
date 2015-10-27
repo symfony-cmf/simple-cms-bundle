@@ -25,10 +25,8 @@
     },
     "require-dev": {
         "symfony-cmf/testing": "^1.3",
-        "matthiasnoback/symfony-dependency-injection-test": "~0.7",
-        "matthiasnoback/symfony-config-test": "0.*",
-        "phpunit/phpunit": "@stable",
-        "phpunit/php-code-coverage": "@stable",
+        "matthiasnoback/symfony-dependency-injection-test": "~0.7,>=0.7.4",
+        "matthiasnoback/symfony-config-test": "^1.2.3",
         "sonata-project/doctrine-phpcr-admin-bundle": "~1.1",
         "symfony-cmf/tree-browser-bundle": ">=1.0.0-RC1",
         "symfony/monolog-bundle": "~2.3"
