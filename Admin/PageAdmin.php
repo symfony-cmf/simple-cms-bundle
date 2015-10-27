@@ -40,17 +40,24 @@ class PageAdmin extends RouteAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
+        $textType = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix') ? 'Symfony\Component\Form\Extension\Core\Type\TextType' : 'text';
+
         $listMapper
-            ->addIdentifier('path', 'text')
-            ->addIdentifier('title', 'text')
-            ->add('label', 'text')
-            ->add('name', 'text')
+            ->addIdentifier('path', $textType)
+            ->addIdentifier('title', $textType)
+            ->add('label', $textType)
+            ->add('name', $textType)
         ;
     }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
         parent::configureFormFields($formMapper);
+
+        $isSf28 = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix');
+        $ckeditorType = $isSf28 ? 'Ivory\CKEditorBundle\Form\Type\CKEditorType' : 'ckeditor';
+        $textareaType = $isSf28 ? 'Symfony\Component\Form\Extension\Core\Type\TextareaType' : 'textarea';
+        $sonataTypeImmutableArray = $isSf28 ? 'Sonata\CoreBundle\Form\Type\ImmutableArrayType' : 'sonata_type_immutable_array';
 
         $formMapper->remove('content');
 
@@ -65,7 +72,7 @@ class PageAdmin extends RouteAdmin
                 ->add('title')
                 ->add(
                     'body',
-                     $this->ivoryCkeditor ? 'ckeditor' : 'textarea',
+                     $this->ivoryCkeditor ? $ckeditorType : $textareaType,
                      $this->ivoryCkeditor
                 )
             ->end()
@@ -74,7 +81,7 @@ class PageAdmin extends RouteAdmin
             ))
                 ->add(
                     'routeOptions',
-                    'sonata_type_immutable_array',
+                    $sonataTypeImmutableArray,
                     array('keys' => $this->configureFieldsForOptions($this->getSubject()->getRouteOptions()), 'label' => 'form.label_options'),
                     array('help' => 'form.help_options')
                 )
