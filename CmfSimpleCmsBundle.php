@@ -11,6 +11,7 @@
 
 namespace Symfony\Cmf\Bundle\SimpleCmsBundle;
 
+use Symfony\Cmf\Bundle\SimpleCmsBundle\DependencyInjection\Compiler\AppendRouteBasepathPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Doctrine\Bundle\PHPCRBundle\DependencyInjection\Compiler\DoctrinePhpcrMappingsPass;
@@ -20,6 +21,8 @@ class CmfSimpleCmsBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
+
+        $container->addCompilerPass(new AppendRouteBasepathPass());
 
         if ($container->hasExtension('jms_di_extra')) {
             $container->getExtension('jms_di_extra')->blackListControllerFile(__DIR__ . '/Controller/PageAdminController.php');

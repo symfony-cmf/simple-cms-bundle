@@ -50,11 +50,7 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
                 'enabled' => true,
             )
         );
-        if (isset($config['persistence']['phpcr']['basepath'])
-            && '/cms/simple' != $config['persistence']['phpcr']['basepath']
-        ) {
-            $prependConfig['dynamic']['persistence']['phpcr']['route_basepaths'] = array($config['persistence']['phpcr']['basepath']);
-        }
+
         $container->prependExtensionConfig('cmf_routing', $prependConfig);
     }
 
