@@ -6,7 +6,12 @@
 
     <testsuites>
         <testsuite name="Symfony SimpleCmsBundle Test Suite">
+            <directory>./Tests/Unit</directory>
+        </testsuite>
+
+        <testsuite name="phpcr">
             <directory>./Tests</directory>
+            <exclude>./Tests/Unit</exclude>
         </testsuite>
     </testsuites>
 

@@ -25,15 +25,7 @@ class LoadPageData implements FixtureInterface
 
     public function load(ObjectManager $manager)
     {
-        NodeHelper::createPath($manager->getPhpcrSession(), '/test');
-        $root = $manager->find(null, '/test');
-
-        $base = new Page();
-        $base->setName('page');
-        $base->setTitle('Simple Cms');
-        $base->setLabel('Simple Cms');
-        $base->setParent($root);
-        $manager->persist($base);
+        $base = $manager->find(null, '/test/page');
 
         $page = new Page();
         $page->setName('homepage');

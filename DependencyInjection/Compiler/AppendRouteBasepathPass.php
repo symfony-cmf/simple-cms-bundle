@@ -17,7 +17,8 @@ class AppendRouteBasepathPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasParameter('cmf_routing.dynamic.persistence.phpcr.route_basepaths')) {
+        if (!$container->hasParameter('cmf_routing.dynamic.persistence.phpcr.route_basepaths')
+            || !$container->hasParameter('cmf_simple_cms.persistence.phpcr.basepath')) {
             return;
         }
 

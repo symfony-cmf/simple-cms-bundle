@@ -20,7 +20,7 @@ class PageAdminTest extends BaseTestCase
     {
         $this->db('PHPCR')->loadFixtures(array(
             'Symfony\Cmf\Bundle\SimpleCmsBundle\Tests\Resources\DataFixtures\Phpcr\LoadPageData',
-        ));
+        ), true);
         $this->client = $this->createClient();
     }
 
