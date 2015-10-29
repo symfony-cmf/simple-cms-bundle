@@ -28,7 +28,7 @@ class PageAdminTest extends BaseTestCase
     {
         $crawler = $this->client->request('GET', '/admin/cmf/simplecms/page/list');
         $res = $this->client->getResponse();
-        $this->assertEquals(200, $res->getStatusCode());
+        $this->assertResponseSuccess($res);
         $this->assertCount(1, $crawler->filter('html:contains("homepage")'));
     }
 
@@ -36,7 +36,7 @@ class PageAdminTest extends BaseTestCase
     {
         $crawler = $this->client->request('GET', '/admin/cmf/simplecms/page/test/page/homepage/edit');
         $res = $this->client->getResponse();
-        $this->assertEquals(200, $res->getStatusCode());
+        $this->assertResponseSuccess($res);
         $this->assertCount(2, $crawler->filter('input[value="Homepage"]'));
     }
 
@@ -44,7 +44,7 @@ class PageAdminTest extends BaseTestCase
     {
         $crawler = $this->client->request('GET', '/admin/cmf/simplecms/page/test/page/homepage/show');
         $res = $this->client->getResponse();
-        $this->assertEquals(200, $res->getStatusCode());
+        $this->assertResponseSuccess($res);
         $this->assertCount(1, $crawler->filter('html:contains("Homepage")'));
     }
 
@@ -52,7 +52,7 @@ class PageAdminTest extends BaseTestCase
     {
         $crawler = $this->client->request('GET', '/admin/cmf/simplecms/page/create');
         $res = $this->client->getResponse();
-        $this->assertEquals(200, $res->getStatusCode());
+        $this->assertResponseSuccess($res);
 
         $button = $crawler->selectButton('Create');
         $form = $button->form();
