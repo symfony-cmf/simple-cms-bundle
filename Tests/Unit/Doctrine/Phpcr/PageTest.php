@@ -16,13 +16,26 @@ use Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page;
 class PageTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Testing BC
+     * @group legacy
      */
-    public function testGetSet()
+    public function testAddLocalePattern()
     {
         $page = new Page;
-
         $page->setAddLocalePattern(true);
+
         $this->assertEquals(true, $page->getAddLocalePattern());
+    }
+
+    /**
+     * @group legacy
+     */
+    public function testCreateDate()
+    {
+        $date = $this->prophesize('\DateTime')->reveal();
+
+        $page = new Page;
+        $page->setPublishStartDate($date);
+
+        $this->assertEquals($date, $page->getCreateDate());
     }
 }

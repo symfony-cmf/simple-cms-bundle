@@ -157,6 +157,8 @@ class Page extends Route implements
      */
     public function getAddLocalePattern()
     {
+        @trigger_error('The Page#getAddLocalePattern() method is deprecated since version 1.1 and will be removed in 2.0. Use getOption(\'add_locale_pattern\') instead.', E_USER_DEPRECATED);
+
         return $this->getOption('add_locale_pattern');
     }
 
@@ -165,6 +167,8 @@ class Page extends Route implements
      */
     public function setAddLocalePattern($addLocalePattern)
     {
+        @trigger_error('The Page#setAddLocalePattern() method is deprecated since version 1.1 and will be removed in 2.0. Use setOption(\'add_locale_pattern\') instead.', E_USER_DEPRECATED);
+
         $this->setOption('add_locale_pattern', $addLocalePattern);
     }
 
@@ -201,6 +205,8 @@ class Page extends Route implements
      */
     public function getCreateDate()
     {
+        @trigger_error('The Page#getCreateDate() method is deprecated since version 1.1 and will be removed in 2.0. Use getDate() instead.', E_USER_DEPRECATED);
+
         return $this->getDate();
     }
 

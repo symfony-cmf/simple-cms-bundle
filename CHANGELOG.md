@@ -3,6 +3,9 @@ Changelog
 
 * **2015-08-31**: Added IvoryCKEditorBundle integration and added the
   `ivory_ckeditor` settings.
+* **2015-10-31**: Calling `getCreateDate()`, `getAddLocalePattern()` or
+  `setAddLocalePattern()` now results in a deprecation notice. The methods are
+  deprecated since 1.1 and will be removed in 2.0.
 
 1.2.0-RC1
 ---------
