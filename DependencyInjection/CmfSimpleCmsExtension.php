@@ -17,7 +17,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
-
 use PHPCR\Util\PathHelper;
 
 class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterface
@@ -44,11 +43,11 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
                 'routers_by_id' => array(
                     'router.default' => 0,
                     'cmf_routing.dynamic_router' => -100,
-                )
+                ),
             ),
             'dynamic' => array(
                 'enabled' => true,
-            )
+            ),
         );
 
         $container->prependExtensionConfig('cmf_routing', $prependConfig);
@@ -72,7 +71,7 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
 
     protected function loadIvoryCKEditor(array $config, ContainerBuilder $container)
     {
-        $container->setParameter($this->getAlias() . '.ivory_ckeditor.config', array());
+        $container->setParameter($this->getAlias().'.ivory_ckeditor.config', array());
 
         $bundles = $container->getParameter('kernel.bundles');
         if ('auto' === $config['enabled'] && !isset($bundles['IvoryCKEditorBundle'])) {
@@ -93,7 +92,7 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
             return;
         }
 
-        $container->setParameter($this->getAlias() . '.ivory_ckeditor.config', array(
+        $container->setParameter($this->getAlias().'.ivory_ckeditor.config', array(
             'config_name' => $config['config_name'],
         ));
     }
@@ -103,11 +102,11 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
         $loader->load('services-phpcr.xml');
         $loader->load('migrator-phpcr.xml');
 
-        $prefix = $this->getAlias() . '.persistence.phpcr';
+        $prefix = $this->getAlias().'.persistence.phpcr';
 
-        $container->setParameter($prefix . '.basepath', $config['basepath']);
+        $container->setParameter($prefix.'.basepath', $config['basepath']);
 
-        $container->setParameter($prefix . '.menu_basepath', PathHelper::getParentPath($config['basepath']));
+        $container->setParameter($prefix.'.menu_basepath', PathHelper::getParentPath($config['basepath']));
 
         if ($config['use_sonata_admin']) {
             $this->loadSonataAdmin($config, $loader, $container);
@@ -115,9 +114,9 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
             throw new InvalidConfigurationException('Do not define sonata_admin options when use_sonata_admin is set to false');
         }
 
-        $container->setParameter($prefix . '.manager_name', $config['manager_name']);
+        $container->setParameter($prefix.'.manager_name', $config['manager_name']);
 
-        $container->setParameter($prefix . '.document.class', $config['document_class']);
+        $container->setParameter($prefix.'.document.class', $config['document_class']);
     }
 
     protected function loadPhpcrMenu($config, XmlFileLoader $loader, ContainerBuilder $container)
@@ -137,7 +136,7 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
             return;
         }
 
-        $container->setParameter($this->getAlias() . '.persistence.phpcr.admin.sort',
+        $container->setParameter($this->getAlias().'.persistence.phpcr.admin.sort',
             isset($config['sonata_admin'])
             ? $config['sonata_admin']['sort']
             : false

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Symfony CMF package.
+ *
+ * (c) 2011-2015 Symfony CMF
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 $container->loadFromExtension('cmf_simple_cms', array(
     'persistence' => array(
         'phpcr' => array(
@@ -11,7 +20,7 @@ $container->loadFromExtension('cmf_simple_cms', array(
             'use_sonata_admin' => true,
             'sonata_admin' => array(
                 'sort' => 'asc',
-            )
+            ),
         ),
     ),
     'use_menu' => false,

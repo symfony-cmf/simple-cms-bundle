@@ -40,7 +40,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                     'use_sonata_admin' => true,
                     'sonata_admin' => array(
                         'sort' => 'asc',
-                    )
+                    ),
                 ),
             ),
             'use_menu' => false,

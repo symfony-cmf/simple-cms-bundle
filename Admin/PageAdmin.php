@@ -14,7 +14,6 @@ namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
 use Symfony\Cmf\Bundle\RoutingBundle\Admin\RouteAdmin;
 use Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page;
 
@@ -27,7 +26,7 @@ class PageAdmin extends RouteAdmin
 
     public function setSortOrder($sortOrder)
     {
-        if (! in_array($sortOrder, array(false, 'asc', 'desc'))) {
+        if (!in_array($sortOrder, array(false, 'asc', 'desc'))) {
             throw new \InvalidArgumentException($sortOrder);
         }
         $this->sortOrder = $sortOrder;
@@ -93,7 +92,7 @@ class PageAdmin extends RouteAdmin
     {
         $datagridMapper
             ->add('title', 'doctrine_phpcr_string')
-            ->add('name',  'doctrine_phpcr_nodename')
+            ->add('name', 'doctrine_phpcr_nodename')
         ;
     }
 

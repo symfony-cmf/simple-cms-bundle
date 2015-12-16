@@ -25,14 +25,14 @@ class CmfSimpleCmsBundle extends Bundle
         $container->addCompilerPass(new AppendRouteBasepathPass());
 
         if ($container->hasExtension('jms_di_extra')) {
-            $container->getExtension('jms_di_extra')->blackListControllerFile(__DIR__ . '/Controller/PageAdminController.php');
+            $container->getExtension('jms_di_extra')->blackListControllerFile(__DIR__.'/Controller/PageAdminController.php');
         }
 
         if (class_exists('Doctrine\Bundle\PHPCRBundle\DependencyInjection\Compiler\DoctrinePhpcrMappingsPass')) {
             $container->addCompilerPass(
                 DoctrinePhpcrMappingsPass::createXmlMappingDriver(
                     array(
-                        realpath(__DIR__ . '/Resources/config/doctrine-phpcr') => 'Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr',
+                        realpath(__DIR__.'/Resources/config/doctrine-phpcr') => 'Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr',
                     ),
                     array('cmf_simple_cms.persistence.phpcr.manager_name'),
                     false,
