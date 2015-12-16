@@ -1,6 +1,7 @@
 # Symfony CMF Simple CMS Bundle
 
 [![Build Status](https://secure.travis-ci.org/symfony-cmf/SimpleCmsBundle.png?branch=master)](http://travis-ci.org/symfony-cmf/SimpleCmsBundle)
+[![StyleCI](https://styleci.io/repos/4396665/shield)](https://styleci.io/repos/4396665)
 [![Latest Stable Version](https://poser.pugx.org/symfony-cmf/simple-cms-bundle/version.png)](https://packagist.org/packages/symfony-cmf/simple-cms-bundle)
 [![Total Downloads](https://poser.pugx.org/symfony-cmf/simple-cms-bundle/d/total.png)](https://packagist.org/packages/symfony-cmf/simple-cms-bundle)
 

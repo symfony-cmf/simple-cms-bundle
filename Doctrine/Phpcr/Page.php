@@ -22,7 +22,6 @@ use Symfony\Cmf\Bundle\MenuBundle\Model\MenuOptionsInterface;
 use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
 use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
 use PHPCR\NodeInterface as PHPCRNodeInterface;
-
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -102,14 +101,14 @@ class Page extends Route implements
     /**
      * Set to false to not render a menu item for this.
      *
-     * @var boolean
+     * @var bool
      */
     protected $display = true;
 
     /**
      * Set to false to not render the child menu items of this page.
      *
-     * @var boolean
+     * @var bool
      */
     protected $displayChildren = true;
 
@@ -137,7 +136,7 @@ class Page extends Route implements
     protected $publishEndDate;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $publishable = true;
 
@@ -147,7 +146,8 @@ class Page extends Route implements
     protected $locale;
 
     /**
-     * Extra values an application can store along with a page
+     * Extra values an application can store along with a page.
+     *
      * @var array
      */
     protected $extras = array();
@@ -181,7 +181,7 @@ class Page extends Route implements
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getLocale()
     {
@@ -189,7 +189,7 @@ class Page extends Route implements
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setLocale($locale)
     {
@@ -221,7 +221,7 @@ class Page extends Route implements
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getPublishStartDate()
     {
@@ -229,7 +229,7 @@ class Page extends Route implements
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setPublishStartDate(\DateTime $publishStartDate = null)
     {
@@ -237,7 +237,7 @@ class Page extends Route implements
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getPublishEndDate()
     {
@@ -245,7 +245,7 @@ class Page extends Route implements
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setPublishEndDate(\DateTime $publishEndDate = null)
     {
@@ -253,7 +253,7 @@ class Page extends Route implements
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function isPublishable()
     {
@@ -261,7 +261,7 @@ class Page extends Route implements
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setPublishable($publishable)
     {
@@ -269,7 +269,7 @@ class Page extends Route implements
     }
 
     /**
-     * Get extras - a flat key-value hashmap
+     * Get extras - a flat key-value hashmap.
      *
      * @return array hashmap with only string values
      */
@@ -296,7 +296,7 @@ class Page extends Route implements
     }
 
     /**
-     * Add a single key - value pair to extras
+     * Add a single key - value pair to extras.
      *
      * @param string $key
      * @param string $value - if this is not a string it is cast to one
@@ -333,9 +333,9 @@ class Page extends Route implements
     }
 
     /**
-     * Content method: Get the routes that point to this content
+     * Content method: Get the routes that point to this content.
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getRoutes()
     {
@@ -353,7 +353,7 @@ class Page extends Route implements
     }
 
     /**
-     * Menu method: List of child menu nodes
+     * Menu method: List of child menu nodes.
      *
      * @param object[] $children
      */
@@ -363,7 +363,7 @@ class Page extends Route implements
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -373,7 +373,7 @@ class Page extends Route implements
     /**
      * Route method: The content of this route is the object itself.
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getContent()
     {
@@ -394,7 +394,7 @@ class Page extends Route implements
     }
 
     /**
-     * Menu method: set the menu label
+     * Menu method: set the menu label.
      *
      * @param string $label
      */
@@ -404,7 +404,7 @@ class Page extends Route implements
     }
 
     /**
-     * Menu method: get the label for the menu
+     * Menu method: get the label for the menu.
      *
      * @return string
      */
@@ -414,7 +414,7 @@ class Page extends Route implements
     }
 
     /**
-     * Content method: set the page title
+     * Content method: set the page title.
      *
      * @param string $title
      */
@@ -424,7 +424,7 @@ class Page extends Route implements
     }
 
     /**
-     * Content method: get the page title
+     * Content method: get the page title.
      *
      * @return string
      */
@@ -434,7 +434,7 @@ class Page extends Route implements
     }
 
     /**
-     * Content method: set the page body
+     * Content method: set the page body.
      *
      * @param string $body
      */
@@ -444,7 +444,7 @@ class Page extends Route implements
     }
 
     /**
-     * Content method: get the page body
+     * Content method: get the page body.
      *
      * @return string
      */
@@ -474,7 +474,7 @@ class Page extends Route implements
     }
 
     /**
-     * Return the attributes associated with this menu node
+     * Return the attributes associated with this menu node.
      *
      * @return array
      */
@@ -484,7 +484,7 @@ class Page extends Route implements
     }
 
     /**
-     * Set the attributes associated with this menu node
+     * Set the attributes associated with this menu node.
      *
      * @param $attributes array
      *
@@ -498,7 +498,7 @@ class Page extends Route implements
     }
 
     /**
-     * Return the given attribute, optionally specifying a default value
+     * Return the given attribute, optionally specifying a default value.
      *
      * @param string $name    The name of the attribute to return
      * @param string $default The value to return if the attribute doesn't exist
@@ -515,7 +515,7 @@ class Page extends Route implements
     }
 
     /**
-     * Set the named attribute
+     * Set the named attribute.
      *
      * @param string $name  attribute name
      * @param string $value attribute value
@@ -530,7 +530,7 @@ class Page extends Route implements
     }
 
     /**
-     * Return the children attributes
+     * Return the children attributes.
      *
      * @return array
      */
@@ -540,7 +540,7 @@ class Page extends Route implements
     }
 
     /**
-     * Set the children attributes
+     * Set the children attributes.
      *
      * @param array $attributes
      *
@@ -604,7 +604,7 @@ class Page extends Route implements
     /**
      * Whether a menu item for this page should be displayed if possible.
      *
-     * @return boolean
+     * @return bool
      *
      * @see isDisplayableMenu
      */
@@ -616,7 +616,7 @@ class Page extends Route implements
     /**
      * Set whether to display the menu item for this.
      *
-     * @param boolean $display
+     * @param bool $display
      *
      * @return Page The current Page instance
      */
@@ -630,7 +630,7 @@ class Page extends Route implements
     /**
      * Whether to display the child menu items of this page.
      *
-     * @return boolean
+     * @return bool
      */
     public function getDisplayChildren()
     {
@@ -640,7 +640,7 @@ class Page extends Route implements
     /**
      * Set whether to display the child menu items of this page.
      *
-     * @param boolean $displayChildren
+     * @param bool $displayChildren
      *
      * @return Page The current Page instance
      */
@@ -655,7 +655,7 @@ class Page extends Route implements
      * Whether this page can be displayed in the menu, meaning getDisplay is
      * true and there is a non-empty label.
      *
-     * @return boolean
+     * @return bool
      */
     public function isDisplayableMenu()
     {
@@ -664,9 +664,9 @@ class Page extends Route implements
 
     /**
      * Route method and Menu method - provides menu options merged with the
-     * route options
+     * route options.
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getOptions()
     {
@@ -695,7 +695,7 @@ class Page extends Route implements
     }
 
     /**
-     * Retrieve UUID of Node or null if not present
+     * Retrieve UUID of Node or null if not present.
      *
      * @return string|null
      */

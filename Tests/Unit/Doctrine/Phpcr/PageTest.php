@@ -20,7 +20,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddLocalePattern()
     {
-        $page = new Page;
+        $page = new Page();
         $page->setAddLocalePattern(true);
 
         $this->assertEquals(true, $page->getAddLocalePattern());
@@ -33,7 +33,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     {
         $date = $this->prophesize('\DateTime')->reveal();
 
-        $page = new Page;
+        $page = new Page();
         $page->setPublishStartDate($date);
 
         $this->assertEquals($date, $page->getCreateDate());

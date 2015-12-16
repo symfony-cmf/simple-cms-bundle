@@ -14,16 +14,14 @@ namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Migrator\Phpcr;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Cmf\Component\Routing\RouteObjectInterface;
-
 use PHPCR\Util\NodeHelper;
 use PHPCR\SessionInterface;
-
 use Doctrine\Bundle\PHPCRBundle\ManagerRegistry;
 use Doctrine\Bundle\PHPCRBundle\Migrator\MigratorInterface;
 use Doctrine\ODM\PHPCR\DocumentManager;
 
 /**
- * Doctrine migrator for pages
+ * Doctrine migrator for pages.
  *
  * Provides a way of creating and maintaining pages from YAML files.
  */
