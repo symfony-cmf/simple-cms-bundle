@@ -1,6 +1,9 @@
 Changelog
 =========
 
+1.3.0-RC1
+---------
+
 * **2015-08-31**: Added IvoryCKEditorBundle integration and added the
   `ivory_ckeditor` settings.
 * **2015-10-31**: Calling `getCreateDate()`, `getAddLocalePattern()` or
