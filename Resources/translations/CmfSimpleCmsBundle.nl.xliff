@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="dashboard.cmf">
+        <source>dashboard.cmf</source>
+        <target>Symfony CMF</target>
+      </trans-unit>
+      <trans-unit id="dashboard.label_page">
+        <source>dashboard.label_page</source>
+        <target>Pagina's</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_page_list">
+        <source>breadcrumb.link_page_list</source>
+        <target>Pagina's</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_page_create">
+        <source>breadcrumb.link_page_create</source>
+        <target>Aanmaken</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_page_edit">
+        <source>breadcrumb.link_page_edit</source>
+        <target>Wijzigen</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_page_delete">
+        <source>breadcrumb.link_page_delete</source>
+        <target>Verwijderen</target>
+      </trans-unit>
+      <trans-unit id="list.label_path">
+        <source>list.label_path</source>
+        <target>Pad</target>
+      </trans-unit>
+      <trans-unit id="list.label_title">
+        <source>list.label_title</source>
+        <target>Titel</target>
+      </trans-unit>
+      <trans-unit id="list.label_name">
+        <source>list.label_name</source>
+        <target>Naam</target>
+      </trans-unit>
+      <trans-unit id="list.label_label">
+        <source>list.label_label</source>
+        <target>Label</target>
+      </trans-unit>
+      <trans-unit id="filter.label_title">
+        <source>filter.label_title</source>
+        <target>Titel</target>
+      </trans-unit>
+      <trans-unit id="filter.label_name">
+        <source>filter.label_name</source>
+        <target>Naam</target>
+      </trans-unit>
+      <trans-unit id="form.group_general">
+        <source>form.group_general</source>
+        <target>Algemeen</target>
+      </trans-unit>
+      <trans-unit id="form.label_parent">
+        <source>form.label_parent</source>
+        <target>Ouder</target>
+      </trans-unit>
+      <trans-unit id="form.label_name">
+        <source>form.label_name</source>
+        <target>Naam</target>
+      </trans-unit>
+      <trans-unit id="form.label_label">
+        <source>form.label_label</source>
+        <target>Menu Label</target>
+      </trans-unit>
+      <trans-unit id="form.label_title">
+        <source>form.label_title</source>
+        <target>Titel</target>
+      </trans-unit>
+      <trans-unit id="form.label_body">
+        <source>form.label_body</source>
+        <target>Inhoud</target>
+	  </trans-unit>
+    </body>
+  </file>
+</xliff>
